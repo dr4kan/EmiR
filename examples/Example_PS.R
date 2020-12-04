@@ -8,5 +8,5 @@ eggholder <- function(x) {
 x1 <- parameter("x1", -512, 512)
 x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
-minimize_PS(eggholder, l)
+ps <- minimize_PS(eggholder, l)
 

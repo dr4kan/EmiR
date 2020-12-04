@@ -6,14 +6,15 @@
 using namespace Rcpp;
 
 // minimize_PS
-void minimize_PS(Function func, List parameters);
-RcppExport SEXP _EmiR_minimize_PS(SEXP funcSEXP, SEXP parametersSEXP) {
+S4 minimize_PS(Function cost_function, List parameters);
+RcppExport SEXP _EmiR_minimize_PS(SEXP cost_functionSEXP, SEXP parametersSEXP) {
 BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Function >::type func(funcSEXP);
+    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
     Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
-    minimize_PS(func, parameters);
-    return R_NilValue;
+    rcpp_result_gen = Rcpp::wrap(minimize_PS(cost_function, parameters));
+    return rcpp_result_gen;
 END_RCPP
 }
 // parameter

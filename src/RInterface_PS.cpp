@@ -10,7 +10,7 @@ NumericVector eval_PS(std::vector<double> x, Function f) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 // [[Rcpp::export]]
-void minimize_PS(Function func, List parameters) {
+S4 minimize_PS(Function cost_function, List parameters) {
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -39,7 +39,7 @@ void minimize_PS(Function func, List parameters) {
     // Compute the cost for the population
     for (size_t i = 0; i < pop.size(); ++i) {
       //      print(eval_PS(pop[i].getPositionVector(), func));
-      cost_value = eval_PS(pop[i].getPositionVector(), func)[0];
+      cost_value = eval_PS(pop[i].getPositionVector(), cost_function)[0];
       pop[i].setCost(cost_value);
     }
 
@@ -74,5 +74,12 @@ void minimize_PS(Function func, List parameters) {
       minimizer.checkParameterBoundary();
     }
   }
+
+  S4 result("MinimizationResult");
+  result.slot("best_cost") = minimizer.best_cost;
+  result.slot("best_parameters") = minimizer.fitted_parmaters;
+  result.slot("cost_history") = minimizer.cost_history;
+
+  return result;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
