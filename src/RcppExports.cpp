@@ -5,18 +5,6 @@
 
 using namespace Rcpp;
 
-// eval
-NumericVector eval(NumericVector x, Function f);
-RcppExport SEXP _EmiR_eval(SEXP xSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< Function >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(eval(x, f));
-    return rcpp_result_gen;
-END_RCPP
-}
 // minimize_PS
 void minimize_PS(Function func, List parameters);
 RcppExport SEXP _EmiR_minimize_PS(SEXP funcSEXP, SEXP parametersSEXP) {
@@ -43,7 +31,6 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EmiR_eval", (DL_FUNC) &_EmiR_eval, 2},
     {"_EmiR_minimize_PS", (DL_FUNC) &_EmiR_minimize_PS, 2},
     {"_EmiR_parameter", (DL_FUNC) &_EmiR_parameter, 3},
     {NULL, NULL, 0}

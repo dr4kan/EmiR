@@ -10,7 +10,7 @@ class CSPopulation {
 public:
   /// CSPopulation default constructor assigning the configuration Config.
   /// The population is initialized with random starting eggs
-  CSPopulation(CSConfig*, const ParametersRange&);
+  CSPopulation(const CSConfig&, const ParametersRange&);
 
   /// Return the number of chromosomes in the population
   size_t size() const;
@@ -46,7 +46,7 @@ private:
   /// Population initialization with random starting eggs
   void init();
 
-  CSConfig          *m_config; /**< Configuration used in the population */
+  CSConfig          m_config; /**< Configuration used in the population */
   std::mt19937      m_mt;
   ParametersRange   m_par_range;
   std::vector<Nest> m_nest; /**< Vector of nests that compose the population */

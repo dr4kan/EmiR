@@ -1,7 +1,7 @@
 #include "GAMinimization.h"
 
 GAMinimization::GAMinimization() : verbose(SILENT) {
-  m_algo_config =  new GAConfig();
+  m_algo_config = GAConfig();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -35,7 +35,7 @@ void GAMinimization::checkParameterBoundary(const std::vector<double>&  v, int i
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 void GAMinimization::fit(std::function<double (double*)> func) {
-  m_algo_config->setConfigCrossover();
+  m_algo_config.setConfigCrossover();
   cost_history.clear();
   GAPopulation pop(m_algo_config, m_parameters_range);
 
@@ -46,7 +46,7 @@ void GAMinimization::fit(std::function<double (double*)> func) {
   if (cost_history.size() == 0) cost_history.push_back(pop[0].getCost());
 
   int n_sc = 0;
-  for (int i = 1; i < m_algo_config->getNMaxIterations(); ++i) {
+  for (int i = 1; i < m_algo_config.getNMaxIterations(); ++i) {
     pop.crossover();
     pop.ComputeCost(func);
     pop.sort();
@@ -66,7 +66,7 @@ void GAMinimization::fit(std::function<double (double*)> func) {
     } else {
       n_sc = 0;
     }
-    if (n_sc > m_algo_config->getNMaxIterationsSameCost()) break;
+    if (n_sc > m_algo_config.getNMaxIterationsSameCost()) break;
   }
 
   if (std::isnan(best_cost)) {
@@ -85,7 +85,7 @@ void GAMinimization::fit(std::function<double (double*)> func) {
 
 void GAMinimization::print() {
   std::cout << "\n     MINIMIZER: GA\n";
-  std::cout << *m_algo_config << "\n";
+  std::cout << m_algo_config << "\n";
   std::cout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
   std::cout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
   std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";

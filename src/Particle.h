@@ -30,6 +30,9 @@ public:
    /// Return the coordinates of the particle in the current position
    double* getPosition() { return &m_position[0]; };
 
+   /// Return the coordinates of the particle in the current position
+   std::vector<double> getPositionVector() { return m_position; };
+
    /// Return the _t_ - coordinate of the best position found by the particle
    double getBestPosition(size_t t);
 

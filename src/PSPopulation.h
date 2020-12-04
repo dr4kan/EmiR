@@ -10,7 +10,7 @@ class PSPopulation {
 public:
   /// PSPopulation default constructor assigning the configuration Config.
   /// The population is initialized with random starting positions and velocities
-  PSPopulation(PSConfig*, const ParametersRange&);
+  PSPopulation(const PSConfig&, const ParametersRange&);
 
   /// Sort the particles according to the best cost
   void sort();
@@ -40,7 +40,7 @@ private:
   /// Set the velocity for each particle in the population
   void setVelocity();
 
-  PSConfig             *m_config;   /**< Configuration */
+  PSConfig              m_config;   /**< Configuration */
   std::mt19937          m_mt;
   ParametersRange       m_par_range;
   std::vector<Particle> m_particles; /**< Particles in the population */

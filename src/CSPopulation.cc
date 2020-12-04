@@ -1,7 +1,7 @@
 #include "CSPopulation.h"
 
-CSPopulation::CSPopulation(CSConfig *t_config, const ParametersRange& t_par_range) : m_config(t_config), m_mt(std::random_device()()), m_par_range(t_par_range) {
-  m_nest.resize(m_config->getPopulationSize(), m_par_range.getNumberOfParameters());
+CSPopulation::CSPopulation(const CSConfig& t_config, const ParametersRange& t_par_range) : m_config(t_config), m_mt(std::random_device()()), m_par_range(t_par_range) {
+  m_nest.resize(m_config.getPopulationSize(), m_par_range.getNumberOfParameters());
   init();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -65,7 +65,7 @@ void CSPopulation::mutation(){
   std::uniform_real_distribution<double> uni_1(0, 1); // with elitism
   double ran = uni_1(m_mt);
 
-  if (ran < m_config->getMutationRate()){
+  if (ran < m_config.getMutationRate()){
     for (size_t j = 0; j < m_par_range.getNumberOfParameters(); ++j) {
       std::uniform_real_distribution<double> uni_2(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
       m_nest[new_nest].setEgg(j, uni_2(m_mt));

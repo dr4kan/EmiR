@@ -10,7 +10,7 @@ class SAPopulation {
 public:
   /// SAPopulation default constructor assigning the configuration Config.
   /// The population is initialized with random starting positions and velocities = 0
-  SAPopulation(SAConfig*, const ParametersRange&);
+  SAPopulation(const SAConfig&, const ParametersRange&);
 
   /// Sort the particles according to the best cost
   void sort();
@@ -39,7 +39,7 @@ public:
 
 private:
 
-  SAConfig              *m_config;   /**< Configuration */
+  SAConfig              m_config;   /**< Configuration */
   std::mt19937          m_mt;
   ParametersRange       m_par_range;
   std::vector<Particle> m_particles; /**< Particles in the population */

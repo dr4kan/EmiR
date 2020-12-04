@@ -11,7 +11,7 @@ public:
   /// CSMinimization default constructor
   CSMinimization();
 
-  CSConfig* algoConfig() {return static_cast<CSConfig*>(m_algo_config);};
+  CSConfig& algoConfig() {return m_algo_config;};
 
   void fit(std::function<double (double*)>);
 
@@ -26,13 +26,13 @@ public:
   std::vector<double>      fitted_parmaters;
   std::vector<bool>        fit_par_boundary;
 
-private:
   /// Check if any parameter is at boundary
   void checkParameterBoundary();
   void checkParameterBoundary(const std::vector<double>&, int);
 
-  ParametersRange          m_parameters_range;
+private:
 
-  CSConfig *m_algo_config;
+  ParametersRange m_parameters_range;
+  CSConfig        m_algo_config;
 };
 #endif

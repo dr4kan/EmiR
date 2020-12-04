@@ -1,7 +1,7 @@
 #include "SAMinimization.h"
 
 SAMinimization::SAMinimization() : verbose(SILENT) {
-  m_algo_config =  new SAConfig();
+  m_algo_config = SAConfig();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -39,7 +39,7 @@ void SAMinimization::fit(std::function<double (double*)> func) {
   SAPopulation pop(m_algo_config, m_parameters_range);
 
   int n_sc = 0;
-  for (int i = 0; i < m_algo_config->getNMaxIterations(); ++i) {
+  for (int i = 0; i < m_algo_config.getNMaxIterations(); ++i) {
     // Change the velocity of the paricles, move them and calculate the cost
     pop.moveParticles(func, i);
     // Sort the population according to the best cost
@@ -57,7 +57,7 @@ void SAMinimization::fit(std::function<double (double*)> func) {
     } else {
       n_sc = 0;
     }
-    if (n_sc > m_algo_config->getNMaxIterationsSameCost()) break;
+    if (n_sc > m_algo_config.getNMaxIterationsSameCost()) break;
   };
 
   if (std::isnan(best_cost)) {
@@ -76,7 +76,7 @@ void SAMinimization::fit(std::function<double (double*)> func) {
 
 void SAMinimization::print() {
   std::cout << "\n     MINIMIZER: SA\n";
-  std::cout << *m_algo_config << "\n";
+  std::cout << m_algo_config << "\n";
   std::cout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
   std::cout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
   std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";

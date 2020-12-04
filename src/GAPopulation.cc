@@ -1,7 +1,7 @@
 #include "GAPopulation.h"
 
-GAPopulation::GAPopulation(GAConfig *t_config, const ParametersRange& t_par_range) : m_config(t_config), m_mt(std::random_device()()), m_par_range(t_par_range) {
-  m_chrom.resize(m_config->getPopulationSize(), m_par_range.getNumberOfParameters());
+GAPopulation::GAPopulation(const GAConfig& t_config, const ParametersRange& t_par_range) : m_config(t_config), m_mt(std::random_device()()), m_par_range(t_par_range) {
+  m_chrom.resize(m_config.getPopulationSize(), m_par_range.getNumberOfParameters());
   init();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -36,19 +36,19 @@ void GAPopulation::crossover() {
   std::uniform_real_distribution<double> uni(0.0, 1.0);
 
   // generate offspring
-  for (size_t i = 0; i < (m_chrom.size() - m_config->getKeep()); i = i + 2) {
+  for (size_t i = 0; i < (m_chrom.size() - m_config.getKeep()); i = i + 2) {
     m_chrom[m_chrom.size() - 1 - i].setIndicatorDown();
     m_chrom[m_chrom.size() - 2 - i].setIndicatorDown();
     int    ma = 0, pa = 0;
     double ra1 = uni(m_mt);
     // mother
-    for (int u = 1; u < m_config->getKeep(); u++) {
-      if (ra1 > m_config->getProb(u - 1) && ra1 <= m_config->getProb(u)) ma = u;
+    for (int u = 1; u < m_config.getKeep(); u++) {
+      if (ra1 > m_config.getProb(u - 1) && ra1 <= m_config.getProb(u)) ma = u;
     };
     double ra2 = uni(m_mt);
     // father
-    for (int u = 1; u < m_config->getKeep(); u++) {
-      if (ra2 > m_config->getProb(u - 1) && ra2 <= m_config->getProb(u)) pa = u;
+    for (int u = 1; u < m_config.getKeep(); u++) {
+      if (ra2 > m_config.getProb(u - 1) && ra2 <= m_config.getProb(u)) pa = u;
     };
     for (size_t u = 0; u < m_par_range.getNumberOfParameters(); u++) {
       double beta = uni(m_mt);
@@ -63,7 +63,7 @@ void GAPopulation::crossover() {
 
 void GAPopulation::mutation() {
   // random generator engine
-  int mutat = floor(m_config->getMutationRate() * m_config->getPopulationSize() * m_par_range.getNumberOfParameters());
+  int mutat = floor(m_config.getMutationRate() * m_config.getPopulationSize() * m_par_range.getNumberOfParameters());
 
   for (int i = 0; i < mutat; i++) {
     std::uniform_int_distribution<int> uni_1(0, m_par_range.getNumberOfParameters() - 1);

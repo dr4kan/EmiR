@@ -11,7 +11,7 @@ public:
   /// GAMinimization default constructor
   GAMinimization();
 
-  GAConfig* algoConfig() {return static_cast<GAConfig*>(m_algo_config);};
+  GAConfig& algoConfig() {return m_algo_config;};
 
   void fit(std::function<double (double*)>);
 
@@ -26,13 +26,13 @@ public:
   std::vector<double>      fitted_parmaters;
   std::vector<bool>        fit_par_boundary;
 
-private:
   /// Check if any parameter is at boundary
   void checkParameterBoundary();
   void checkParameterBoundary(const std::vector<double>&, int);
 
-  ParametersRange          m_parameters_range;
+private:
 
-  GAConfig *m_algo_config;
+  ParametersRange m_parameters_range;
+  GAConfig        m_algo_config;
 };
 #endif

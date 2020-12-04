@@ -10,7 +10,7 @@ class GAPopulation {
 public:
 
   /// GAPopulation constructor from a configuration of and a range on the parameters
-  GAPopulation(GAConfig*, const ParametersRange&);
+  GAPopulation(const GAConfig&, const ParametersRange&);
 
   /// Return the number of chromosomes in the population
   size_t size() const;
@@ -47,7 +47,7 @@ private:
   /// Population initialization with random starting genes
   void init();
 
-  GAConfig               *m_config;  /**< Configuration used in the population */
+  GAConfig                m_config;  /**< Configuration used in the population */
   std::mt19937            m_mt;
   ParametersRange         m_par_range;
   std::vector<Chromosome> m_chrom;    /**< Vector of chromosomes that compose the population */
