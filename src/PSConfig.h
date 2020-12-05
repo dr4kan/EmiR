@@ -56,8 +56,8 @@ public:
   friend std::ostream &operator<<(std::ostream &os, PSConfig &rhs) {
     os << " CONFIGURATION: " << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
     os << std::string(16, ' ') << "| " << Utility::centerAlign("OPTION", 22) << " | " << Utility::centerAlign("VALUE", 10) << "|\n";
-    std::cout << std::string(16, ' ') << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
-    os << std::string(16, ' ') << "| " << Utility::rightAlign("max number iterations", 22) << " | " << Utility::leftAlign(std::to_string(rhs.m_nmax_iter), 10) << "|" << "\n";;
+    os << std::string(16, ' ') << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
+    os << std::string(16, ' ') << "| " << Utility::rightAlign("max number iterations", 22) << " | " << Utility::leftAlign(std::to_string(rhs.m_nmax_iter), 10) << "|" << "\n";
     os << std::string(16, ' ') << "| " << Utility::rightAlign("max num. it. same cost", 22) << " | " << Utility::leftAlign(std::to_string(rhs.m_nmax_iter_scost), 10) << "|" << "\n";
     os << std::string(16, ' ') << "| " << Utility::rightAlign("population size", 22) << " | " << std::setw(10) << std::left << rhs.m_nparticles << "|" << "\n";
     os << std::string(16, ' ') << "| " << Utility::rightAlign("cognitive learning", 22) << " | " << std::setw(10) << std::left << rhs.m_cognitive << "|" << "\n";

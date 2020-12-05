@@ -1,4 +1,6 @@
 #include "CSMinimization.h"
+#include <Rcpp.h>
+using namespace Rcpp;
 
 CSMinimization::CSMinimization() : verbose(SILENT) {
   m_algo_config = CSConfig();
@@ -27,7 +29,7 @@ void CSMinimization::checkParameterBoundary(const std::vector<double>&  v, int i
   for (size_t i = 0; i < v.size(); ++i) {
     if (Utility::areEqual(v[i], m_parameters_range.getParameterMin(i)) ||
     Utility::areEqual(v[i], m_parameters_range.getParameterMax(i))) {
-      std::cout << "EmiR::Warning - Iteration #" << it << ": parameter '"
+      Rcout << "EmiR::Warning - Iteration #" << it << ": parameter '"
       << m_parameters_range.getParameterName(i) << "' is at boundary." << std::endl;
     }
   }
@@ -85,21 +87,21 @@ void CSMinimization::fit(std::function<double (double*)> func) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 void CSMinimization::print() {
-  std::cout << "\n     MINIMIZER: CS\n";
-  std::cout << m_algo_config << "\n";
-  std::cout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-  std::cout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
-  std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-
-  for (size_t i = 0; i < fitted_parmaters.size(); ++i) {
-    std::cout << std::string(16, ' ') << "|" << Utility::rightAlign(m_parameters_range.getParameterName(i), 10)
-    << " | " << std::setw(14) << std::left << Utility::toStringScientific(fitted_parmaters[i]) << "|";
-    std::cout << " " << std::setw(30) << std::left << m_parameters_range[i].sciPrint() << " |";
-
-    if (fit_par_boundary[i]) std::cout << " <- at boundary";
-    std::cout << "\n";
-  }
-  std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-  std::cout << "\n     BEST COST: " << Utility::toStringScientific(best_cost) << "\n\n";
+  // Rcout << "\n     MINIMIZER: CS\n";
+  // Rcout << m_algo_config << "\n";
+  // Rcout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+  // Rcout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
+  // Rcout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+  //
+  // for (size_t i = 0; i < fitted_parmaters.size(); ++i) {
+  //   Rcout << std::string(16, ' ') << "|" << Utility::rightAlign(m_parameters_range.getParameterName(i), 10)
+  //   << " | " << std::setw(14) << std::left << Utility::toStringScientific(fitted_parmaters[i]) << "|";
+  //   Rcout << " " << std::setw(30) << std::left << m_parameters_range[i].sciPrint() << " |";
+  //
+  //   if (fit_par_boundary[i]) Rcout << " <- at boundary";
+  //   Rcout << "\n";
+  // }
+  // Rcout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+  // Rcout << "\n     BEST COST: " << Utility::toStringScientific(best_cost) << "\n\n";
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

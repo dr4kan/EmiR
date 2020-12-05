@@ -2,7 +2,7 @@ setClass (
   "Parameter",
 
   # Defining slot type
-  representation (
+  slots = c(
     name    = "character",
     min_val = "numeric",
     max_val = "numeric"
@@ -13,7 +13,7 @@ setClass (
     name    = as.character(NULL),
     min_val = as.double(NULL),
     max_val = as.double(NULL)
-  ),
+  )
 )
 
 # overriding the print function

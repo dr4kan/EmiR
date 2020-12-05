@@ -9,8 +9,36 @@ NumericVector eval_PS(std::vector<double> x, Function f) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+//' Minimize a cost function using the Particle Swarm (PS) algorithm
+//'
+//' Description XXX
+//'
+//' @param cost_function cost function to be minimized.
+//' @param parameters a list of objects of class "`Parameter`" the cost function is minimized with respect to.
+//' See \link[EmiR]{parameter}.
+//' @param config an object of class "`PSConfig`" with the configuration parameters
+//' for the PS algorithm. See \link[EmiR]{config_PS}.
+//' @return `minimize_PS` returns an object of class "`MinimizationResult`".
+//' @examples
+//' library(EmiR)
+//'
+//' eggholder <- function(x) {
+//'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
+//'   return(value)
+//' }
+//'
+//' x1 <- parameter("x1", -512, 512)
+//' x2 <- parameter("x2", -512, 512)
+//' l <- list(x1, x2)
+//'
+//' config <- config_PS(iterations = 250, n_particles = 100)
+//' ps <- minimize_PS(cost_function = eggholder,
+//'                   parameters = l,
+//'                   config = config)
+//' print(ps)
+//' @export
 // [[Rcpp::export]]
-S4 minimize_PS(Function cost_function, List parameters) {
+S4 minimize_PS(Function cost_function, List parameters, S4 config) {
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -20,6 +48,13 @@ S4 minimize_PS(Function cost_function, List parameters) {
 
   // PS algorithm configuration
   PSConfig algo_config;
+  algo_config.setNMaxIterations(config.slot("iterations"));
+  algo_config.setNumberOfParticles(config.slot("n_particles"));
+  algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
+  algo_config.setCognitiveParameter(config.slot("cognitive"));
+  algo_config.setSocialParameter(config.slot("social"));
+  algo_config.setInertia(config.slot("inertia"));
+  algo_config.setVMaxParameter(config.slot("max_velocity"));
 
   // Initialization of the minimizer
   PSMinimization minimizer;
@@ -76,9 +111,10 @@ S4 minimize_PS(Function cost_function, List parameters) {
   }
 
   S4 result("MinimizationResult");
-  result.slot("best_cost") = minimizer.best_cost;
+  result.slot("algorithm")       = "PS";
+  result.slot("best_cost")       = minimizer.best_cost;
   result.slot("best_parameters") = minimizer.fitted_parmaters;
-  result.slot("cost_history") = minimizer.cost_history;
+  result.slot("cost_history")    = minimizer.cost_history;
 
   return result;
 }
