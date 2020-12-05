@@ -2,22 +2,22 @@
 % Please edit documentation in R/RInterface_Parameter.R
 \name{parameter}
 \alias{parameter}
-\title{Create XXX}
+\title{Parameter for minimization}
 \usage{
 parameter(name, min_val, max_val)
 }
 \arguments{
-\item{name}{name.}
+\item{name}{name of the parameter.}
 
-\item{min_val}{min_val.}
+\item{min_val}{minimum value the parameter is allowed to assume during minimization.}
 
-\item{max_val}{max_val.}
+\item{max_val}{maximum value the parameter is allowed to assume during minimization.}
 }
 \value{
-\code{parameter} returns an object of class "\code{Parameter}".
+\code{parameter} returns an object of class \code{Parameter}.
 }
 \description{
-Create XXX
+Create a parameter the cost function is minimized with respect to.
 }
 \examples{
 library(EmiR)

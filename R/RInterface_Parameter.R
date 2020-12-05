@@ -1,9 +1,11 @@
-#' Create XXX
+#' Parameter for minimization
 #'
-#' @param name name.
-#' @param min_val min_val.
-#' @param max_val max_val.
-#' @return `parameter` returns an object of class "`Parameter`".
+#' Create a parameter the cost function is minimized with respect to.
+#'
+#' @param name name of the parameter.
+#' @param min_val minimum value the parameter is allowed to assume during minimization.
+#' @param max_val maximum value the parameter is allowed to assume during minimization.
+#' @return `parameter` returns an object of class `Parameter`.
 #' @examples
 #' library(EmiR)
 #'
@@ -22,11 +24,7 @@
 #'                   config = config)
 #' print(ps)
 #' @export
-parameter <- function(name, min_val, max_val) {
-  p <- new("Parameter")
-  p@name <- name
-  p@min_val <- min_val
-  p@max_val <- max_val
-  return(p);
-}
+parameter <- function(name, min_val, max_val)
+  new("Parameter", name=name, min_val=min_val, max_val=max_val)
+
 

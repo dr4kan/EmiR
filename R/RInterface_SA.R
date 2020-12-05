@@ -1,6 +1,6 @@
-#' Create a configuration object for the PS minimizer
+#' Create a configuration object for the SA minimizer
 #'
-#' Create a configuration object for the PS minimizer. At minimum the number of iterations
+#' Create a configuration object for the SA minimizer. At minimum the number of iterations
 #' (parameter `iterations`) and the number of particles (parameter `n_particles`) has
 #' to be provided.
 #'
@@ -9,11 +9,11 @@
 #' @param iterations_same_cost maximum number of consecutive iterations with the same cost before
 #' ending the minimization. If `NULL` the minimization continues for the number of iterations
 #' specified by the parameter `iterations`.
-#' @param cognitive cognitive learning factor.
-#' @param social social learning factor.
-#' @param inertia inertia factor.
-#' @param max_velocity a measure of the maximum distance particles travel at each iteration.
-#' @return `config_PS` returns an object of class `PSConfig`.
+#' @param cognitive ???.
+#' @param social ???.
+#' @param dumping ???.
+#' @param temperature temperature.
+#' @return `config_SA` returns an object of class `SAConfig`.
 #' @examples
 #' library(EmiR)
 #'
@@ -26,20 +26,20 @@
 #' x2 <- parameter("x2", -512, 512)
 #' l <- list(x1, x2)
 #'
-#' config <- config_PS(iterations = 250, n_particles = 100)
-#' ps <- minimize_PS(cost_function = eggholder,
+#' config <- config_SA(iterations = 250, n_particles = 100)
+#' SA <- minimize_SA(cost_function = eggholder,
 #'                   parameters = l,
 #'                   config = config)
-#' print(ps)
+#' print(SA)
 #' @export
-config_PS <- function(iterations,
+config_SA <- function(iterations,
                       n_particles,
                       iterations_same_cost = NULL,
                       cognitive = 2.0,
                       social = 2.0,
-                      inertia = 0.4,
-                      max_velocity = 0.1) {
-  p <- new("PSConfig")
+                      dumping = 0.1,
+                      temperature = 50) {
+  p <- new("SAConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
     p@iterations_same_cost <- iterations
@@ -49,8 +49,8 @@ config_PS <- function(iterations,
   p@n_particles  <- n_particles
   p@cognitive    <- cognitive
   p@social       <- social
-  p@inertia      <- inertia
-  p@max_velocity <- max_velocity
+  p@dumping      <- dumping
+  p@temperature  <- temperature
   return(p)
 }
 

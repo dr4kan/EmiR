@@ -18,9 +18,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// minimize_SA
+S4 minimize_SA(Function cost_function, List parameters, S4 config);
+RcppExport SEXP _EmiR_minimize_SA(SEXP cost_functionSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
+    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
+    rcpp_result_gen = Rcpp::wrap(minimize_SA(cost_function, parameters, config));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_EmiR_minimize_PS", (DL_FUNC) &_EmiR_minimize_PS, 3},
+    {"_EmiR_minimize_SA", (DL_FUNC) &_EmiR_minimize_SA, 3},
     {NULL, NULL, 0}
 };
 

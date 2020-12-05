@@ -19,6 +19,8 @@ public:
   /// using the provided cost function
   void moveParticles(std::function<double (double*)>, int);
 
+  Particle createGuess(size_t);
+
   /// Return the number of particles in the SAPopulation
   size_t size() const;
 

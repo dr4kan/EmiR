@@ -1,24 +1,24 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-#include "PSMinimization.h"
+#include "SAMinimization.h"
 
-NumericVector eval_PS(std::vector<double> x, Function f) {
+NumericVector eval_SA(std::vector<double> x, Function f) {
   NumericVector res = f(x);
   return res;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-//' Particle Swarm minimization
+//' Simulated Annealing minimization
 //'
-//' Minimize a cost function using the Particle Swarm (PS) algorithm.
+//' Minimize a cost function using the Simulated Annealing (SA) algorithm.
 //'
 //' @param cost_function cost function to be minimized.
 //' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
 //' See \link[EmiR]{parameter}.
-//' @param config an object of class `PSConfig` with the configuration parameters
-//' for the PS algorithm. See \link[EmiR]{config_PS}.
-//' @return `minimize_PS` returns an object of class `MinimizationResult`.
+//' @param config an object of class `SAConfig` with the configuration parameters
+//' for the PS algorithm. See \link[EmiR]{config_SA}.
+//' @return `minimize_SA` returns an object of class `MinimizationResult`.
 //' @examples
 //' library(EmiR)
 //'
@@ -31,14 +31,14 @@ NumericVector eval_PS(std::vector<double> x, Function f) {
 //' x2 <- parameter("x2", -512, 512)
 //' l <- list(x1, x2)
 //'
-//' config <- config_PS(iterations = 250, n_particles = 100)
-//' ps <- minimize_PS(cost_function = eggholder,
+//' config <- config_SA(iterations = 250, n_particles = 100)
+//' ps <- minimize_SA(cost_function = eggholder,
 //'                   parameters = l,
 //'                   config = config)
 //' print(ps)
 //' @export
 // [[Rcpp::export]]
-S4 minimize_PS(Function cost_function, List parameters, S4 config) {
+S4 minimize_SA(Function cost_function, List parameters, S4 config) {
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -47,34 +47,56 @@ S4 minimize_PS(Function cost_function, List parameters, S4 config) {
   }
 
   // PS algorithm configuration
-  PSConfig algo_config;
+  SAConfig algo_config;
   algo_config.setNMaxIterations(config.slot("iterations"));
   algo_config.setNumberOfParticles(config.slot("n_particles"));
   algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
   algo_config.setCognitiveParameter(config.slot("cognitive"));
   algo_config.setSocialParameter(config.slot("social"));
-  algo_config.setInertia(config.slot("inertia"));
-  algo_config.setVMaxParameter(config.slot("max_velocity"));
+  algo_config.setInertia(config.slot("dumping"));
+  algo_config.setTemp(config.slot("temperature"));
 
   // Initialization of the minimizer
-  PSMinimization minimizer;
+  SAMinimization minimizer;
   minimizer.setParametersRange(pr);
   minimizer.cost_history.clear();
 
   // Initialization of the population
-  PSPopulation pop(algo_config, pr);
+  SAPopulation pop(algo_config, pr);
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
 
   int n_sc = 0;
   double cost_value = 0.;
   for (size_t iter = 0; iter < algo_config.getNMaxIterations(); ++iter) {
 
-    // Change the velocity of the paricles and move them
-    if (iter > 0) pop.moveParticles();
+    if (iter == 0) {
+      for (size_t k = 0; k < pop.size(); ++k) {
+        cost_value = eval_SA(pop[k].getPositionVector(), cost_function)[0];
+        pop[k].setCost(cost_value);
+      }
+    } else{
+      pop.setVelocity();
 
-    // Compute the cost for the population
-    for (size_t k = 0; k < pop.size(); ++k) {
-      cost_value = eval_PS(pop[k].getPositionVector(), cost_function)[0];
-      pop[k].setCost(cost_value);
+      double temperature = algo_config.getTemp();
+      temperature = temperature / log(1 + iter);
+      size_t n_dim = pr.getNumberOfParameters();
+
+      std::uniform_real_distribution<double> uni(0, 1);
+      for (size_t i = 0; i < n_dim; ++i) {
+        Particle guess = pop.createGuess(i);
+        cost_value = eval_SA(guess.getPositionVector(), cost_function)[0];
+        guess.setCost(cost_value);
+
+        double deltaF =  guess.getCost() - pop[i].getCost();
+        if (exp(- deltaF / temperature) > uni(gen)) {
+          for (size_t j = 0; j < n_dim; ++j) {
+            pop[i].setPosition(j, guess.getPosition(j));
+          };
+          pop[i].setCost(guess.getCost());
+        };
+      };
     }
 
     // Sort the population according to the best cost
@@ -95,7 +117,7 @@ S4 minimize_PS(Function cost_function, List parameters, S4 config) {
       n_sc = 0;
     }
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
-  };
+  }
 
   if (std::isnan(minimizer.best_cost)) {
     minimizer.best_cost = pop[0].getBestCost();
@@ -110,7 +132,7 @@ S4 minimize_PS(Function cost_function, List parameters, S4 config) {
   }
 
   S4 result("MinimizationResult");
-  result.slot("algorithm")       = "PS";
+  result.slot("algorithm")       = "SA";
   result.slot("best_cost")       = minimizer.best_cost;
   result.slot("best_parameters") = minimizer.fitted_parmaters;
   result.slot("cost_history")    = minimizer.cost_history;
