@@ -5,12 +5,13 @@
 #' \loadmathjax
 #' On an n-dimensional domain it is defined by:
 #'
-#' \mjdeqn{20n + \sum_{i=1}^n \left( x_{i}^2 - 20\cos(2\pi x_{i}) \right),}{20n + sum_{i=0}^n [x_{i}^2 - 20cos(2*pi*x_{i})],}
-#' where is usually evaluated on the hypercube
+#' \mjdeqn{f(\vec{x}) = 20n + \sum_{i=1}^n \left( x_{i}^2 - 20\cos(2\pi x_{i}) \right),}{20n + sum_{i=0}^n [x_{i}^2 - 20cos(2*pi*x_{i})],}
+#' and is usually evaluated on the hypercube
 #' \mjeqn{x_{i} \in \[ -5.12, 5.12 \]}{x_{i} in [-5.12, 5.12]}, for all
 #' \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
 #' \mjeqn{f(0,0,...,0)=0}{f(0,0,...,0)=0}.
-#' @return
+#' @param x numeric or complex vector.
+#' @return The value of the function.
 #' @examples
 #' library(EmiR)
 #'
@@ -26,6 +27,7 @@
 #' print(ps)
 #' @export
 rastrigin_func <- function(x) {
+  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   value <- 10*n
   for (i in 1:n) value = value + x[i]^2 - 10*cos(2*pi*x[i])
@@ -43,14 +45,15 @@ rastrigin_func <- function(x) {
 #' \mjeqn{b=0.2}{b=0.2} and \mjeqn{c=2\pi}{c=2\pi} (see definition below).
 #'
 #'
-#' On an n-dimensional domain it is defined by:
+#' On an n-dimensional domain it is defined by
 #'
-#' \mjdeqn{-a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a*exp(-b*sqrt(1/n*sum_1^n (x_{i}^2)) -exp(1/n*sum_1^n (\cos(c*x_i)) + a + exp(1),}
-#' where is usually evaluated on the hypercube
+#' \mjdeqn{f(\vec{x}) = -a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a*exp(-b*sqrt(1/n*sum_1^n (x_{i}^2)) -exp(1/n*sum_1^n (\cos(c*x_i)) + a + exp(1),}
+#' and is usually evaluated on the hypercube
 #' \mjeqn{x_{i} \in \[ -32.768, 32.768 \]}{x_{i} in [-32.768, 32.768]}, for all
 #' \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
 #' \mjeqn{f(0,0,...,0)=0}{f(0,0,...,0)=0}.
-#' @return
+#' @param x numeric or complex vector.
+#' @return The value of the function.
 #' @examples
 #' library(EmiR)
 #'
@@ -65,6 +68,7 @@ rastrigin_func <- function(x) {
 #' print(ps)
 #' @export
 ackley_func <- function(x) {
+  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   sum1 <- 0
   sum2 <- 0
@@ -82,3 +86,46 @@ ackley_func <- function(x) {
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+
+#' Rosenbrock function
+#'
+#' \loadmathjax
+#' Implementation of n-dimensional Rosenbrock function.
+#'
+#'
+#' On an n-dimensional domain it is defined by
+#'
+#' \mjdeqn{f(\vec{x}) = \sum_{i=1}^{n-1} \left\[ 100(x_{i+1}-x_{i}^2)^2 + (x_{i}-1)^2 \right\],}{,}
+#' and is usually evaluated on the hypercube
+#' \mjeqn{x_{i} \in \[ -5, 10 \]}{x_{i} in [-5, 10]}, for all
+#' \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
+#' \mjeqn{f(1,1,...,1)=0}{f(1,1,...,1)=0}.
+#' @param x numeric or complex vector.
+#' @return The value of the function.
+#' @importFrom Rdpack reprompt
+#' @references \insertRef{Rosenbrock1960}{EmiR}
+#' @examples
+#' library(EmiR)
+#'
+#' x1 <- parameter("x1", -5, 10)
+#' x2 <- parameter("x2", -5, 10)
+#' l <- list(x1, x2)
+#'
+#' config <- config_PS(iterations = 250, n_particles = 150)
+#' ps <- minimize_PS(cost_function = rosenbrock_func,
+#'                   parameters = l,
+#'                   config = config)
+#' print(ps)
+#' @export
+rosenbrock_func <- function(x) {
+  stopifnot(is.numeric(x) || is.complex(x) == T)
+  n <- length(x)
+  value <- 0
+  for (i in 1:n-1) {
+    value <- value + 100*(x[i+1]-x[i]^2)^2 + (x[i]-1)^2
+  }
+  return(value)
+}
+#_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+#_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+#_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

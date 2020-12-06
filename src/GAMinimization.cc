@@ -1,6 +1,9 @@
 #include "GAMinimization.h"
+
+#ifndef CPPEXE
 #include <Rcpp.h>
 using namespace Rcpp;
+#endif
 
 GAMinimization::GAMinimization() : verbose(SILENT) {
   m_algo_config = GAConfig();
@@ -30,8 +33,13 @@ void GAMinimization::checkParameterBoundary(const std::vector<double>&  v, int i
   for (size_t i = 0; i < v.size(); ++i) {
     if (Utility::areEqual(v[i], m_parameters_range.getParameterMin(i)) ||
     Utility::areEqual(v[i], m_parameters_range.getParameterMax(i))) {
+      #ifdef CPPEXE
+      std::cout << "EmiR::Warning - Iteration #" << it << ": parameter '"
+      << m_parameters_range.getParameterName(i) << "' is at boundary.\n";
+      #else
       Rcout << "EmiR::Warning - Iteration #" << it << ": parameter '"
-      << m_parameters_range.getParameterName(i) << "' is at boundary." << std::endl;
+      << m_parameters_range.getParameterName(i) << "' is at boundary.\n";
+      #endif
     }
   }
 };
@@ -72,36 +80,32 @@ void GAMinimization::fit(std::function<double (double*)> func) {
     if (n_sc > m_algo_config.getNMaxIterationsSameCost()) break;
   }
 
-  if (std::isnan(best_cost)) {
+  if (pop[0].getCost() < best_cost) {
     best_cost = pop[0].getCost();
     fitted_parmaters = pop[0].getGenes();
     checkParameterBoundary();
-  } else {
-    if (pop[0].getCost() < best_cost) {
-      best_cost = pop[0].getCost();
-      fitted_parmaters = pop[0].getGenes();
-      checkParameterBoundary();
-    }
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 void GAMinimization::print() {
-  // Rcout << "\n     MINIMIZER: GA\n";
-  // Rcout << m_algo_config << "\n";
-  // Rcout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-  // Rcout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
-  // Rcout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-  //
-  // for (size_t i = 0; i < fitted_parmaters.size(); ++i) {
-  //   Rcout << std::string(16, ' ') << "|" << Utility::rightAlign(m_parameters_range.getParameterName(i), 10)
-  //   << " | " << std::setw(14) << std::left << Utility::toStringScientific(fitted_parmaters[i]) << "|";
-  //   Rcout << " " << std::setw(30) << std::left << m_parameters_range[i].sciPrint() << " |";
-  //
-  //   if (fit_par_boundary[i]) Rcout << " <- at boundary";
-  //   Rcout << "\n";
-  // }
-  // Rcout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
-  // Rcout << "\n     BEST COST: " << Utility::toStringScientific(best_cost) << "\n\n";
+  #ifdef CPPEXE
+  std::cout << "\n     MINIMIZER: GA\n";
+  std::cout << m_algo_config << "\n";
+  std::cout << "    PARAMETERS: " << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+  std::cout << std::string(16, ' ') << "| PARAMETER | FITTED VALUE  |             RANGE              |" << "\n";
+  std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+
+  for (size_t i = 0; i < fitted_parmaters.size(); ++i) {
+    std::cout << std::string(16, ' ') << "|" << Utility::rightAlign(m_parameters_range.getParameterName(i), 10)
+    << " | " << std::setw(14) << std::left << Utility::toStringScientific(fitted_parmaters[i]) << "|";
+    std::cout << " " << std::setw(30) << std::left << m_parameters_range[i].sciPrint() << " |";
+
+    if (fit_par_boundary[i]) std::cout << " <- at boundary";
+    std::cout << "\n";
+  }
+  std::cout << std::string(16, ' ') << "+" << std::string(11, '-') << "+" << std::string(15, '-') << "+" << std::string(32, '-') << "+" << "\n";
+  std::cout << "\n     BEST COST: " << Utility::toStringScientific(best_cost) << "\n\n";
+  #endif
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

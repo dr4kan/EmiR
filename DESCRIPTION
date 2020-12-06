@@ -9,8 +9,8 @@ Description: More about what it does (maybe more than one line)
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 1.0.5), methods (>= 4.0.3), mathjaxr (>= 1.0-1)
+Imports: Rcpp (>= 1.0.5), methods, mathjaxr, Rdpack
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
-RdMacros: mathjaxr
+RdMacros: mathjaxr, Rdpack

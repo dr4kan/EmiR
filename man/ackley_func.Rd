@@ -6,8 +6,11 @@
 \usage{
 ackley_func(x)
 }
+\arguments{
+\item{x}{numeric or complex vector.}
+}
 \value{
-
+The value of the function.
 }
 \description{
 \loadmathjax
@@ -15,10 +18,10 @@ Implementation of n-dimensional Ackley function, with \mjeqn{a=20}{a=20},
 \mjeqn{b=0.2}{b=0.2} and \mjeqn{c=2\pi}{c=2\pi} (see definition below).
 }
 \details{
-On an n-dimensional domain it is defined by:
+On an n-dimensional domain it is defined by
 
-\mjdeqn{-a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a\emph{exp(-b}sqrt(1/n\emph{sum_1^n (x_{i}^2)) -exp(1/n}sum_1^n (\cos(c*x_i)) + a + exp(1),}
-where is usually evaluated on the hypercube
+\mjdeqn{f(\vec{x}) = -a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a\emph{exp(-b}sqrt(1/n\emph{sum_1^n (x_{i}^2)) -exp(1/n}sum_1^n (\cos(c*x_i)) + a + exp(1),}
+and is usually evaluated on the hypercube
 \mjeqn{x_{i} \in [ -32.768, 32.768 ]}{x_{i} in \link{-32.768, 32.768}}, for all
 \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
 \mjeqn{f(0,0,...,0)=0}{f(0,0,...,0)=0}.

@@ -6,8 +6,11 @@
 \usage{
 rastrigin_func(x)
 }
+\arguments{
+\item{x}{numeric or complex vector.}
+}
 \value{
-
+The value of the function.
 }
 \description{
 Implementation of n-dimensional Rastrigin function.
@@ -16,8 +19,8 @@ Implementation of n-dimensional Rastrigin function.
 \loadmathjax
 On an n-dimensional domain it is defined by:
 
-\mjdeqn{20n + \sum_{i=1}^n \left( x_{i}^2 - 20\cos(2\pi x_{i}) \right),}{20n + sum_{i=0}^n \link[=x_{i}^2 - 20cos(2*pi*x_{i})]{x_{i}^2 - 20cos(2\emph{pi}x_{i})},}
-where is usually evaluated on the hypercube
+\mjdeqn{f(\vec{x}) = 20n + \sum_{i=1}^n \left( x_{i}^2 - 20\cos(2\pi x_{i}) \right),}{20n + sum_{i=0}^n \link[=x_{i}^2 - 20cos(2*pi*x_{i})]{x_{i}^2 - 20cos(2\emph{pi}x_{i})},}
+and is usually evaluated on the hypercube
 \mjeqn{x_{i} \in [ -5.12, 5.12 ]}{x_{i} in \link{-5.12, 5.12}}, for all
 \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
 \mjeqn{f(0,0,...,0)=0}{f(0,0,...,0)=0}.
