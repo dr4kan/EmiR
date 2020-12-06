@@ -33,7 +33,7 @@ x1 <- parameter("x1", -512, 512)
 x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
 
-config <- config_CS(iterations = 250, n_particles = 100)
+config <- config_CS(iterations = 250, population_size = 100)
 cs <- minimize_CS(cost_function = eggholder,
                   parameters = l,
                   config = config)

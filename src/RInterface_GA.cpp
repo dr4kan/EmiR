@@ -42,7 +42,7 @@ void ComputeCost(GAPopulation& pop, Function cost_function) {
 //' x2 <- parameter("x2", -512, 512)
 //' l <- list(x1, x2)
 //'
-//' config <- config_GA(iterations = 250, n_particles = 100)
+//' config <- config_GA(iterations = 250, population_size = 100)
 //' ga <- minimize_GA(cost_function = eggholder,
 //'                   parameters = l,
 //'                   config = config)

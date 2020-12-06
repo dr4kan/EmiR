@@ -42,7 +42,7 @@ void ComputeCost(CSPopulation& pop, Function cost_function) {
 //' x2 <- parameter("x2", -512, 512)
 //' l <- list(x1, x2)
 //'
-//' config <- config_CS(iterations = 250, n_particles = 100)
+//' config <- config_CS(iterations = 250, population_size = 100)
 //' cs <- minimize_CS(cost_function = eggholder,
 //'                   parameters = l,
 //'                   config = config)
@@ -64,7 +64,7 @@ S4 minimize_CS(Function cost_function, List parameters, S4 config) {
   algo_config.setNMaxIterations(config.slot("iterations"));
   algo_config.setPopulationSize(config.slot("population_size"));
   algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
-  algo_config.setMutationRate(config.slot("m_mutation_rate"));
+  algo_config.setMutationRate(config.slot("mutation_rate"));
 
   // Initialization of the minimizer
   CSMinimization minimizer;
