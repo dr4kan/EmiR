@@ -49,10 +49,10 @@ public:
   };
 
 private:
-  int m_nmax_iter;        /**< Maximum number of iterations */
-  int m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
-  int                 m_population_size;  /**< Number of chromosomes that survives to selection */
-  double              m_mutation_rate; /**< Mutation rate */
+  int     m_nmax_iter;        /**< Maximum number of iterations */
+  int     m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
+  int     m_population_size;  /**< Number of chromosomes that survives to selection */
+  double  m_mutation_rate;    /**< Mutation rate */
 };
 
 #endif

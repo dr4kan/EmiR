@@ -54,8 +54,7 @@ void CSMinimization::fit(std::function<double (double*)> func) {
 
   // Sort the population according to the best cost
   pop.sort();
-
-  if (cost_history.size() == 0) cost_history.push_back(pop[0].getCost());
+  cost_history.push_back(pop[0].getCost());
 
   int n_sc = 0;
   for (int i = 1; i < m_algo_config.getNMaxIterations(); ++i) {

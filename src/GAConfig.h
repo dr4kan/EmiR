@@ -64,13 +64,14 @@ public:
   };
 
 private:
-  int m_nmax_iter;        /**< Maximum number of iterations */
-  int m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
-  int                 m_keep;            /**< Number of chromosomes that survives to selection */
+  int                 m_nmax_iter;       /**< Maximum number of iterations */
+  int                 m_nmax_iter_scost; /**< Maximum number of consecutive iterations with approximately the same cost */
   int                 m_population_size; /**< Number of chromosomes in the population */
-  std::vector<double> m_prob;            /**< Vector of probabilities used in the Roulette Wheel selection */
-  double              m_mutation_rate;   /**< Mutation rate */
   double              m_keep_fraction;   /**< Selection rate */
+  double              m_mutation_rate;   /**< Mutation rate */
+
+  int                 m_keep;            /**< Number of chromosomes that survives to selection */
+  std::vector<double> m_prob;            /**< Vector of probabilities used in the Roulette Wheel selection */
 };
 
 #endif

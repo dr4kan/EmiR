@@ -5,6 +5,32 @@
 
 using namespace Rcpp;
 
+// minimize_CS
+S4 minimize_CS(Function cost_function, List parameters, S4 config);
+RcppExport SEXP _EmiR_minimize_CS(SEXP cost_functionSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
+    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
+    rcpp_result_gen = Rcpp::wrap(minimize_CS(cost_function, parameters, config));
+    return rcpp_result_gen;
+END_RCPP
+}
+// minimize_GA
+S4 minimize_GA(Function cost_function, List parameters, S4 config);
+RcppExport SEXP _EmiR_minimize_GA(SEXP cost_functionSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
+    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
+    rcpp_result_gen = Rcpp::wrap(minimize_GA(cost_function, parameters, config));
+    return rcpp_result_gen;
+END_RCPP
+}
 // minimize_PS
 S4 minimize_PS(Function cost_function, List parameters, S4 config);
 RcppExport SEXP _EmiR_minimize_PS(SEXP cost_functionSEXP, SEXP parametersSEXP, SEXP configSEXP) {
@@ -33,6 +59,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_EmiR_minimize_CS", (DL_FUNC) &_EmiR_minimize_CS, 3},
+    {"_EmiR_minimize_GA", (DL_FUNC) &_EmiR_minimize_GA, 3},
     {"_EmiR_minimize_PS", (DL_FUNC) &_EmiR_minimize_PS, 3},
     {"_EmiR_minimize_SA", (DL_FUNC) &_EmiR_minimize_SA, 3},
     {NULL, NULL, 0}

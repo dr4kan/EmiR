@@ -9,6 +9,19 @@ NumericVector eval_SA(std::vector<double> x, Function f) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void ComputeCost(Particle& particle, Function cost_function) {
+  double cost_value = eval_SA(particle.getPositionVector(), cost_function)[0];
+  particle.setCost(cost_value);
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+void ComputeCost(SAPopulation& pop, Function cost_function) {
+  for (size_t i = 0; i < pop.size(); ++i) {
+    ComputeCost(pop[i], cost_function);
+  }
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 //' Simulated Annealing minimization
 //'
 //' Minimize a cost function using the Simulated Annealing (SA) algorithm.
@@ -70,14 +83,10 @@ S4 minimize_SA(Function cost_function, List parameters, S4 config) {
   std::mt19937 gen(rd());
 
   int n_sc = 0;
-  double cost_value = 0.;
   for (size_t iter = 0; iter < algo_config.getNMaxIterations(); ++iter) {
 
     if (iter == 0) {
-      for (size_t k = 0; k < pop.size(); ++k) {
-        cost_value = eval_SA(pop[k].getPositionVector(), cost_function)[0];
-        pop[k].setCost(cost_value);
-      }
+      ComputeCost(pop, cost_function);
     } else{
       pop.setVelocity();
 
@@ -88,8 +97,7 @@ S4 minimize_SA(Function cost_function, List parameters, S4 config) {
       std::uniform_real_distribution<double> uni(0, 1);
       for (size_t i = 0; i < n_dim; ++i) {
         Particle guess = pop.createGuess(i);
-        cost_value = eval_SA(guess.getPositionVector(), cost_function)[0];
-        guess.setCost(cost_value);
+        ComputeCost(guess, cost_function);
 
         double deltaF =  guess.getCost() - pop[i].getCost();
         if (exp(- deltaF / temperature) > uni(gen)) {

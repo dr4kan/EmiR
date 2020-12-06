@@ -1,7 +1,7 @@
 #' Create a configuration object for the SA minimizer
 #'
 #' Create a configuration object for the SA minimizer. At minimum the number of iterations
-#' (parameter `iterations`) and the number of particles (parameter `n_particles`) has
+#' (parameter `iterations`) and the number of particles (parameter `n_particles`) have
 #' to be provided.
 #'
 #' @param iterations maximum number of iterations.
