@@ -39,6 +39,8 @@ NumericVector eval_PS(std::vector<double> x, Function f) {
 //' @export
 // [[Rcpp::export]]
 S4 minimize_PS(Function cost_function, List parameters, S4 config) {
+  Rcout << "Staring PS minimization...\n";
+
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -97,16 +99,10 @@ S4 minimize_PS(Function cost_function, List parameters, S4 config) {
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
   };
 
-  if (std::isnan(minimizer.best_cost)) {
+  if (pop[0].getBestCost() < minimizer.best_cost) {
     minimizer.best_cost = pop[0].getBestCost();
     minimizer.fitted_parmaters = pop[0].getBestPosition();
     minimizer.checkParameterBoundary();
-  } else {
-    if (pop[0].getBestCost() < minimizer.best_cost) {
-      minimizer.best_cost = pop[0].getBestCost();
-      minimizer.fitted_parmaters = pop[0].getBestPosition();
-      minimizer.checkParameterBoundary();
-    }
   }
 
   S4 result("MinimizationResult");

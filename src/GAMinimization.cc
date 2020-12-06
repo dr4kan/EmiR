@@ -4,6 +4,7 @@ using namespace Rcpp;
 
 GAMinimization::GAMinimization() : verbose(SILENT) {
   m_algo_config = GAConfig();
+  best_cost = std::numeric_limits<double>::max();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

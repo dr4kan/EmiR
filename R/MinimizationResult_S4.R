@@ -25,7 +25,7 @@ setMethod(f = "show",
             cat("  EmiR minimizer: ", object@algorithm, "\n", sep = "")
             cat("       best cost: ", object@best_cost, "\n", sep = "")
             cat(" best parameters: ")
-            cat(object@best_parameters)
+            cat(object@best_parameters, "\n")
           }
 )
 

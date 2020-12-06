@@ -4,6 +4,7 @@ using namespace Rcpp;
 
 CSMinimization::CSMinimization() : verbose(SILENT) {
   m_algo_config = CSConfig();
+  best_cost = std::numeric_limits<double>::max();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

@@ -4,6 +4,7 @@ using namespace Rcpp;
 
 SAMinimization::SAMinimization() : verbose(SILENT) {
   m_algo_config = SAConfig();
+  best_cost = std::numeric_limits<double>::max();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
