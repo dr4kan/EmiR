@@ -11,7 +11,7 @@
 #' specified by the parameter `iterations`.
 #' @param keep_fraction ???.
 #' @param m_mutation_rate ???.
-#' @return `config_GA` returns an object of class `GAConfig`.
+#' @return `config_ga` returns an object of class `GAConfig`.
 #' @examples
 #' library(EmiR)
 #'
@@ -24,13 +24,13 @@
 #' x2 <- parameter("x2", -512, 512)
 #' l <- list(x1, x2)
 #'
-#' config <- config_GA(iterations = 250, n_particles = 100)
+#' config <- config_ga(iterations = 250, n_particles = 100)
 #' GA <- minimize_GA(cost_function = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(GA)
 #' @export
-config_GA <- function(iterations,
+config_ga <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,
                       keep_fraction = 0.4,
@@ -49,3 +49,34 @@ config_GA <- function(iterations,
 }
 
 
+#' Genetic Algorithm minimization
+#'
+#' Minimize a cost function using the Genetic Algorithm (GA) algorithm.
+#'
+#' @param cost_function cost function to be minimized.
+#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
+#' See \link[EmiR]{parameter}.
+#' @param config an object of class `GAConfig` with the configuration parameters
+#' for the GA algorithm. See \link[EmiR]{config_ga}.
+#' @return `minimize_ga` returns an object of class `MinimizationResult`.
+#' @examples
+#' library(EmiR)
+#'
+#' eggholder <- function(x) {
+#'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
+#'   return(value)
+#' }
+#'
+#' x1 <- parameter("x1", -512, 512)
+#' x2 <- parameter("x2", -512, 512)
+#' l <- list(x1, x2)
+#'
+#' config <- config_ga(iterations = 250, population_size = 100)
+#' ga <- minimize_ga(cost_function = eggholder,
+#'                   parameters = l,
+#'                   config = config)
+#' print(ga)
+#' @export
+minimize_ga <- function(cost_function, constraints = NULL, parameters, config) {
+cstr_minimize_ga(cost_function, constraints, parameters, config)
+}

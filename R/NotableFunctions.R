@@ -143,7 +143,7 @@ rosenbrock_func <- function(x) {
 #' and is usually evaluated on the hypercube
 #' \mjeqn{x_{i} \in \[ -500, 500 \]}{x_{i} in [-500, 500]}, for all
 #' \mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
-#' \mjeqn{f(\vec{x}) = −418.9829n}{f(x) = −418.9829n} for \mjeqn{x_{i}=420.9687}{x_i=420.9687} for all \mjeqn{i=1,...,n}{i=1,...,n}.
+#' \mjeqn{f(\vec{x}) = -418.9829n}{f(x) = -418.9829n} for \mjeqn{x_{i}=420.9687}{x_i=420.9687} for all \mjeqn{i=1,...,n}{i=1,...,n}.
 #' @param x numeric or complex vector.
 #' @return The value of the function.
 #' @references \insertRef{Schwefel1981}{EmiR}
@@ -172,4 +172,3 @@ schwefel_func <- function(x) {
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 #_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-

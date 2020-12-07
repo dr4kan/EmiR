@@ -13,7 +13,7 @@
 #' @param social social learning factor.
 #' @param inertia inertia factor.
 #' @param max_velocity a measure of the maximum distance particles travel at each iteration.
-#' @return `config_PS` returns an object of class `PSConfig`.
+#' @return `config_ps` returns an object of class `PSConfig`.
 #' @examples
 #' library(EmiR)
 #'
@@ -26,13 +26,13 @@
 #' x2 <- parameter("x2", -512, 512)
 #' l <- list(x1, x2)
 #'
-#' config <- config_PS(iterations = 250, n_particles = 100)
+#' config <- config_ps(iterations = 250, n_particles = 100)
 #' ps <- minimize_PS(cost_function = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)
 #' @export
-config_PS <- function(iterations,
+config_ps <- function(iterations,
                       n_particles,
                       iterations_same_cost = NULL,
                       cognitive = 2.0,
@@ -55,3 +55,36 @@ config_PS <- function(iterations,
 }
 
 
+#' Particle Swarm minimization
+#'
+#' Minimize a cost function using the Particle Swarm (PS) algorithm.
+#'
+#' @param cost_function cost function to be minimized.
+#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
+#' See \link[EmiR]{parameter}.
+#' @param config an object of class `PSConfig` with the configuration parameters
+#' for the PS algorithm. See \link[EmiR]{config_ps}.
+#' @return `minimize_ps` returns an object of class `MinimizationResult`.
+#' @importFrom Rdpack reprompt
+#' @references \insertRef{eberhart1995new}{EmiR}
+#' @examples
+#' library(EmiR)
+#'
+#' eggholder <- function(x) {
+#'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
+#'   return(value)
+#' }
+#'
+#' x1 <- parameter("x1", -512, 512)
+#' x2 <- parameter("x2", -512, 512)
+#' l <- list(x1, x2)
+#'
+#' config <- config_ps(iterations = 250, n_particles = 100)
+#' ps <- minimize_ps(cost_function = eggholder,
+#'                   parameters = l,
+#'                   config = config)
+#' print(ps)
+#' @export
+minimize_ps <- function(cost_function, constraints = NULL, parameters, config) {
+cstr_minimize_ps(cost_function, constraints, parameters, config)
+}

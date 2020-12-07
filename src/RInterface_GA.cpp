@@ -3,16 +3,33 @@ using namespace Rcpp;
 
 #include "GAMinimization.h"
 
-NumericVector eval_GA(std::vector<double> x, Function f) {
-  NumericVector res = f(x);
-  return res;
+double Eval_GA(std::vector<double> x, Function f, List c) {
+  NumericVector tmp_v = f(x);
+  double value = tmp_v[0];
+
+  double tmp_d = 0.;
+  for (int i = 0; i < c.length(); ++i) {
+    S4 constraint = c[i];
+    Function g = constraint.slot("func");
+    std::string inequality = constraint.slot("inequality");
+    tmp_v = g(x);
+    tmp_d = tmp_v[0];
+    if (inequality == "<=" || inequality == "<") {
+      value = value + pow(std::max(0., tmp_d), 2);
+    } else {
+      value = value + pow(std::min(0., tmp_d), 2);
+    }
+  }
+
+  return value;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-void ComputeCost(GAPopulation& pop, Function cost_function) {
+
+void ComputeCost(GAPopulation& pop, Function cost_function, List constraints) {
   double cost_value = 0.;
   for (size_t i = 0; i < pop.size(); ++i) {
-    cost_value = eval_GA(pop[i].getGenes(), cost_function)[0];
+    cost_value = Eval_GA(pop[i].getGenes(), cost_function, constraints);
     pop[i].setCost(cost_value);
     pop[i].setIndicatorUp();
   }
@@ -20,37 +37,13 @@ void ComputeCost(GAPopulation& pop, Function cost_function) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-//' Genetic Algorithm minimization
-//'
-//' Minimize a cost function using the Genetic Algorithm (GA) algorithm.
-//'
-//' @param cost_function cost function to be minimized.
-//' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
-//' See \link[EmiR]{parameter}.
-//' @param config an object of class `GAConfig` with the configuration parameters
-//' for the GA algorithm. See \link[EmiR]{config_GA}.
-//' @return `minimize_GA` returns an object of class `MinimizationResult`.
-//' @examples
-//' library(EmiR)
-//'
-//' eggholder <- function(x) {
-//'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
-//'   return(value)
-//' }
-//'
-//' x1 <- parameter("x1", -512, 512)
-//' x2 <- parameter("x2", -512, 512)
-//' l <- list(x1, x2)
-//'
-//' config <- config_GA(iterations = 250, population_size = 100)
-//' ga <- minimize_GA(cost_function = eggholder,
-//'                   parameters = l,
-//'                   config = config)
-//' print(ga)
-//' @export
 // [[Rcpp::export]]
-S4 minimize_GA(Function cost_function, List parameters, S4 config) {
-  Rcout << "Staring GA minimization...\n";
+S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S4 config) {
+  if (constraints.length() > 0) {
+    Rcout << "Starting GA minimization...\n\n";
+  } else {
+    Rcout << "Starting constrained GA minimization...\n\n";
+  }
 
   int n = parameters.length();
   ParametersRange pr(n);
@@ -76,7 +69,7 @@ S4 minimize_GA(Function cost_function, List parameters, S4 config) {
   GAPopulation pop(algo_config, pr);
 
   // Compute the cost for the population
-  ComputeCost(pop, cost_function);
+  ComputeCost(pop, cost_function, constraints);
 
   // Sort the population according to the best cost
   pop.sort();
@@ -87,10 +80,10 @@ S4 minimize_GA(Function cost_function, List parameters, S4 config) {
   int n_sc = 0;
   for (size_t iter = 1; iter < algo_config.getNMaxIterations(); ++iter) {
     pop.crossover();
-    ComputeCost(pop, cost_function);
+    ComputeCost(pop, cost_function, constraints);
     pop.sort();
     pop.mutation();
-    ComputeCost(pop, cost_function);
+    ComputeCost(pop, cost_function, constraints);
     pop.sort();
     if (minimizer.cost_history.size() <= iter) {
       minimizer.cost_history.push_back(pop[0].getCost());
