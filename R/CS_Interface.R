@@ -10,6 +10,7 @@
 #' ending the minimization. If `NULL` the minimization continues for the number of iterations
 #' specified by the parameter `iterations`.
 #' @param mutation_rate ???.
+#' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_cs` returns an object of class `CSConfig`.
 #' @examples
 #' library(EmiR)
@@ -32,7 +33,8 @@
 config_cs <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,
-                      mutation_rate = 0.25) {
+                      mutation_rate = 0.25,
+                      penalty_parameter = 10.) {
   p <- new("CSConfig")
   p@iterations <- iterations
   if (is.null(iterations_same_cost)) {
@@ -40,23 +42,30 @@ config_cs <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@population_size <- population_size
-  p@mutation_rate <- mutation_rate
+  p@population_size   <- population_size
+  p@mutation_rate     <- mutation_rate
+  p@penalty_parameter <- penalty_parameter
   return(p)
 }
 
 
-#' Cuckoo Search constrained minimization
+#' Cuckoo Search function minimization
 #'
-#' Minimize a cost function, subjected to one or more constraints, using
+#' Minimize an objective function, possibly subjected to inequality constraints, using
 #' the Cuckoo Search (CS) algorithm.
 #'
-#' @param cost_function cost function to be minimized.
-#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
-#' See \link[EmiR]{parameter}.
+#' XXXIn case of a constrained optimization only inequality constraints are allowed. The
+#'
+#' @param obj_func objective function be minimized.
+#' @param constraints list of constraints. Constraints are requested to be objects of
+#' class `Constraint` (see \link[EmiR]{constraint}).
+#' @param parameters list of parameters the function is minimized with respect to.
+#' Parmeters are requested to be objects of class `Parameter`(see \link[EmiR]{parameter}).
 #' @param config an object of class `CSConfig` with the configuration parameters
-#' for the CS algorithm. See \link[EmiR]{config_cs}.
+#' used by algorithm (see \link[EmiR]{config_cs}).
 #' @return `minimize_cs` returns an object of class `MinimizationResult`.
+#' @importFrom Rdpack reprompt
+#' @references \insertRef{Yang2009}{EmiR}
 #' @examples
 #' library(EmiR)
 #'
@@ -75,6 +84,6 @@ config_cs <- function(iterations,
 #'                   config = config)
 #' print(cs)
 #' @export
-minimize_cs <- function(cost_function, constraints = NULL, parameters, config) {
-cstr_minimize_cs(cost_function, constraints, parameters, config)
+minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
+  cstr_minimize_cs(cost_function, constraints, parameters, config)
 }

@@ -13,6 +13,7 @@
 #' @param social ???.
 #' @param dumping ???.
 #' @param temperature temperature.
+#' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_sa` returns an object of class `SAConfig`.
 #' @examples
 #' library(EmiR)
@@ -38,7 +39,8 @@ config_sa <- function(iterations,
                       cognitive = 2.0,
                       social = 2.0,
                       dumping = 0.1,
-                      temperature = 50) {
+                      temperature = 50,
+                      penalty_parameter = 10.) {
   p <- new("SAConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
@@ -46,25 +48,33 @@ config_sa <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@n_particles  <- n_particles
-  p@cognitive    <- cognitive
-  p@social       <- social
-  p@dumping      <- dumping
-  p@temperature  <- temperature
+  p@n_particles       <- n_particles
+  p@cognitive         <- cognitive
+  p@social            <- social
+  p@dumping           <- dumping
+  p@temperature       <- temperature
+  p@penalty_parameter <- penalty_parameter
   return(p)
 }
 
 
-#' Simulated Annealing minimization
+#' Simulated Annealing function minimization
 #'
-#' Minimize a cost function using the Simulated Annealing (SA) algorithm.
+#' Minimize an objective function, possibly subjected to inequality constraints, using
+#' the Simulated Annealing (PS) algorithm.
 #'
-#' @param cost_function cost function to be minimized.
-#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
-#' See \link[EmiR]{parameter}.
+#' XXXIn case of a constrained optimization only inequality constraints are allowed. The
+#'
+#' @param obj_func objective function be minimized.
+#' @param constraints list of constraints. Constraints are requested to be objects of
+#' class `Constraint` (see \link[EmiR]{constraint}).
+#' @param parameters list of parameters the function is minimized with respect to.
+#' Parmeters are requested to be objects of class `Parameter`(see \link[EmiR]{parameter}).
 #' @param config an object of class `SAConfig` with the configuration parameters
-#' for the PS algorithm. See \link[EmiR]{config_sa}.
+#' used by algorithm (see \link[EmiR]{config_sa}).
 #' @return `minimize_sa` returns an object of class `MinimizationResult`.
+#' @importFrom Rdpack reprompt
+#' @references \insertRef{Kirkpatrick1983}{EmiR}
 #' @examples
 #' library(EmiR)
 #'
@@ -84,5 +94,5 @@ config_sa <- function(iterations,
 #' print(ps)
 #' @export
 minimize_sa <- function(cost_function, constraints = NULL, parameters, config) {
-cstr_minimize_sa(cost_function, constraints, parameters, config)
+  cstr_minimize_sa(cost_function, constraints, parameters, config)
 }

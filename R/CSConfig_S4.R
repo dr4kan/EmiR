@@ -6,7 +6,8 @@ setClass (
     iterations           = "numeric",
     iterations_same_cost = "numeric",
     population_size      = "numeric",
-    mutation_rate        = "numeric"
+    mutation_rate        = "numeric",
+    penalty_parameter    = "numeric"
   ),
 
   # Initializing slots
@@ -14,7 +15,8 @@ setClass (
     iterations           = as.integer(NULL),
     iterations_same_cost = as.integer(NULL),
     population_size      = as.integer(NULL),
-    mutation_rate        = as.double(NULL)
+    mutation_rate        = as.double(NULL),
+    penalty_parameter    = as.double(NULL)
   )
 )
 
@@ -27,5 +29,6 @@ setMethod(f = "show",
             cat("iterations_same_cost:", object@iterations_same_cost, "\n")
             cat("     population_size:", object@population_size, "\n")
             cat("       mutation_rate:", object@mutation_rate, "\n")
+            cat("   penalty_parameter:", object@penalty_parameter, "\n")
           }
 )

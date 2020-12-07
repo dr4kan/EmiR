@@ -4,10 +4,10 @@ using namespace Rcpp;
 #include "PSMinimization.h"
 #include "Eval.h"
 
-void ComputeCost(PSPopulation& pop, Function cost_function, List constraints) {
+void ComputeCost(PSPopulation& pop, Function cost_function, List constraints, double penality) {
   double cost_value = 0.;
   for (size_t i = 0; i < pop.size(); ++i) {
-    cost_value = Eval(pop[i].getPositionVector(), cost_function, constraints);
+    cost_value = Eval(pop[i].getPositionVector(), cost_function, constraints, penality);
     pop[i].setCost(cost_value);
   }
 }
@@ -38,6 +38,9 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
   algo_config.setSocialParameter(config.slot("social"));
   algo_config.setInertia(config.slot("inertia"));
   algo_config.setVMaxParameter(config.slot("max_velocity"));
+  algo_config.setPenaltyParameter(config.slot("penalty_parameter"));
+
+  double penality = config.slot("penalty_parameter");
 
   // Initialization of the minimizer
   PSMinimization minimizer;
@@ -54,7 +57,7 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
     if (iter > 0) pop.moveParticles();
 
     // Compute the cost for the population
-    ComputeCost(pop, cost_function, constraints);
+    ComputeCost(pop, cost_function, constraints, penality);
 
     // Sort the population according to the best cost
     pop.sort();

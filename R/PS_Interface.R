@@ -13,6 +13,7 @@
 #' @param social social learning factor.
 #' @param inertia inertia factor.
 #' @param max_velocity a measure of the maximum distance particles travel at each iteration.
+#' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_ps` returns an object of class `PSConfig`.
 #' @examples
 #' library(EmiR)
@@ -38,7 +39,8 @@ config_ps <- function(iterations,
                       cognitive = 2.0,
                       social = 2.0,
                       inertia = 0.4,
-                      max_velocity = 0.1) {
+                      max_velocity = 0.1,
+                      penalty_parameter = 10.) {
   p <- new("PSConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
@@ -46,24 +48,30 @@ config_ps <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@n_particles  <- n_particles
-  p@cognitive    <- cognitive
-  p@social       <- social
-  p@inertia      <- inertia
-  p@max_velocity <- max_velocity
+  p@n_particles       <- n_particles
+  p@cognitive         <- cognitive
+  p@social            <- social
+  p@inertia           <- inertia
+  p@max_velocity      <- max_velocity
+  p@penalty_parameter <- penalty_parameter
   return(p)
 }
 
 
-#' Particle Swarm minimization
+#' Particle Swarm function minimization
 #'
-#' Minimize a cost function using the Particle Swarm (PS) algorithm.
+#' Minimize an objective function, possibly subjected to inequality constraints, using
+#' the Particle Swarm (PS) algorithm.
 #'
-#' @param cost_function cost function to be minimized.
-#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
-#' See \link[EmiR]{parameter}.
+#' XXXIn case of a constrained optimization only inequality constraints are allowed. The
+#'
+#' @param obj_func objective function be minimized.
+#' @param constraints list of constraints. Constraints are requested to be objects of
+#' class `Constraint` (see \link[EmiR]{constraint}).
+#' @param parameters list of parameters the function is minimized with respect to.
+#' Parmeters are requested to be objects of class `Parameter`(see \link[EmiR]{parameter}).
 #' @param config an object of class `PSConfig` with the configuration parameters
-#' for the PS algorithm. See \link[EmiR]{config_ps}.
+#' used by algorithm (see \link[EmiR]{config_ps}).
 #' @return `minimize_ps` returns an object of class `MinimizationResult`.
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{eberhart1995new}{EmiR}
@@ -86,5 +94,5 @@ config_ps <- function(iterations,
 #' print(ps)
 #' @export
 minimize_ps <- function(cost_function, constraints = NULL, parameters, config) {
-cstr_minimize_ps(cost_function, constraints, parameters, config)
+  cstr_minimize_ps(cost_function, constraints, parameters, config)
 }

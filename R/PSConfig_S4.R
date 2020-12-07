@@ -9,7 +9,8 @@ setClass (
     cognitive            = "numeric",
     social               = "numeric",
     inertia              = "numeric",
-    max_velocity         = "numeric"
+    max_velocity         = "numeric",
+    penalty_parameter    = "numeric"
   ),
 
   # Initializing slots
@@ -20,7 +21,8 @@ setClass (
     cognitive            = as.double(NULL),
     social               = as.double(NULL),
     inertia              = as.double(NULL),
-    max_velocity         = as.double(NULL)
+    max_velocity         = as.double(NULL),
+    penalty_parameter    = as.double(NULL)
   )
 )
 
@@ -36,5 +38,6 @@ setMethod(f = "show",
             cat("              social:", object@social, "\n")
             cat("             inertia:", object@inertia, "\n")
             cat("        max_velocity:", object@max_velocity, "\n")
+            cat("   penalty_parameter:", object@penalty_parameter, "\n")
           }
 )

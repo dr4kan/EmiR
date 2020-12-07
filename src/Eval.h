@@ -4,6 +4,6 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-double Eval(std::vector<double>, Function, List, double r = 1);
+double Eval(std::vector<double>, Function, List, double);
 
 #endif

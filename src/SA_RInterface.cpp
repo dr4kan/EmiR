@@ -4,10 +4,10 @@ using namespace Rcpp;
 #include "SAMinimization.h"
 #include "Eval.h"
 
-void ComputeCost(SAPopulation& pop, Function cost_function, List constraints) {
+void ComputeCost(SAPopulation& pop, Function cost_function, List constraints, double penality) {
   double cost_value = 0.;
   for (size_t i = 0; i < pop.size(); ++i) {
-    cost_value = Eval(pop[i].getPositionVector(), cost_function, constraints);
+    cost_value = Eval(pop[i].getPositionVector(), cost_function, constraints, penality);
     pop[i].setCost(cost_value);
   }
 }
@@ -29,7 +29,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
     pr.setParameterRange(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
   }
 
-  // PS algorithm configuration
+  // SA algorithm configuration
   SAConfig algo_config;
   algo_config.setNMaxIterations(config.slot("iterations"));
   algo_config.setNumberOfParticles(config.slot("n_particles"));
@@ -38,6 +38,9 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
   algo_config.setSocialParameter(config.slot("social"));
   algo_config.setInertia(config.slot("dumping"));
   algo_config.setTemp(config.slot("temperature"));
+  algo_config.setPenaltyParameter(config.slot("penalty_parameter"));
+
+  double penality = config.slot("penalty_parameter");
 
   // Initialization of the minimizer
   SAMinimization minimizer;
@@ -54,7 +57,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
   for (size_t iter = 0; iter < algo_config.getNMaxIterations(); ++iter) {
 
     if (iter == 0) {
-      ComputeCost(pop, cost_function, constraints);
+      ComputeCost(pop, cost_function, constraints, penality);
     } else{
       pop.setVelocity();
 
@@ -65,7 +68,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
       std::uniform_real_distribution<double> uni(0, 1);
       for (size_t i = 0; i < n_dim; ++i) {
         Particle guess = pop.createGuess(i);
-        ComputeCost(pop, cost_function, constraints);
+        ComputeCost(pop, cost_function, constraints, penality);
 
         double deltaF =  guess.getCost() - pop[i].getCost();
         if (exp(- deltaF / temperature) > uni(gen)) {

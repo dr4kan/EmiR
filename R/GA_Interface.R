@@ -11,6 +11,7 @@
 #' specified by the parameter `iterations`.
 #' @param keep_fraction ???.
 #' @param m_mutation_rate ???.
+#' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_ga` returns an object of class `GAConfig`.
 #' @examples
 #' library(EmiR)
@@ -34,7 +35,8 @@ config_ga <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,
                       keep_fraction = 0.4,
-                      m_mutation_rate = 0.1) {
+                      m_mutation_rate = 0.1,
+                      penalty_parameter = 10.) {
   p <- new("GAConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
@@ -42,22 +44,28 @@ config_ga <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@population_size <- population_size
-  p@keep_fraction   <- keep_fraction
-  p@m_mutation_rate <- m_mutation_rate
+  p@population_size   <- population_size
+  p@keep_fraction     <- keep_fraction
+  p@m_mutation_rate   <- m_mutation_rate
+  p@penalty_parameter <- penalty_parameter
   return(p)
 }
 
 
-#' Genetic Algorithm minimization
+#' Genetic Algorithm function minimization
 #'
-#' Minimize a cost function using the Genetic Algorithm (GA) algorithm.
+#' Minimize an objective function, possibly subjected to inequality constraints, using
+#' a Genetic Algorithm (GA).
 #'
-#' @param cost_function cost function to be minimized.
-#' @param parameters a list of objects of class `Parameter` the cost function is minimized with respect to.
-#' See \link[EmiR]{parameter}.
+#' XXXIn case of a constrained optimization only inequality constraints are allowed. The
+#'
+#' @param obj_func objective function be minimized.
+#' @param constraints list of constraints. Constraints are requested to be objects of
+#' class `Constraint` (see \link[EmiR]{constraint}).
+#' @param parameters list of parameters the function is minimized with respect to.
+#' Parmeters are requested to be objects of class `Parameter`(see \link[EmiR]{parameter}).
 #' @param config an object of class `GAConfig` with the configuration parameters
-#' for the GA algorithm. See \link[EmiR]{config_ga}.
+#' used by algorithm (see \link[EmiR]{config_ga}).
 #' @return `minimize_ga` returns an object of class `MinimizationResult`.
 #' @examples
 #' library(EmiR)
@@ -78,5 +86,5 @@ config_ga <- function(iterations,
 #' print(ga)
 #' @export
 minimize_ga <- function(cost_function, constraints = NULL, parameters, config) {
-cstr_minimize_ga(cost_function, constraints, parameters, config)
+  cstr_minimize_ga(cost_function, constraints, parameters, config)
 }
