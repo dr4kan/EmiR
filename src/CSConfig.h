@@ -30,11 +30,17 @@ public:
   /// Set the mutation rate
   void setMutationRate(double);
 
+  /// Set the penalty parameter for constrained optimization
+  void setPenaltyParameter(double);
+
   /// Return the number of nests in the population
   int getPopulationSize() const;
 
   /// Return the mutation rate
   double getMutationRate() const;
+
+  /// the penalty parameter for constrained optimization
+  double getPenaltyParameter() const;
 
   friend std::ostream &operator<<(std::ostream &os, CSConfig &rhs) {
     os << " CONFIGURATION: " << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
@@ -49,10 +55,11 @@ public:
   };
 
 private:
-  int     m_nmax_iter;        /**< Maximum number of iterations */
-  int     m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
-  int     m_population_size;  /**< Number of chromosomes that survives to selection */
-  double  m_mutation_rate;    /**< Mutation rate */
+  int    m_nmax_iter;        /**< Maximum number of iterations */
+  int    m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
+  int    m_population_size;  /**< Number of chromosomes that survives to selection */
+  double m_mutation_rate;    /**< Mutation rate */
+  double m_penalty_parameter; /**< Penalty parameter in constrained optimization */
 };
 
 #endif

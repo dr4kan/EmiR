@@ -38,6 +38,9 @@ public:
   /// Set the temperature factor
   void setTemp(double t);
 
+  /// Set the penalty parameter for constrained optimization
+  void setPenaltyParameter(double);
+
   /// Return the number of particles in the population
   int getNumberOfParticles() const;
 
@@ -47,11 +50,14 @@ public:
   /// Return the social learning factor
   double getSocialParameter() const;
 
-  /// Return the intertia factor <br> <br>
+  /// Return the intertia factor
   double getInertia() const;
 
-  /// Return the temperature factor <br> <br>
+  /// Return the temperature factor 
   double getTemp() const;
+
+  /// the penalty parameter for constrained optimization
+  double getPenaltyParameter() const;
 
   friend std::ostream &operator<<(std::ostream &os, SAConfig &rhs) {
     os << " CONFIGURATION: " << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
@@ -70,12 +76,13 @@ public:
 
 
 private:
-  int m_nmax_iter;        /**< Maximum number of iterations */
-  int m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
-  int              m_nparticles; /**< Number of particles */
-  double           m_cognitive;  /**< Cognitive learning factor */
-  double           m_social;     /**< Social learning factor */
-  double           m_inertia;    /**<Dumping factor*/
-  double           m_temp;       /**<Temperature factor*/
+  int    m_nmax_iter;        /**< Maximum number of iterations */
+  int    m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
+  int    m_nparticles; /**< Number of particles */
+  double m_cognitive;  /**< Cognitive learning factor */
+  double m_social;     /**< Social learning factor */
+  double m_inertia;    /**<Dumping factor*/
+  double m_temp;       /**<Temperature factor*/
+  double m_penalty_parameter; /**< Penalty parameter in constrained optimization */
 };
 #endif

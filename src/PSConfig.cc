@@ -56,6 +56,11 @@ void PSConfig::setVMaxParameter(double t) {
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void PSConfig::setPenaltyParameter(double t) {
+  m_penalty_parameter = t;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 int PSConfig::getNumberOfParticles() const {
   return m_nparticles;
 };
@@ -78,5 +83,10 @@ double PSConfig::getInertia() const {
 
 double PSConfig::getVMaxParameter() const {
   return m_vmax;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double PSConfig::getPenaltyParameter() const {
+  return m_penalty_parameter;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

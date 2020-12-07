@@ -2,34 +2,12 @@
 using namespace Rcpp;
 
 #include "SAMinimization.h"
-
-double Eval_SA(std::vector<double> x, Function f, List c) {
-  NumericVector tmp_v = f(x);
-  double value = tmp_v[0];
-
-  double tmp_d = 0.;
-  for (int i = 0; i < c.length(); ++i) {
-    S4 constraint = c[i];
-    Function g = constraint.slot("func");
-    std::string inequality = constraint.slot("inequality");
-    tmp_v = g(x);
-    tmp_d = tmp_v[0];
-    if (inequality == "<=" || inequality == "<") {
-      value = value + pow(std::max(0., tmp_d), 2);
-    } else {
-      value = value + pow(std::min(0., tmp_d), 2);
-    }
-  }
-
-  return value;
-}
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
+#include "Eval.h"
 
 void ComputeCost(SAPopulation& pop, Function cost_function, List constraints) {
   double cost_value = 0.;
   for (size_t i = 0; i < pop.size(); ++i) {
-    cost_value = Eval_SA(pop[i].getPositionVector(), cost_function, constraints);
+    cost_value = Eval(pop[i].getPositionVector(), cost_function, constraints);
     pop[i].setCost(cost_value);
   }
 }

@@ -38,6 +38,9 @@ public:
   /// Set the maximum distance of movement-per-iteration allowed
   void setVMaxParameter(double);
 
+  /// Set the penalty parameter for constrained optimization
+  void setPenaltyParameter(double);
+
   /// Return the number of particles in the population
   int getNumberOfParticles() const;
 
@@ -52,6 +55,9 @@ public:
 
   /// Return the maximum distance of movement-per-iteration allowed
   double getVMaxParameter() const;
+
+  /// the penalty parameter for constrained optimization
+  double getPenaltyParameter() const;
 
   friend std::ostream &operator<<(std::ostream &os, PSConfig &rhs) {
     os << " CONFIGURATION: " << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
@@ -69,12 +75,13 @@ public:
   };
 
 private:
-  int m_nmax_iter;        /**< Maximum number of iterations */
-  int m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
-  int              m_nparticles; /**< Number of particles */
-  double           m_cognitive;  /**< Cognitive learning factor */
-  double           m_social;     /**< Social learning factor */
-  double           m_inertia;    /**< Inertia factor*/
-  double           m_vmax;       /**< Maximum distance of movement-per-iteration */
+  int    m_nmax_iter;        /**< Maximum number of iterations */
+  int    m_nmax_iter_scost;  /**< Maximum number of consecutive iterations with approximately the same cost */
+  int    m_nparticles; /**< Number of particles */
+  double m_cognitive;  /**< Cognitive learning factor */
+  double m_social;     /**< Social learning factor */
+  double m_inertia;    /**< Inertia factor*/
+  double m_vmax;       /**< Maximum distance of movement-per-iteration */
+  double m_penalty_parameter; /**< Penalty parameter in constrained optimization */
 };
 #endif

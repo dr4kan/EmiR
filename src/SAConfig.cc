@@ -57,6 +57,11 @@ void SAConfig::setTemp(double t) {
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void SAConfig::setPenaltyParameter(double t) {
+  m_penalty_parameter = t;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 int SAConfig::getNumberOfParticles() const {
   return m_nparticles;
 };
@@ -79,5 +84,10 @@ double SAConfig::getInertia() const {
 
 double SAConfig::getTemp() const {
   return m_temp;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double SAConfig::getPenaltyParameter() const {
+  return m_penalty_parameter;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -38,6 +38,11 @@ void CSConfig::setMutationRate(double t) {
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void CSConfig::setPenaltyParameter(double t) {
+  m_penalty_parameter = t;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 int CSConfig::getPopulationSize() const {
   return m_population_size;
 };
@@ -45,5 +50,10 @@ int CSConfig::getPopulationSize() const {
 
 double CSConfig::getMutationRate() const {
   return m_mutation_rate;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double CSConfig::getPenaltyParameter() const {
+  return m_penalty_parameter;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

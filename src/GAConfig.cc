@@ -54,6 +54,11 @@ void GAConfig::setConfigCrossover() {
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void GAConfig::setPenaltyParameter(double t) {
+  m_penalty_parameter = t;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 int GAConfig::getPopulationSize() const {
   return m_population_size;
 };
@@ -76,5 +81,10 @@ int GAConfig::getKeep() const {
 
 double GAConfig::getProb(int t) const {
   return m_prob[t];
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double GAConfig::getPenaltyParameter() const {
+  return m_penalty_parameter;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

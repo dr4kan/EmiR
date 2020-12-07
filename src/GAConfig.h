@@ -35,6 +35,9 @@ public:
   /// Set the values for m_keep and m_prob
   void setConfigCrossover();
 
+  /// Set the penalty parameter for constrained optimization
+  void setPenaltyParameter(double);
+
   /// Return the number of chromosomes in the population
   int getPopulationSize() const;
 
@@ -50,6 +53,9 @@ public:
   /// Return m_prob
   double getProb(int) const;
 
+  /// the penalty parameter for constrained optimization
+  double getPenaltyParameter() const;
+
   friend std::ostream &operator<<(std::ostream &os, GAConfig &rhs) {
     os << " CONFIGURATION: " << "+" << std::string(24, '-') << "+" << std::string(11, '-') << "+" << "\n";
     os << std::string(16, ' ') << "| " << Utility::centerAlign("OPTION", 22) << " | " << Utility::centerAlign("VALUE", 10) << "|\n";
@@ -64,11 +70,12 @@ public:
   };
 
 private:
-  int                 m_nmax_iter;       /**< Maximum number of iterations */
-  int                 m_nmax_iter_scost; /**< Maximum number of consecutive iterations with approximately the same cost */
-  int                 m_population_size; /**< Number of chromosomes in the population */
-  double              m_keep_fraction;   /**< Selection rate */
-  double              m_mutation_rate;   /**< Mutation rate */
+  int                 m_nmax_iter;         /**< Maximum number of iterations */
+  int                 m_nmax_iter_scost;   /**< Maximum number of consecutive iterations with approximately the same cost */
+  int                 m_population_size;   /**< Number of chromosomes in the population */
+  double              m_keep_fraction;     /**< Selection rate */
+  double              m_mutation_rate;     /**< Mutation rate */
+  double              m_penalty_parameter; /**< Penalty parameter in constrained optimization */
 
   int                 m_keep;            /**< Number of chromosomes that survives to selection */
   std::vector<double> m_prob;            /**< Vector of probabilities used in the Roulette Wheel selection */
