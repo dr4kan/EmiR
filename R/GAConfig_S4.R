@@ -7,7 +7,7 @@ setClass (
     iterations_same_cost = "numeric",
     population_size      = "numeric",
     keep_fraction        = "numeric",
-    m_mutation_rate      = "numeric",
+    mutation_rate        = "numeric",
     penalty_parameter    = "numeric"
   ),
 
@@ -17,7 +17,7 @@ setClass (
     iterations_same_cost = as.integer(NULL),
     population_size      = as.integer(NULL),
     keep_fraction        = as.double(NULL),
-    m_mutation_rate      = as.double(NULL),
+    mutation_rate        = as.double(NULL),
     penalty_parameter    = as.double(NULL)
   )
 )
@@ -31,7 +31,7 @@ setMethod(f = "show",
             cat("iterations_same_cost:", object@iterations_same_cost, "\n")
             cat("     population_size:", object@population_size, "\n")
             cat("       keep_fraction:", object@keep_fraction, "\n")
-            cat("     m_mutation_rate:", object@m_mutation_rate, "\n")
+            cat("       mutation_rate:", object@mutation_rate, "\n")
             cat("   penalty_parameter:", object@penalty_parameter, "\n")
           }
 )

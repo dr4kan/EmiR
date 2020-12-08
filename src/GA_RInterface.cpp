@@ -42,7 +42,7 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
   algo_config.setPopulationSize(config.slot("population_size"));
   algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
   algo_config.setKeepFraction(config.slot("keep_fraction"));
-  algo_config.setMutationRate(config.slot("m_mutation_rate"));
+  algo_config.setMutationRate(config.slot("mutation_rate"));
   algo_config.setPenaltyParameter(config.slot("penalty_parameter"));
 
   double penality = config.slot("penalty_parameter");
@@ -50,6 +50,7 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
   // Initialization of the minimizer
   GAMinimization minimizer;
   minimizer.setParametersRange(pr);
+  algo_config.setConfigCrossover();
   minimizer.cost_history.clear();
 
   // Initialization of the population

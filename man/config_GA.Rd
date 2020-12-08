@@ -9,7 +9,7 @@ config_ga(
   population_size,
   iterations_same_cost = NULL,
   keep_fraction = 0.4,
-  m_mutation_rate = 0.1,
+  mutation_rate = 0.1,
   penalty_parameter = 10
 )
 }
@@ -24,7 +24,7 @@ specified by the parameter \code{iterations}.}
 
 \item{keep_fraction}{???.}
 
-\item{m_mutation_rate}{???.}
+\item{mutation_rate}{???.}
 
 \item{penalty_parameter}{penalty parameter in constrained optimization.}
 }

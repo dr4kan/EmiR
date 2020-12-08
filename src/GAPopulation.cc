@@ -53,9 +53,9 @@ void GAPopulation::crossover() {
     for (size_t u = 0; u < m_par_range.getNumberOfParameters(); u++) {
       double beta = uni(m_mt);
       m_chrom[m_chrom.size() - 1 - i].setGene(u, m_chrom[ma].getGene(u) -
-      beta * (m_chrom[ma].getGene(u) - m_chrom[pa].getGene(u)));
+        beta * (m_chrom[ma].getGene(u) - m_chrom[pa].getGene(u)));
       m_chrom[m_chrom.size() - 2 - i].setGene(u, m_chrom[pa].getGene(u) +
-      beta * (m_chrom[ma].getGene(u) - m_chrom[pa].getGene(u)));
+        beta * (m_chrom[ma].getGene(u) - m_chrom[pa].getGene(u)));
     };
   };
 };
@@ -73,7 +73,7 @@ void GAPopulation::mutation() {
     int ra2 = uni_2(m_mt);
 
     std::uniform_real_distribution<double> uni_3(m_par_range.getParameterMin(ra1),
-    m_par_range.getParameterMax(ra1));
+                                                 m_par_range.getParameterMax(ra1));
     m_chrom[ra2].setGene(ra1, uni_3(m_mt));
     m_chrom[ra2].setIndicatorDown();
   };

@@ -10,7 +10,7 @@
 #' ending the minimization. If `NULL` the minimization continues for the number of iterations
 #' specified by the parameter `iterations`.
 #' @param keep_fraction ???.
-#' @param m_mutation_rate ???.
+#' @param mutation_rate ???.
 #' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_ga` returns an object of class `GAConfig`.
 #' @examples
@@ -35,7 +35,7 @@ config_ga <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,
                       keep_fraction = 0.4,
-                      m_mutation_rate = 0.1,
+                      mutation_rate = 0.1,
                       penalty_parameter = 10.) {
   p <- new("GAConfig")
   p@iterations           <- iterations
@@ -46,7 +46,7 @@ config_ga <- function(iterations,
   }
   p@population_size   <- population_size
   p@keep_fraction     <- keep_fraction
-  p@m_mutation_rate   <- m_mutation_rate
+  p@mutation_rate     <- mutation_rate
   p@penalty_parameter <- penalty_parameter
   return(p)
 }
