@@ -93,6 +93,6 @@ config_sa <- function(iterations,
 #'                   config = config)
 #' print(ps)
 #' @export
-minimize_sa <- function(cost_function, constraints = NULL, parameters, config) {
-  cstr_minimize_sa(cost_function, constraints, parameters, config)
+minimize_sa <- function(obj_func, constraints = NULL, parameters, config) {
+  cstr_minimize_sa(obj_func, constraints, parameters, config)
 }

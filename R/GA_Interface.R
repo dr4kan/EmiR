@@ -85,6 +85,6 @@ config_ga <- function(iterations,
 #'                   config = config)
 #' print(ga)
 #' @export
-minimize_ga <- function(cost_function, constraints = NULL, parameters, config) {
-  cstr_minimize_ga(cost_function, constraints, parameters, config)
+minimize_ga <- function(obj_func, constraints = NULL, parameters, config) {
+  cstr_minimize_ga(obj_func, constraints, parameters, config)
 }

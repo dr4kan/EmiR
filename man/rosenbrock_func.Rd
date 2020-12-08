@@ -14,16 +14,16 @@ The value of the function.
 }
 \description{
 \loadmathjax
-Implementation of n-dimensional Rosenbrock function.
+Implementation of n-dimensional Rosenbrock function, with \mjeqn{n \geq 2}{n >= 2}.
 }
 \details{
 On an n-dimensional domain it is defined by
 
 \mjdeqn{f(\vec{x}) = \sum_{i=1}^{n-1} \left[ 100(x_{i+1}-x_{i}^2)^2 + (x_{i}-1)^2 \right],}{,}
-and is usually evaluated on the hypercube
+and is usually evaluated on
 \mjeqn{x_{i} \in [ -5, 10 ]}{x_{i} in \link{-5, 10}}, for all
-\mjeqn{i=1,...,n}{i=1,...,n}. The global minimum is
-\mjeqn{f(1,1,...,1)=0}{f(1,1,...,1)=0}.
+\mjeqn{i=1,...,n}{i=1,...,n}. The function has one global minimum at
+\mjeqn{f(\vec{x})=0}{f(x)=0} for \mjeqn{x_{i}=1}{x_i=1} for all \mjeqn{i=1,...,n}{i=1,...,n}.
 }
 \examples{
 library(EmiR)

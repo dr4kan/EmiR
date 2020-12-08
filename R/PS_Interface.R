@@ -93,6 +93,6 @@ config_ps <- function(iterations,
 #'                   config = config)
 #' print(ps)
 #' @export
-minimize_ps <- function(cost_function, constraints = NULL, parameters, config) {
-  cstr_minimize_ps(cost_function, constraints, parameters, config)
+minimize_ps <- function(obj_func, constraints = NULL, parameters, config) {
+  cstr_minimize_ps(obj_func, constraints, parameters, config)
 }

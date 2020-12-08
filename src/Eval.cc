@@ -22,8 +22,8 @@ double Eval(std::vector<double> x, Function obj_func, List constraints, double r
       penalty += pow(std::min(0., tmp_d), 2);
     }
   }
-
   value += r*penalty;
+
   return value;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -85,5 +85,5 @@ config_cs <- function(iterations,
 #' print(cs)
 #' @export
 minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
-  cstr_minimize_cs(cost_function, constraints, parameters, config)
+  cstr_minimize_cs(obj_func, constraints, parameters, config)
 }

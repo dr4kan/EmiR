@@ -4,9 +4,11 @@
 \alias{minimize_ga}
 \title{Genetic Algorithm function minimization}
 \usage{
-minimize_ga(cost_function, constraints = NULL, parameters, config)
+minimize_ga(obj_func, constraints = NULL, parameters, config)
 }
 \arguments{
+\item{obj_func}{objective function be minimized.}
+
 \item{constraints}{list of constraints. Constraints are requested to be objects of
 class \code{Constraint} (see \link[EmiR]{constraint}).}
 
@@ -15,8 +17,6 @@ Parmeters are requested to be objects of class \code{Parameter}(see \link[EmiR]{
 
 \item{config}{an object of class \code{GAConfig} with the configuration parameters
 used by algorithm (see \link[EmiR]{config_ga}).}
-
-\item{obj_func}{objective function be minimized.}
 }
 \value{
 \code{minimize_ga} returns an object of class \code{MinimizationResult}.
