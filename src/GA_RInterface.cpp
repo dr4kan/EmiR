@@ -1,6 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+// [[depends(RcppProgress)]]
+#include <progress.hpp>
 #include "GAMinimization.h"
 #include "Eval.h"
 
@@ -24,6 +26,9 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
     Rcout << "Starting constrained GA minimization...\n\n";
   }
 
+  int n_iter = config.slot("iterations");
+  Progress progress_bar(n_iter, true);
+
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -33,7 +38,7 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
 
   // GA algorithm configuration
   GAConfig algo_config;
-  algo_config.setNMaxIterations(config.slot("iterations"));
+  algo_config.setNMaxIterations(n_iter);
   algo_config.setPopulationSize(config.slot("population_size"));
   algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
   algo_config.setKeepFraction(config.slot("keep_fraction"));
@@ -60,7 +65,7 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
   }
 
   int n_sc = 0;
-  for (size_t iter = 1; iter < algo_config.getNMaxIterations(); ++iter) {
+  for (size_t iter = 1; iter < n_iter; ++iter) {
     pop.crossover();
     ComputeCost(pop, cost_function, constraints, penality);
     pop.sort();
@@ -83,6 +88,9 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
       n_sc = 0;
     }
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
+
+    // Update progress bar
+    progress_bar.increment();
   }
 
   if (pop[0].getCost() < minimizer.best_cost) {

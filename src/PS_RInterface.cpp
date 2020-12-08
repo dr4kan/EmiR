@@ -1,6 +1,8 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+// [[depends(RcppProgress)]]
+#include <progress.hpp>
 #include "PSMinimization.h"
 #include "Eval.h"
 
@@ -22,6 +24,9 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
     Rcout << "Starting constrained PS minimization...\n\n";
   }
 
+  int n_iter = config.slot("iterations");
+  Progress progress_bar(n_iter, true);
+
   int n = parameters.length();
   ParametersRange pr(n);
   for (int i = 0; i < n; ++i) {
@@ -31,7 +36,7 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
 
   // PS algorithm configuration
   PSConfig algo_config;
-  algo_config.setNMaxIterations(config.slot("iterations"));
+  algo_config.setNMaxIterations(n_iter);
   algo_config.setNumberOfParticles(config.slot("n_particles"));
   algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
   algo_config.setCognitiveParameter(config.slot("cognitive"));
@@ -51,7 +56,7 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
   PSPopulation pop(algo_config, pr);
 
   int n_sc = 0;
-  for (size_t iter = 0; iter < algo_config.getNMaxIterations(); ++iter) {
+  for (size_t iter = 0; iter < n_iter; ++iter) {
 
     // Change the velocity of the paricles and move them
     if (iter > 0) pop.moveParticles();
@@ -77,6 +82,9 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
       n_sc = 0;
     }
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
+
+    // Update progress bar
+    progress_bar.increment();
   };
 
   if (pop[0].getBestCost() < minimizer.best_cost) {
