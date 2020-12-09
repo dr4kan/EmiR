@@ -55,7 +55,7 @@ x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
 
 config <- config_sa(iterations = 250, n_particles = 100)
-SA <- minimize_SA(cost_function = eggholder,
+SA <- minimize_sa(obj_func = eggholder,
                   parameters = l,
                   config = config)
 print(SA)

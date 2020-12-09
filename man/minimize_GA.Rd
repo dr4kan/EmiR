@@ -41,7 +41,7 @@ x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
 
 config <- config_ga(iterations = 250, population_size = 100)
-ga <- minimize_ga(cost_function = eggholder,
+ga <- minimize_ga(obj_func = eggholder,
                   parameters = l,
                   config = config)
 print(ga)

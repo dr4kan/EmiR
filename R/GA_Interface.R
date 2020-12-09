@@ -25,8 +25,8 @@
 #' x2 <- parameter("x2", -512, 512)
 #' l <- list(x1, x2)
 #'
-#' config <- config_ga(iterations = 250, n_particles = 100)
-#' GA <- minimize_GA(cost_function = eggholder,
+#' config <- config_ga(iterations = 250, population_size = 100)
+#' GA <- minimize_ga(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(GA)
@@ -80,15 +80,14 @@ config_ga <- function(iterations,
 #' l <- list(x1, x2)
 #'
 #' config <- config_ga(iterations = 250, population_size = 100)
-#' ga <- minimize_ga(cost_function = eggholder,
+#' ga <- minimize_ga(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ga)
 #' @export
 minimize_ga <- function(obj_func, constraints = NULL, parameters, config) {
-  library(tictoc)
-  tic()
+  tictoc::tic()
   out <- cstr_minimize_ga(obj_func, constraints, parameters, config)
-  toc(log = TRUE)
+  tictoc::toc(log = TRUE)
   return(out)
 }

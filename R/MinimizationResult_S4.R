@@ -29,10 +29,6 @@ setMethod(f = "show",
           }
 )
 
-# plot method
-setMethod(f = "plot",
-          signature = "MinimizationResult",
-          definition = function(x) {
-            plot(x@cost_history, type = "l", xlab = "Iteration", ylab = "Cost", main = "PS minimization")
-          }
-)
+setMethod(f = "plot", signature = "MinimizationResult", definition = function (x, ...) {
+  plot(x@cost_history, type = "l", lwd = 2, xlab = "Iteration", ylab = "Function value", ...)
+})

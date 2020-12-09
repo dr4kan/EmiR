@@ -22,8 +22,8 @@
 #' x2 <- parameter("x2", -32.768, 32.768)
 #' l <- list(x1, x2)
 #'
-#' config <- config_PS(iterations = 250, n_particles = 150)
-#' ps <- minimize_PS(cost_function = ackley_func,
+#' config <- config_ps(iterations = 250, n_particles = 150)
+#' ps <- minimize_ps(obj_func = ackley_func,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)

@@ -48,8 +48,8 @@ x1 <- parameter("x1", -512, 512)
 x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
 
-config <- config_ga(iterations = 250, n_particles = 100)
-GA <- minimize_GA(cost_function = eggholder,
+config <- config_ga(iterations = 250, population_size = 100)
+GA <- minimize_ga(obj_func = eggholder,
                   parameters = l,
                   config = config)
 print(GA)

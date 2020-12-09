@@ -25,7 +25,7 @@
 #' l <- list(x1, x2)
 #'
 #' config <- config_cs(iterations = 250, population_size = 100)
-#' ps <- minimize_CS(cost_function = eggholder,
+#' ps <- minimize_cs(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)
@@ -79,15 +79,14 @@ config_cs <- function(iterations,
 #' l <- list(x1, x2)
 #'
 #' config <- config_cs(iterations = 250, population_size = 100)
-#' cs <- minimize_cs(cost_function = eggholder,
+#' cs <- minimize_cs(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(cs)
 #' @export
 minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
-  library(tictoc)
-  tic()
+  tictoc::tic()
   out <- cstr_minimize_cs(obj_func, constraints, parameters, config)
-  toc(log = TRUE)
+  tictoc::toc(log = TRUE)
   return(out)
 }

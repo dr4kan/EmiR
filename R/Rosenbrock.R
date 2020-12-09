@@ -21,8 +21,8 @@
 #' x2 <- parameter("x2", -5, 10)
 #' l <- list(x1, x2)
 #'
-#' config <- config_PS(iterations = 250, n_particles = 150)
-#' ps <- minimize_PS(cost_function = rosenbrock_func,
+#' config <- config_ps(iterations = 250, n_particles = 150)
+#' ps <- minimize_ps(obj_func = rosenbrock_func,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)

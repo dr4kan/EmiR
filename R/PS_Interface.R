@@ -28,7 +28,7 @@
 #' l <- list(x1, x2)
 #'
 #' config <- config_ps(iterations = 250, n_particles = 100)
-#' ps <- minimize_PS(cost_function = eggholder,
+#' ps <- minimize_ps(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)
@@ -88,15 +88,14 @@ config_ps <- function(iterations,
 #' l <- list(x1, x2)
 #'
 #' config <- config_ps(iterations = 250, n_particles = 100)
-#' ps <- minimize_ps(cost_function = eggholder,
+#' ps <- minimize_ps(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)
 #' @export
 minimize_ps <- function(obj_func, constraints = NULL, parameters, config) {
-  library(tictoc)
-  tic()
+  tictoc::tic()
   out <- cstr_minimize_ps(obj_func, constraints, parameters, config)
-  toc(log = TRUE)
+  tictoc::toc(log = TRUE)
   return(out)
 }

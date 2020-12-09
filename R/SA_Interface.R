@@ -28,7 +28,7 @@
 #' l <- list(x1, x2)
 #'
 #' config <- config_sa(iterations = 250, n_particles = 100)
-#' SA <- minimize_SA(cost_function = eggholder,
+#' SA <- minimize_sa(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(SA)
@@ -88,15 +88,14 @@ config_sa <- function(iterations,
 #' l <- list(x1, x2)
 #'
 #' config <- config_sa(iterations = 250, n_particles = 100)
-#' ps <- minimize_sa(cost_function = eggholder,
+#' ps <- minimize_sa(obj_func = eggholder,
 #'                   parameters = l,
 #'                   config = config)
 #' print(ps)
 #' @export
 minimize_sa <- function(obj_func, constraints = NULL, parameters, config) {
-  library(tictoc)
-  tic()
+  tictoc::tic()
   out <- cstr_minimize_sa(obj_func, constraints, parameters, config)
-  toc(log = TRUE)
+  tictoc::toc(log = TRUE)
   return(out)
 }

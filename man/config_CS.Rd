@@ -46,7 +46,7 @@ x2 <- parameter("x2", -512, 512)
 l <- list(x1, x2)
 
 config <- config_cs(iterations = 250, population_size = 100)
-ps <- minimize_CS(cost_function = eggholder,
+ps <- minimize_cs(obj_func = eggholder,
                   parameters = l,
                   config = config)
 print(ps)
