@@ -85,5 +85,9 @@ config_cs <- function(iterations,
 #' print(cs)
 #' @export
 minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
-  cstr_minimize_cs(obj_func, constraints, parameters, config)
+  library(tictoc)
+  tic()
+  out <- cstr_minimize_cs(obj_func, constraints, parameters, config)
+  toc(log = TRUE)
+  return(out)
 }

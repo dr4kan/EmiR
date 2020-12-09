@@ -86,5 +86,9 @@ config_ga <- function(iterations,
 #' print(ga)
 #' @export
 minimize_ga <- function(obj_func, constraints = NULL, parameters, config) {
-  cstr_minimize_ga(obj_func, constraints, parameters, config)
+  library(tictoc)
+  tic()
+  out <- cstr_minimize_ga(obj_func, constraints, parameters, config)
+  toc(log = TRUE)
+  return(out)
 }

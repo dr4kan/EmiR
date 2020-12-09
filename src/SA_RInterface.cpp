@@ -73,7 +73,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
       std::uniform_real_distribution<double> uni(0, 1);
       for (size_t i = 0; i < n_dim; ++i) {
         Particle guess = pop.createGuess(i);
-        ComputeCost(pop, cost_function, constraints, penality);
+        guess.setCost(Eval(guess.getPositionVector(), cost_function, constraints, penality));
 
         double deltaF =  guess.getCost() - pop[i].getCost();
         if (exp(- deltaF / temperature) > uni(gen)) {

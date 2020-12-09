@@ -94,5 +94,9 @@ config_sa <- function(iterations,
 #' print(ps)
 #' @export
 minimize_sa <- function(obj_func, constraints = NULL, parameters, config) {
-  cstr_minimize_sa(obj_func, constraints, parameters, config)
+  library(tictoc)
+  tic()
+  out <- cstr_minimize_sa(obj_func, constraints, parameters, config)
+  toc(log = TRUE)
+  return(out)
 }
