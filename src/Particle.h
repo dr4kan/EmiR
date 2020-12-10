@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 class Particle {
 public:

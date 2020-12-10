@@ -3,6 +3,7 @@
 
 #include "SAConfig.h"
 #include "SAPopulation.h"
+#include <functional>
 
 class SAMinimization {
 public:

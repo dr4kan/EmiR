@@ -66,7 +66,7 @@ S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S
   }
 
   int n_sc = 0;
-  for (size_t iter = 1; iter < n_iter; ++iter) {
+  for (size_t iter = 1; iter < (size_t) n_iter; ++iter) {
     pop.crossover();
     ComputeCost(pop, cost_function, constraints, penality);
     pop.sort();

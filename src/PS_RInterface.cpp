@@ -56,7 +56,7 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
   PSPopulation pop(algo_config, pr);
 
   int n_sc = 0;
-  for (size_t iter = 0; iter < n_iter; ++iter) {
+  for (size_t iter = 0; iter < (size_t) n_iter; ++iter) {
 
     // Change the velocity of the paricles and move them
     if (iter > 0) pop.moveParticles();

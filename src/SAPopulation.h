@@ -5,6 +5,8 @@
 #include "Particle.h"
 #include "ParametersRange.h"
 #include <random>
+#include <functional>
+#include <algorithm>
 
 class SAPopulation {
 public:

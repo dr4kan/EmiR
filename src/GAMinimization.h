@@ -3,6 +3,7 @@
 
 #include "GAConfig.h"
 #include "GAPopulation.h"
+#include <functional>
 
 class GAMinimization {
 public:

@@ -61,7 +61,7 @@ S4 cstr_minimize_cs(Function cost_function, List constraints, List parameters, S
   minimizer.cost_history.push_back(pop[0].getCost());
 
   int n_sc = 0;
-  for (size_t iter = 1; iter < n_iter; ++iter) {
+  for (size_t iter = 1; iter < (size_t) n_iter; ++iter) {
     pop.newNest();
     ComputeCost(pop, cost_function, constraints, penality);
     pop.sort();

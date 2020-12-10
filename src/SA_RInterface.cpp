@@ -61,7 +61,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
   std::mt19937 gen(rd());
 
   int n_sc = 0;
-  for (size_t iter = 0; iter < n_iter; ++iter) {
+  for (size_t iter = 0; iter < (size_t) n_iter; ++iter) {
 
     if (iter == 0) {
       ComputeCost(pop, cost_function, constraints, penality);

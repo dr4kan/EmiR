@@ -3,6 +3,7 @@
 
 #include "CSConfig.h"
 #include "CSPopulation.h"
+#include <functional>
 
 class CSMinimization {
 public:

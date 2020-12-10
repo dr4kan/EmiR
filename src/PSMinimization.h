@@ -3,6 +3,7 @@
 
 #include "PSConfig.h"
 #include "PSPopulation.h"
+#include <functional>
 
 class PSMinimization {
 public:
