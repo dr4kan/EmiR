@@ -5,6 +5,7 @@
 #include "CSPopulation.h"
 #include <functional>
 
+// test
 class CSMinimization {
 public:
   enum VerboseLevel {SILENT, LOW, HIGH};
