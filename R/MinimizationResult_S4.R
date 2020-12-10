@@ -40,8 +40,3 @@ setMethod(f = "show",
             cat("  --------------------------------------- \n")
           }
 )
-
-setMethod(f = "plot", signature = "MinimizationResult", definition = function (x, ...) {
-  plot(x@cost_history, type = "l", lwd = 2, xlab = "Iteration",
-       ylab = "Function value", main = paste("EmiR minimizer: ", x@algorithm), ...)
-})
