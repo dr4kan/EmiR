@@ -6,6 +6,7 @@ setClass (
     algorithm       = "character",
     best_cost       = "numeric",
     best_parameters = "vector",
+    parameter_names = "vector",
     cost_history    = "vector"
   ),
 
@@ -14,6 +15,7 @@ setClass (
     algorithm       = as.character(NULL),
     best_cost       = as.numeric(NULL),
     best_parameters = as.vector(NULL),
+    parameter_names = as.vector(NULL),
     cost_history    = as.vector(NULL)
   )
 )
@@ -22,13 +24,24 @@ setClass (
 setMethod(f = "show",
           signature = "MinimizationResult",
           definition = function(object) {
-            cat("  EmiR minimizer: ", object@algorithm, "\n", sep = "")
-            cat("       best cost: ", object@best_cost, "\n", sep = "")
-            cat(" best parameters: ")
-            cat(object@best_parameters, "\n")
+            cat("\n")
+            cat("         EmiR Minimization Results \n")
+            cat("  --------------------------------------- \n")
+            cat("           minimizer | ", object@algorithm, "\n", sep = "")
+            cat("       minimum value | ", object@best_cost, "\n", sep = "")
+            cat("     best parameters | ")
+            for (i in 1:length(object@best_parameters)) {
+              if (i == 1) {
+                cat(object@parameter_names[i], " = ", object@best_parameters[i], "\n", sep = "")
+              } else {
+                cat("                     | ", object@parameter_names[i], " = ", object@best_parameters[i], "\n", sep = "")
+              }
+            }
+            cat("  --------------------------------------- \n")
           }
 )
 
 setMethod(f = "plot", signature = "MinimizationResult", definition = function (x, ...) {
-  plot(x@cost_history, type = "l", lwd = 2, xlab = "Iteration", ylab = "Function value", ...)
+  plot(x@cost_history, type = "l", lwd = 2, xlab = "Iteration",
+       ylab = "Function value", main = paste("EmiR minimizer: ", x@algorithm), ...)
 })

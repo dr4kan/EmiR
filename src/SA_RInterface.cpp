@@ -29,9 +29,11 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
 
   int n = parameters.length();
   ParametersRange pr(n);
+  std::vector<std::string> par_names;
   for (int i = 0; i < n; ++i) {
     S4 par = parameters[i];
     pr.setParameterRange(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
+    par_names.push_back(par.slot("name"));
   }
 
   // SA algorithm configuration
@@ -118,6 +120,7 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
   result.slot("algorithm")       = "SA";
   result.slot("best_cost")       = minimizer.best_cost;
   result.slot("best_parameters") = minimizer.fitted_parmaters;
+  result.slot("parameter_names") = par_names;
   result.slot("cost_history")    = minimizer.cost_history;
 
   return result;
