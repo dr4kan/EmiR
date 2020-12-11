@@ -28,11 +28,10 @@
 #' print(ps)
 #' @export
 styblinski_tank_func <- function(x) {
-  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   value <- 0
   for (i in 1:n) {
-    value <- value + (x[i]^4 - 16*x[i]^2 + 5*x[i])
+    value <- value + (x[[i]]^4 - 16*x[[i]]^2 + 5*x[[i]])
   }
   value <- value * 0.5
   return(value)

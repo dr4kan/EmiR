@@ -29,13 +29,12 @@
 #' print(ps)
 #' @export
 ackley_func <- function(x) {
-  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   sum1 <- 0
   sum2 <- 0
   for (i in 1:n) {
-    sum1 <- sum1 + x[i]^2
-    sum2 <- sum2 + cos(2*pi*x[i])
+    sum1 <- sum1 + x[[i]]^2
+    sum2 <- sum2 + cos(2*pi*x[[i]])
   }
 
   term1 <- -20 * exp(-0.2*sqrt(sum1/n))

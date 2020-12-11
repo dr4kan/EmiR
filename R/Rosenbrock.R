@@ -28,12 +28,11 @@
 #' print(ps)
 #' @export
 rosenbrock_func <- function(x) {
-  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   stopifnot(n >= 2)
   value <- 0
   for (i in 1:(n-1)) {
-    value <- value + 100*(x[i+1]-x[i]^2)^2 + (x[i]-1)^2
+    value <- value + 100*(x[i+1]-x[[i]]^2)^2 + (x[[i]]-1)^2
   }
   return(value)
 }

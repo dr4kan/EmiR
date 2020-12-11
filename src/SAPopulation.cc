@@ -90,3 +90,10 @@ void SAPopulation::moveParticles(std::function<double (double*)> cost_function, 
 
   };
 };
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+std::vector<std::vector<double>> SAPopulation::getPopulationPosition() {
+  std::vector<std::vector<double>> positions(m_particles.size());
+  for (size_t i = 0; i < m_particles.size(); ++i) positions[i] = m_particles[i].getPositionVector();
+  return positions;
+};

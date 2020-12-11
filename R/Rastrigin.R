@@ -29,9 +29,8 @@
 #' print(ps)
 #' @export
 rastrigin_func <- function(x) {
-  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   value <- 10*n
-  for (i in 1:n) value = value + x[i]^2 - 10*cos(2*pi*x[i])
+  for (i in 1:n) value = value + x[[i]]^2 - 10*cos(2*pi*x[[i]])
   return(value)
 }

@@ -41,6 +41,9 @@ public:
   /// Set the velocity for each particle in the population
   void setVelocity();
 
+  /// Return the position of all particles
+  std::vector<std::vector<double>> getPopulationPosition();
+
 private:
 
   SAConfig              m_config;   /**< Configuration */

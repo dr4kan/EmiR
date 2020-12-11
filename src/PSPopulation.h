@@ -38,6 +38,9 @@ public:
     return t_os;
   };
 
+  /// Return the position of all particles
+  std::vector<std::vector<double>> getPopulationPosition();
+
 private:
   /// Set the velocity for each particle in the population
   void setVelocity();

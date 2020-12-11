@@ -29,10 +29,15 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
 
   int n = parameters.length();
   ParametersRange pr(n);
+
   std::vector<std::string> par_names;
+  std::vector<std::vector<double>>parameter_range(n);
+  std::vector<std::vector<std::vector<double>>> population_position;
+
   for (int i = 0; i < n; ++i) {
     S4 par = parameters[i];
     pr.setParameterRange(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
+    parameter_range[i] = {par.slot("min_val"), par.slot("max_val")};
     par_names.push_back(par.slot("name"));
   }
 
@@ -61,7 +66,8 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
   std::mt19937 gen(rd());
 
   int n_sc = 0;
-  for (size_t iter = 0; iter < (size_t) n_iter; ++iter) {
+  size_t iter = 0;
+  for (iter = 0; iter < (size_t) n_iter; ++iter) {
 
     if (iter == 0) {
       ComputeCost(pop, cost_function, constraints, penality);
@@ -106,6 +112,8 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
     }
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
 
+    population_position.push_back(pop.getPopulationPosition());
+
     // Update progress bar
     progress_bar.increment();
   }
@@ -118,8 +126,11 @@ S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S
 
   S4 result("MinimizationResult");
   result.slot("algorithm")       = "SA";
+  result.slot("iterations")      = iter;
   result.slot("best_cost")       = minimizer.best_cost;
   result.slot("best_parameters") = minimizer.fitted_parmaters;
+  result.slot("parameter_range") = parameter_range;
+  result.slot("particles")       = population_position;
   result.slot("parameter_names") = par_names;
   result.slot("cost_history")    = minimizer.cost_history;
 

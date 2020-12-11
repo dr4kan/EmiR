@@ -6,6 +6,17 @@ using namespace Rcpp;
 #include "PSMinimization.h"
 #include "Eval.h"
 
+void add(List& df, PSPopulation& pop, size_t iter) {
+  std::vector<double> v;
+  for (size_t i = 0; i < pop.size(); ++i) {
+    v = pop[i].getPositionVector();
+    v.push_back(iter);
+    df.push_back(v);
+  }
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
 void ComputeCost(PSPopulation& pop, Function cost_function, List constraints, double penality) {
   double cost_value = 0.;
   for (size_t i = 0; i < pop.size(); ++i) {
@@ -29,9 +40,16 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
 
   int n = parameters.length();
   ParametersRange pr(n);
+
+  std::vector<std::string> par_names;
+  std::vector<std::vector<double>>parameter_range(n);
+  List population_position;
+
   for (int i = 0; i < n; ++i) {
     S4 par = parameters[i];
     pr.setParameterRange(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
+    parameter_range[i] = {par.slot("min_val"), par.slot("max_val")};
+    par_names.push_back(par.slot("name"));
   }
 
   // PS algorithm configuration
@@ -56,7 +74,8 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
   PSPopulation pop(algo_config, pr);
 
   int n_sc = 0;
-  for (size_t iter = 0; iter < (size_t) n_iter; ++iter) {
+  size_t iter = 0;
+  for (iter = 0; iter < (size_t) n_iter; ++iter) {
 
     // Change the velocity of the paricles and move them
     if (iter > 0) pop.moveParticles();
@@ -83,6 +102,8 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
     }
     if (n_sc > algo_config.getNMaxIterationsSameCost()) break;
 
+    add(population_position, pop, iter);
+
     // Update progress bar
     progress_bar.increment();
   };
@@ -95,8 +116,13 @@ S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S
 
   S4 result("MinimizationResult");
   result.slot("algorithm")       = "PS";
+  result.slot("iterations")      = iter;
+  result.slot("obj_function")    = cost_function;
   result.slot("best_cost")       = minimizer.best_cost;
   result.slot("best_parameters") = minimizer.fitted_parmaters;
+  result.slot("parameter_range") = parameter_range;
+  result.slot("particles")       = population_position;
+  result.slot("parameter_names") = par_names;
   result.slot("cost_history")    = minimizer.cost_history;
 
   return result;

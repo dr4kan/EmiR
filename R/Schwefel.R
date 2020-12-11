@@ -28,11 +28,10 @@
 #' print(ps)
 #' @export
 schwefel_func <- function(x) {
-  stopifnot(is.numeric(x) || is.complex(x) == T)
   n <- length(x)
   value <- 0
   for (i in 1:n) {
-    value <- value - x[i]*sin(sqrt(abs(x[i])))
+    value <- value - x[[i]]*sin(sqrt(abs(x[[i]])))
   }
   return(value)
 }
