@@ -1,0 +1,7 @@
+SOURCES = $(wildcard Base/*.cpp HS/*.cpp IHS/*.cpp BAT/*.cpp)
+
+OBJECTS.src = HS_R_Interface.o \
+              IHS_R_Interface.o \
+              BAT_R_Interface.o
+
+OBJECTS = $(OBJECTS.src) RcppExports.o $(SOURCES:.cpp=.o)

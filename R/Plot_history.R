@@ -1,3 +1,5 @@
+utils::globalVariables(c("V1", "V2", "V3", "value"))
+
 #' Plot minimization history
 #'
 #' Plot the minimization history as a function of the number of iterations.
@@ -29,7 +31,8 @@ plot_history <- function(minimizer_result, ...) {
 #' Plot the XXX.
 #'
 #' @param minimizer_result an object of class `MinimizationResult`.
-#' @param iteration iteration.
+#' @param iteration iteration at which the population is plotted.
+#' @param n_points number of points used to draw the objective function.
 #' @param ... additional arguments, such as graphical parameters (see \link[graphics]{contour}).
 #' @return A plot.
 #' @examples
@@ -108,6 +111,7 @@ plot_population <- function(minimizer_result, iteration, n_points = 1000, ...) {
 #' XXXX
 #'
 #' @param minimizer_result an object of class `MinimizationResult`.
+#' @param n_points number of points used to draw the objective function.
 #' @param ... additional arguments, such as graphical parameters (see \link[graphics]{contour}).
 #' @return ???
 #' @examples

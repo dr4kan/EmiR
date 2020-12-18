@@ -5,68 +5,56 @@
 
 using namespace Rcpp;
 
-// cstr_minimize_cs
-S4 cstr_minimize_cs(Function cost_function, List constraints, List parameters, S4 config);
-RcppExport SEXP _EmiR_cstr_minimize_cs(SEXP cost_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+// cpp_minimize_bat
+S4 cpp_minimize_bat(Function obj_function, List constraints, List parameters, S4 config, bool silent_mode);
+RcppExport SEXP _EmiR_cpp_minimize_bat(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP silent_modeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< Function >::type obj_function(obj_functionSEXP);
     Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
     Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
     Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
-    rcpp_result_gen = Rcpp::wrap(cstr_minimize_cs(cost_function, constraints, parameters, config));
+    Rcpp::traits::input_parameter< bool >::type silent_mode(silent_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_minimize_bat(obj_function, constraints, parameters, config, silent_mode));
     return rcpp_result_gen;
 END_RCPP
 }
-// cstr_minimize_ga
-S4 cstr_minimize_ga(Function cost_function, List constraints, List parameters, S4 config);
-RcppExport SEXP _EmiR_cstr_minimize_ga(SEXP cost_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+// cpp_minimize_hs
+S4 cpp_minimize_hs(Function obj_function, List constraints, List parameters, S4 config, bool silent_mode);
+RcppExport SEXP _EmiR_cpp_minimize_hs(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP silent_modeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< Function >::type obj_function(obj_functionSEXP);
     Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
     Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
     Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
-    rcpp_result_gen = Rcpp::wrap(cstr_minimize_ga(cost_function, constraints, parameters, config));
+    Rcpp::traits::input_parameter< bool >::type silent_mode(silent_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_minimize_hs(obj_function, constraints, parameters, config, silent_mode));
     return rcpp_result_gen;
 END_RCPP
 }
-// cstr_minimize_ps
-S4 cstr_minimize_ps(Function cost_function, List constraints, List parameters, S4 config);
-RcppExport SEXP _EmiR_cstr_minimize_ps(SEXP cost_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP) {
+// cpp_minimize_ihs
+S4 cpp_minimize_ihs(Function obj_function, List constraints, List parameters, S4 config, bool silent_mode);
+RcppExport SEXP _EmiR_cpp_minimize_ihs(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP silent_modeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
+    Rcpp::traits::input_parameter< Function >::type obj_function(obj_functionSEXP);
     Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
     Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
     Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
-    rcpp_result_gen = Rcpp::wrap(cstr_minimize_ps(cost_function, constraints, parameters, config));
-    return rcpp_result_gen;
-END_RCPP
-}
-// cstr_minimize_sa
-S4 cstr_minimize_sa(Function cost_function, List constraints, List parameters, S4 config);
-RcppExport SEXP _EmiR_cstr_minimize_sa(SEXP cost_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Function >::type cost_function(cost_functionSEXP);
-    Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
-    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
-    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
-    rcpp_result_gen = Rcpp::wrap(cstr_minimize_sa(cost_function, constraints, parameters, config));
+    Rcpp::traits::input_parameter< bool >::type silent_mode(silent_modeSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_minimize_ihs(obj_function, constraints, parameters, config, silent_mode));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EmiR_cstr_minimize_cs", (DL_FUNC) &_EmiR_cstr_minimize_cs, 4},
-    {"_EmiR_cstr_minimize_ga", (DL_FUNC) &_EmiR_cstr_minimize_ga, 4},
-    {"_EmiR_cstr_minimize_ps", (DL_FUNC) &_EmiR_cstr_minimize_ps, 4},
-    {"_EmiR_cstr_minimize_sa", (DL_FUNC) &_EmiR_cstr_minimize_sa, 4},
+    {"_EmiR_cpp_minimize_bat", (DL_FUNC) &_EmiR_cpp_minimize_bat, 5},
+    {"_EmiR_cpp_minimize_hs", (DL_FUNC) &_EmiR_cpp_minimize_hs, 5},
+    {"_EmiR_cpp_minimize_ihs", (DL_FUNC) &_EmiR_cpp_minimize_ihs, 5},
     {NULL, NULL, 0}
 };
 

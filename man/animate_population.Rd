@@ -9,6 +9,8 @@ animate_population(minimizer_result, n_points = 1000, ...)
 \arguments{
 \item{minimizer_result}{an object of class \code{MinimizationResult}.}
 
+\item{n_points}{number of points used to draw the objective function.}
+
 \item{...}{additional arguments, such as graphical parameters (see \link[graphics]{contour}).}
 }
 \value{

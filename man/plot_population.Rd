@@ -9,7 +9,9 @@ plot_population(minimizer_result, iteration, n_points = 1000, ...)
 \arguments{
 \item{minimizer_result}{an object of class \code{MinimizationResult}.}
 
-\item{iteration}{iteration.}
+\item{iteration}{iteration at which the population is plotted.}
+
+\item{n_points}{number of points used to draw the objective function.}
 
 \item{...}{additional arguments, such as graphical parameters (see \link[graphics]{contour}).}
 }
