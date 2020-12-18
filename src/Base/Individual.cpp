@@ -1,45 +1,40 @@
-#include "Harmony.h"
+#include "Individual.h"
 
-
-Harmony::Harmony() {};
+Individual::Individual() {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-Harmony::Harmony(int n) : m_position(n) {};
+Individual::Individual(int n) :
+m_position(n, 0),
+m_cost(0.) {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Harmony::setPosition(size_t i, double t) {
-  m_position[i] = t;
+void Individual::setPosition(size_t t, double t_x) {
+  m_position[t] = t_x;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Harmony::setCost(double t) {
+void Individual::setCost(double t) {
   m_cost = t;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t Harmony::getDimension() const {
+size_t Individual::getDimension() const {
   return m_position.size();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double Harmony::getPosition(size_t t) {
+double Individual::getPosition(size_t t) {
   return m_position[t];
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-const std::vector<double>& Harmony::getPosition() const {
-  return m_position;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-double Harmony::getCost() {
+double Individual::getCost() {
   return m_cost;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

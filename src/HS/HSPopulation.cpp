@@ -1,15 +1,13 @@
 #include "HSPopulation.h"
 
-HSPopulation::HSPopulation(Function func) :
-  m_mt((std::random_device())()),
-  m_obj_func(func) {};
+HSPopulation::HSPopulation(Function func) : Population(func) {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
 void HSPopulation::init() {
   size_t pop_size = m_config.getPopulationSize();
   size_t d = m_par_range.getNumberOfParameters();
-  m_harmonies.resize(pop_size, Harmony(d));
+  m_harmonies.resize(pop_size, Individual(d));
 
   for (size_t j = 0; j < d; ++j) { // loop on dimension
     std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
@@ -24,18 +22,6 @@ void HSPopulation::init() {
 
 void HSPopulation::setConfig(const HSConfig& t_config) {
   m_config = t_config;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void HSPopulation::setParRange(const ParametersRange& t_par_range) {
-  m_par_range = t_par_range;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void HSPopulation::setConstraints(List constraints) {
-  m_constraints = constraints;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -58,7 +44,7 @@ void HSPopulation::generateNewHarmony() {
   std::uniform_real_distribution<double> u_1_1(-1., 1.);
   std::uniform_int_distribution<> u_pop(0, m_harmonies.size()-1);
   double val = 0.;
-  Harmony new_solution(d);
+  Individual new_solution(d);
 
   for (size_t j = 0; j < d; ++j) { // loop on dimension
     std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
@@ -96,7 +82,7 @@ void HSPopulation::evaluate() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HSPopulation::evaluate(Harmony& solution) {
+void HSPopulation::evaluate(Individual& solution) {
   // check if the solution is out of range
   for (size_t j = 0; j < m_par_range.getNumberOfParameters(); ++j) {
     if (solution.getPosition(j) < m_par_range.getParameterMin(j) ||

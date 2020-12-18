@@ -4,15 +4,16 @@ SOURCES = BAT/BATConfig.cpp \
 	BAT/Bat.cpp \
 	Base/Algorithm.cpp \
 	Base/Config.cpp \
+	Base/Individual.cpp \
 	Base/Parameter.cpp \
 	Base/ParametersRange.cpp \
+	Base/Population.cpp \
 	CS/CSConfig.cpp \
 	CS/CSPopulation.cpp \
 	CS/Nest.cpp \
 	HS/HSConfig.cpp \
 	HS/HSPopulation.cpp \
 	HS/HS_algorithm.cpp \
-	HS/Harmony.cpp \
 	IHS/IHSConfig.cpp \
 	IHS/IHSPopulation.cpp \
 	IHS/IHS_algorithm.cpp

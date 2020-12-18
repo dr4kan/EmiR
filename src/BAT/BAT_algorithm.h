@@ -1,6 +1,8 @@
 #ifndef EmiR_BAT_algorithm_h
 #define EmiR_BAT_algorithm_h
 
+#include "../Base/Algorithm.h"
+#include "BATConfig.h"
 #include "BATPopulation.h"
 
 class BAT_algorithm : public Algorithm {

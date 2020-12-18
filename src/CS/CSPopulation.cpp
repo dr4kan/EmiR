@@ -1,8 +1,6 @@
 #include "CSPopulation.h"
 
-CSPopulation::CSPopulation(Function func) :
-  m_mt((std::random_device())()),
-  m_obj_func(func) {};
+CSPopulation::CSPopulation(Function func) : Population(func) {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -24,18 +22,6 @@ void CSPopulation::init() {
 
 void CSPopulation::setConfig(const CSConfig& t_config) {
   m_config = t_config;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void CSPopulation::setParRange(const ParametersRange& t_par_range) {
-  m_par_range = t_par_range;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void CSPopulation::setConstraints(List constraints) {
-  m_constraints = constraints;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

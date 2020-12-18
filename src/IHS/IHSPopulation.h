@@ -1,11 +1,11 @@
 #ifndef EmiR_IHSPopulation_h
 #define EmiR_IHSPopulation_h
 
-#include "../HS/Harmony.h"
+#include "../Base/Individual.h"
 #include "IHSConfig.h"
-#include "../Base/Algorithm.h"
+#include "../Base/Population.h"
 
-class IHSPopulation {
+class IHSPopulation : public Population {
 public:
 
   IHSPopulation(Function);
@@ -14,10 +14,6 @@ public:
 
   void setConfig(const IHSConfig&);
 
-  void setParRange(const ParametersRange&);
-
-  void setConstraints(List);
-
   /// Sort the particles according to the best cost
   void sort();
 
@@ -25,7 +21,7 @@ public:
   size_t size() const;
 
   /// Access the specified solution
-  Harmony &operator[](size_t t) { return m_harmonies[t]; };
+  Individual &operator[](size_t t) { return m_harmonies[t]; };
 
   /// Return the position of all particles
   std::vector<std::vector<double>> getPopulationPosition();
@@ -36,16 +32,11 @@ public:
 
   void evaluate();
 
-  void evaluate(Harmony&);
+  void evaluate(Individual&);
 
 private:
-  IHSConfig             m_config;   /**< Configuration */
-  std::mt19937          m_mt;
-  ParametersRange       m_par_range;
-  Function              m_obj_func;
-  std::vector<Harmony>  m_harmonies;
-  List                  m_constraints;
-
+  IHSConfig             m_config;
+  std::vector<Individual>  m_harmonies;
   double                m_current_par;
   double                m_current_bw;
 };

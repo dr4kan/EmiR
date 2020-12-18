@@ -3,9 +3,9 @@
 
 #include "Bat.h"
 #include "BATConfig.h"
-#include "../Base/Algorithm.h"
+#include "../Base/Population.h"
 
-class BATPopulation {
+class BATPopulation : public Population {
 public:
 
   BATPopulation(Function);
@@ -13,10 +13,6 @@ public:
   void init();
 
   void setConfig(const BATConfig&);
-
-  void setParRange(const ParametersRange&);
-
-  void setConstraints(List);
 
   /// Sort the particles according to the best cost
   void sort();
@@ -45,14 +41,10 @@ public:
 private:
 
   BATConfig           m_config;   /**< Configuration */
-  std::mt19937        m_mt;
-  ParametersRange     m_par_range;
-  Function            m_obj_func;
   Bat                 m_best_solution;
   std::vector<Bat>    m_bats;    /**< Bats in the population */
   double              m_loudness;
   double              m_pulse_rate;
-  List                m_constraints;
 };
 
 #endif

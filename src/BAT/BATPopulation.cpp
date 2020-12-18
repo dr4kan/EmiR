@@ -1,8 +1,6 @@
 #include "BATPopulation.h"
 
-BATPopulation::BATPopulation(Function func) :
-  m_mt((std::random_device())()),
-  m_obj_func(func) {};
+BATPopulation::BATPopulation(Function func) : Population(func) {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -33,18 +31,6 @@ void BATPopulation::init() {
 
 void BATPopulation::setConfig(const BATConfig& t_config) {
   m_config = t_config;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void BATPopulation::setParRange(const ParametersRange& t_par_range) {
-  m_par_range = t_par_range;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-void BATPopulation::setConstraints(List constraints) {
-  m_constraints = constraints;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

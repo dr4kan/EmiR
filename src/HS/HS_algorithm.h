@@ -1,6 +1,8 @@
 #ifndef EmiR_HS_algorithm_h
 #define EmiR_HS_algorithm_h
 
+#include "../Base/Algorithm.h"
+#include "HSConfig.h"
 #include "HSPopulation.h"
 
 class HS_algorithm : public Algorithm {

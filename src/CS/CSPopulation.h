@@ -3,9 +3,9 @@
 
 #include "Nest.h"
 #include "CSConfig.h"
-#include "../Base/Algorithm.h"
+#include "../Base/Population.h"
 
-class CSPopulation {
+class CSPopulation : public Population {
 public:
 
   CSPopulation(Function);
@@ -13,10 +13,6 @@ public:
   void init();
 
   void setConfig(const CSConfig&);
-
-  void setParRange(const ParametersRange&);
-
-  void setConstraints(List);
 
   /// Sort the particles according to the best cost
   void sort();
@@ -36,12 +32,8 @@ public:
 
 private:
   CSConfig          m_config;
-  std::mt19937      m_mt;
-  ParametersRange   m_par_range;
-  Function          m_obj_func;
   std::vector<Nest> m_harmonies;
-  List              m_constraints;
-
+  
 };
 
 #endif
