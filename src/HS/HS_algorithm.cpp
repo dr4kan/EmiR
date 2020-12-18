@@ -45,8 +45,6 @@ void HS_algorithm::minimize() {
   // Evaluate the cost for the population
   m_population.evaluate();
 
-  std::cout << " OK " << std::endl;
-
   // Sort the population
   m_population.sort();
 

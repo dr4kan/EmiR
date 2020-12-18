@@ -5,8 +5,6 @@ EmiR is package which provides several evolutionary algorithms for
 optimization problems. EmiR can be used to minimize an objective
 function also if subjected to inequality constraints.
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
-
 ### Constrained Optimization
 
 EmiR can also be used for constrained optimization problems, but only

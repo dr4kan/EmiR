@@ -7,7 +7,7 @@ BATPopulation::BATPopulation(Function func) :
 
 
 void BATPopulation::init() {
-  size_t pop_size = m_config.getNumberOfParticles();
+  size_t pop_size = m_config.getPopulationSize();
   m_loudness = m_config.getInitialLoudness();
   m_pulse_rate = m_config.getInitialPulseRate() * (1 - exp(-m_config.getGamma()));
   size_t d = m_par_range.getNumberOfParameters();

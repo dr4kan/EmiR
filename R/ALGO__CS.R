@@ -12,23 +12,6 @@
 #' @param mutation_rate ???.
 #' @param penalty_parameter penalty parameter in constrained optimization.
 #' @return `config_cs` returns an object of class `CSConfig`.
-#' @examples
-#' library(EmiR)
-#'
-#' eggholder <- function(x) {
-#'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
-#'   return(value)
-#' }
-#'
-#' x1 <- parameter("x1", -512, 512)
-#' x2 <- parameter("x2", -512, 512)
-#' l <- list(x1, x2)
-#'
-#' config <- config_cs(iterations = 250, population_size = 100)
-#' ps <- minimize_cs(obj_func = eggholder,
-#'                   parameters = l,
-#'                   config = config)
-#' print(ps)
 #' @export
 config_cs <- function(iterations,
                       population_size,
@@ -66,23 +49,6 @@ config_cs <- function(iterations,
 #' @return `minimize_cs` returns an object of class `MinimizationResult`.
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Yang2009}{EmiR}
-#' @examples
-#' library(EmiR)
-#'
-#' eggholder <- function(x) {
-#'   value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
-#'   return(value)
-#' }
-#'
-#' x1 <- parameter("x1", -512, 512)
-#' x2 <- parameter("x2", -512, 512)
-#' l <- list(x1, x2)
-#'
-#' config <- config_cs(iterations = 250, population_size = 100)
-#' cs <- minimize_cs(obj_func = eggholder,
-#'                   parameters = l,
-#'                   config = config)
-#' print(cs)
 #' @export
 minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
   tictoc::tic()

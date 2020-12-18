@@ -33,21 +33,3 @@ Create a configuration object for the CS minimizer. At minimum the number of ite
 (parameter \code{iterations}) and the population size (parameter \code{population_size}) have
 to be provided.
 }
-\examples{
-library(EmiR)
-
-eggholder <- function(x) {
-  value = -(x[2]+47)*sin(sqrt(abs(x[1]/2+x[2]+47)))+x[1]*sin(sqrt(abs(x[1]-(x[2]+47))));
-  return(value)
-}
-
-x1 <- parameter("x1", -512, 512)
-x2 <- parameter("x2", -512, 512)
-l <- list(x1, x2)
-
-config <- config_cs(iterations = 250, population_size = 100)
-ps <- minimize_cs(obj_func = eggholder,
-                  parameters = l,
-                  config = config)
-print(ps)
-}

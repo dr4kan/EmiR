@@ -1,5 +1,5 @@
-#ifndef EmiR_Population_h
-#define EmiR_Population_h
+#ifndef EmiR_HSPopulation_h
+#define EmiR_HSPopulation_h
 
 #include "Harmony.h"
 #include "HSConfig.h"

@@ -1,44 +1,45 @@
-#include "HSConfig.h"
+#include "Nest.h"
 
-HSConfig::HSConfig() {
-  m_hmcr = 0.5;
-  m_par = 0.5;
-  m_bw = 0.1;
+
+Nest::Nest() {};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+Nest::Nest(int n) : m_position(n) {};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+void Nest::setPosition(size_t i, double t) {
+  m_position[i] = t;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HSConfig::setHmcr(double t) {
-  m_hmcr = t;
+void Nest::setCost(double t) {
+  m_cost = t;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HSConfig::setPar(double t) {
-  m_par = t;
+size_t Nest::getDimension() const {
+  return m_position.size();
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HSConfig::setBw(double t) {
-  m_bw = t;
+double Nest::getPosition(size_t t) {
+  return m_position[t];
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double HSConfig::getHmcr() const {
-  return m_hmcr;
+const std::vector<double>& Nest::getPosition() const {
+  return m_position;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double HSConfig::getPar() const {
-  return m_par;
-};
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-
-double HSConfig::getBw() const {
-  return m_bw;
+double Nest::getCost() {
+  return m_cost;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

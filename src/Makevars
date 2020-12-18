@@ -1,7 +1,25 @@
-SOURCES = $(wildcard Base/*.cpp HS/*.cpp IHS/*.cpp BAT/*.cpp)
+SOURCES = BAT/BATConfig.cpp \
+	BAT/BATPopulation.cpp \
+	BAT/BAT_algorithm.cpp \
+	BAT/Bat.cpp \
+	Base/Algorithm.cpp \
+	Base/Config.cpp \
+	Base/Parameter.cpp \
+	Base/ParametersRange.cpp \
+	CS/CSConfig.cpp \
+	CS/CSPopulation.cpp \
+	CS/Nest.cpp \
+	HS/HSConfig.cpp \
+	HS/HSPopulation.cpp \
+	HS/HS_algorithm.cpp \
+	HS/Harmony.cpp \
+	IHS/IHSConfig.cpp \
+	IHS/IHSPopulation.cpp \
+	IHS/IHS_algorithm.cpp
 
-OBJECTS.src = HS_R_Interface.o \
-              IHS_R_Interface.o \
-              BAT_R_Interface.o
+OBJECTS.src = BAT_R_Interface.o \
+	HS_R_Interface.o \
+	IHS_R_Interface.o \
+	RcppExports.o
 
-OBJECTS = $(OBJECTS.src) RcppExports.o $(SOURCES:.cpp=.o)
+OBJECTS = $(OBJECTS.src) $(SOURCES:.cpp=.o)

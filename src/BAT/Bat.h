@@ -35,7 +35,7 @@ public:
   /// Return a velocity component
   double getVelocity(size_t t);
 
-  /// Return the cost computed using the current position of the Bat
+  /// Return the cost
   double getCost();
 
   double getFrequency() const;
