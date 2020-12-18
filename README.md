@@ -1,0 +1,33 @@
+
+## EmiR: Evolutionary minimizator for R
+
+EmiR is package which provides several evolutionary algorithms for
+optimization problems. EmiR can be used to minimize an objective
+function also if subjected to inequality constraints.
+
+### Constrained Optimization
+
+EmiR can also be used for constrained optimization problems, but only
+with inequality constraints. Indeed, in general, evolutionary algorithms
+are not well suited for minimizing an objective function subjected to
+equality constraints. In EmiR, constrained optimization problems are
+brought back to unconstrained ones by using the barrier method.
+
+Consider the following constrained problem
+
+\(\begin{equation} \begin{cases} \min f(\vec{x}) \\ g_{i}(\vec{x}) \leq 0, & i = 1,...,m \\ \vec{x} \in \mathbb{R}^{n} \end{cases} \end{equation}\)
+
+where the objective function \(f\) is subjected to \(m\) inequality
+constraints. This problem is equivalent to the following unconstrained
+problem
+
+\(\begin{equation} \begin{cases} \min f(\vec{x}) + \sum_{i=1}^{m}\mathbb{1}_{g_{i}}(\vec{x}) \\ \vec{x} \in \mathbb{R}^{n} \end{cases} \end{equation}\)
+
+where \(\mathbb{1}_{g_{i}}\) is an indicator functions, defined as
+
+\(\begin{equation} \mathbb{1}_{g_{i}}(\vec{x}) = \begin{cases} 0, & g_{i}(\vec{x}) \leq 0 \\ +\infty, & g_{i}(\vec{x}) > 0 \end{cases} \end{equation}\).
+
+When using optimization algorithms such as gradient descent method or
+Newton’s method, \(\mathbb{1}_{g_{i}}\) is approximated by some smooth
+functions, such as the log barrier function. This approximation is not
+necessary for evolutionary algorithms and is not performed by EmiR.
