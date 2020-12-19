@@ -8,23 +8,19 @@ void BATPopulation::init() {
   size_t pop_size = m_config.getPopulationSize();
   m_loudness = m_config.getInitialLoudness();
   m_pulse_rate = m_config.getInitialPulseRate() * (1 - exp(-m_config.getGamma()));
-  size_t d = m_par_range.getNumberOfParameters();
+  size_t d = m_search_space.getNumberOfParameters();
   m_bats.resize(pop_size, Bat(d));
 
-  // Generate randomly frequency, position and velocity for the bats
   std::uniform_real_distribution<double> u_freq(m_config.getMinFrequency(), m_config.getMaxFrequency());
 
-  for (size_t j = 0; j < d; ++j) { // loop on dimension
-    std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
-
-    for (size_t i = 0; i < m_bats.size(); ++i) { // loop on population
-      // update the frequency
-      if (j == 0) m_bats[i].setFrequency(u_freq(m_mt));
-
-      m_bats[i].setPosition(j, u_pos(m_mt));
-      m_bats[i].setVelocity(j, 0);
-    };
+  // Generate randomly frequency and position
+  // initial velocity is set to zero in the constructor of
+  // the Bat class
+  for (size_t i = 0; i < m_bats.size(); ++i) {
+    m_bats[i].setFrequency(u_freq(m_mt));
+    m_bats[i].setPosition(m_search_space.getRandom());
   };
+
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -63,12 +59,12 @@ void BATPopulation::updateLoudnessAndPulse(size_t t) {
 
 
 void BATPopulation::moveBats() {
-  size_t d = m_par_range.getNumberOfParameters();
+  size_t d = m_search_space.getNumberOfParameters();
   std::uniform_real_distribution<double> u_freq(m_config.getMinFrequency(),
-                                                m_config.getMaxFrequency());
+  m_config.getMaxFrequency());
   std::uniform_real_distribution<double> u_1_1(-1., 1.);
   std::uniform_real_distribution<double> u_0_1(-1., 1.);
-  double v, x = 0.;
+  double v = 0.;
   bool update_p = false;
   bool update_l = false;
   m_best_solution = m_bats[0];
@@ -84,32 +80,35 @@ void BATPopulation::moveBats() {
 
     // update position and velocity
     for (size_t j = 0; j < d; ++j) { // loop on dimension
-      v = tmp.getVelocity(j) + (tmp.getPosition(j) - m_best_solution.getPosition(j))*tmp.getFrequency();
+      v = tmp.getVelocity(j) + (tmp[j] - m_best_solution[j])*tmp.getFrequency();
       tmp.setVelocity(j, v);
-
-      x = tmp.getPosition(j) + v;
-      tmp.setPosition(j, x);
+      tmp[j] = tmp[j] + v;
 
       // improving the best solution
       if (update_p) {
-        x = m_best_solution.getPosition(j) + u_1_1(m_mt)*m_loudness;
-        tmp.setPosition(j, x);
+        tmp[j] = m_best_solution[j] + u_1_1(m_mt)*m_loudness;
       }
 
-      // evaluate
-      evaluate(tmp);
-
-      // conditionally save of the new solution
-      if (update_l && tmp.getCost() < m_bats[i].getCost()) {
-        m_bats[i] = tmp;
+      // if the position is not in the range a new solution is generated
+      if (tmp[j] < m_search_space[j].getMin() || tmp[j] > m_search_space[j].getMax()) {
+        tmp[j] = m_search_space[j].getRandom();
+        tmp.setVelocity(j, 0);
       }
-
-      // update the best solution
-      if (tmp.getCost() < m_best_solution.getCost()) {
-        m_best_solution = tmp;
-      }
-
     }
+
+    // evaluate
+    evaluate(tmp);
+
+    // conditionally save of the new solution
+    if (update_l && tmp.getCost() < m_bats[i].getCost()) {
+      m_bats[i] = tmp;
+    }
+
+    // update the best solution
+    if (tmp.getCost() < m_best_solution.getCost()) {
+      m_best_solution = tmp;
+    }
+
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -124,15 +123,6 @@ void BATPopulation::evaluate() {
 
 
 void BATPopulation::evaluate(Bat& solution) {
-  // check if the solution is out of range
-  for (size_t j = 0; j < m_par_range.getNumberOfParameters(); ++j) {
-    if (solution.getPosition(j) < m_par_range.getParameterMin(j) ||
-        solution.getPosition(j) > m_par_range.getParameterMax(j)) {
-      solution.setCost(std::numeric_limits<double>::max());
-      return;
-    }
-  }
-
   NumericVector tmp_v = m_obj_func(solution.getPosition());
   double value = tmp_v[0];
   bool violated_constr = false;

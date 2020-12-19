@@ -41,7 +41,7 @@ void IHS_algorithm::minimize() {
 
   // Initialization of the population
   m_population.setConfig(m_algo_config);
-  m_population.setParRange(m_parameters);
+  m_population.setSearchSpace(m_parameters);
   m_population.init();
 
   // Evaluate the cost for the population

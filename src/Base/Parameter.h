@@ -2,12 +2,14 @@
 #define EmiR_Parameter_h
 
 #include <string>
-#include <iostream>
-#include <iomanip>
-#include <sstream>
+#include <random>
 
 class Parameter {
+
+  typedef typename std::uniform_real_distribution<double>::param_type r_pt;
+
 public:
+
   /// Empty constructor
   Parameter();
 
@@ -24,25 +26,24 @@ public:
   const std::string& getName() const;
 
   /// Return the min value of the range
-  double getRangeMin() const;
+  double getMin() const;
 
   /// Return the min value of the range
-  double getRangeMax() const;
+  double getMax() const;
 
-  std::string sciPrint() {
-    std::stringstream ss;
-    ss << std::scientific << "[" << m_min_val << ", " << m_max_val << "]";
-    return ss.str();
-  };
+  /// Return the width of the range
+  double getWidth() const;
 
-  friend std::ostream &operator<<(std::ostream &os, Parameter &rhs) {
-    os << rhs.m_name << ": [ " << rhs.m_min_val << ", " << rhs.m_max_val << " ]\n";
-    return os;
-  };
+  /// Return a random value in the parameter range
+  double getRandom();
 
 private:
-  std::string m_name;    /**< Name of the parameter */
-  double      m_min_val; /**< Minimum value of the range */
-  double      m_max_val; /**< Maximum value of the range */
+  std::mt19937 m_mt;
+  std::string  m_name;    /**< Name of the parameter */
+  double       m_min_val; /**< Minimum value of the range */
+  double       m_max_val; /**< Maximum value of the range */
+
+  r_pt         m_range;
+  std::uniform_real_distribution<double> m_r_range;
 };
 #endif

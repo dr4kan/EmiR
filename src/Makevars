@@ -6,10 +6,11 @@ SOURCES = BAT/BATConfig.cpp \
 	Base/Config.cpp \
 	Base/Individual.cpp \
 	Base/Parameter.cpp \
-	Base/ParametersRange.cpp \
 	Base/Population.cpp \
+	Base/SearchSpace.cpp \
 	CS/CSConfig.cpp \
 	CS/CSPopulation.cpp \
+	CS/CS_algorithm.cpp \
 	CS/Nest.cpp \
 	HS/HSConfig.cpp \
 	HS/HSPopulation.cpp \

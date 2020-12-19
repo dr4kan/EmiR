@@ -29,11 +29,11 @@ public:
   double getBwMax() const;
 
 private:
-  double m_hmcr;            /**< Harmony memory considering rate */
-  double m_par_min;         /**< Minimum pitch adjusting rate */
-  double m_par_max;         /**< Maximum pitch adjusting rate */
-  double m_bw_min;          /**< Minumum distance bandwidth */
-  double m_bw_max;          /**< Maximum distance bandwidth */
+  double m_hmcr;    /**< Harmony memory considering rate */
+  double m_par_min; /**< Minimum pitch adjusting rate */
+  double m_par_max; /**< Maximum pitch adjusting rate */
+  double m_bw_min;  /**< Minumum distance bandwidth */
+  double m_bw_max;  /**< Maximum distance bandwidth */
 };
 
 #endif

@@ -17,12 +17,12 @@ void Algorithm::setConstraints(List constraints) {
 
 void Algorithm::setParameters(List parameters) {
   int n = parameters.length();
-  m_parameters = ParametersRange(n);
+  m_parameters = SearchSpace(n);
   m_parameter_range = std::vector<std::vector<double>>(n);
 
   for (int i = 0; i < n; ++i) {
     S4 par = parameters[i];
-    m_parameters.setParameterRange(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
+    m_parameters.setParameter(i, par.slot("name"), par.slot("min_val"), par.slot("max_val"));
     m_parameter_range[i] = {par.slot("min_val"), par.slot("max_val")};
     m_parameter_names.push_back(par.slot("name"));
   }

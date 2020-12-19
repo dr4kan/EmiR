@@ -6,14 +6,14 @@ CSPopulation::CSPopulation(Function func) : Population(func) {};
 
 void CSPopulation::init() {
   size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_par_range.getNumberOfParameters();
-  m_harmonies.resize(pop_size, Nest(d));
+  size_t d = m_search_space.getNumberOfParameters();
+  m_nests.resize(pop_size, Nest(d));
 
   for (size_t j = 0; j < d; ++j) { // loop on dimension
-    std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
+    std::uniform_real_distribution<double> u_pos(m_search_space[j].getMin(), m_search_space[j].getMax());
 
-    for (size_t i = 0; i < m_harmonies.size(); ++i) { // loop on population
-      m_harmonies[i].setPosition(j, u_pos(m_mt));
+    for (size_t i = 0; i < m_nests.size(); ++i) { // loop on population
+      m_nests[i][j] = u_pos(m_mt);
     }
   }
 };
@@ -27,35 +27,58 @@ void CSPopulation::setConfig(const CSConfig& t_config) {
 
 
 void CSPopulation::sort() {
-  std::sort(m_harmonies.begin(), m_harmonies.end());
+  std::sort(m_nests.begin(), m_nests.end());
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
 size_t CSPopulation::size() const {
-  return m_harmonies.size();
+  return m_nests.size();
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+Nest& CSPopulation::chooseRndNest() {
+  std::uniform_int_distribution<int> uni(1, m_nests.size()-1);
+  return m_nests[uni(m_mt)];
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+void CSPopulation::updateWithLevyFlight(size_t t) {
+  size_t d = m_search_space.getNumberOfParameters();
+  std::uniform_real_distribution<double> u_1_3(1., 3.);
+  double lambda = 0.;
+
+  for (size_t i = 0; i < m_nests.size(); ++i) {
+    for (size_t j = 0; j < d; ++j) {
+
+      // generate the levy exponent uniformly in [1, 3]
+      lambda = u_1_3(m_mt);
+
+      m_nests[i][j] = m_nests[i][j] + m_config.getAlpha() * pow(t, -lambda);
+
+      // if the position is not in the range a new solution is generated
+      if (m_nests[i][j] < m_search_space[j].getMin() ||
+          m_nests[i][j] > m_search_space[j].getMax()) {
+
+      }
+
+    }
+  }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
 void CSPopulation::evaluate() {
-  for (size_t i = 0; i < m_harmonies.size(); ++i) {
-    evaluate(m_harmonies[i]);
+  for (size_t i = 0; i < m_nests.size(); ++i) {
+    evaluate(m_nests[i]);
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
 void CSPopulation::evaluate(Nest& solution) {
-  // check if the solution is out of range
-  for (size_t j = 0; j < m_par_range.getNumberOfParameters(); ++j) {
-    if (solution.getPosition(j) < m_par_range.getParameterMin(j) ||
-        solution.getPosition(j) > m_par_range.getParameterMax(j)) {
-      solution.setCost(std::numeric_limits<double>::max());
-      return;
-    }
-  }
-
   NumericVector tmp_v = m_obj_func(solution.getPosition());
   double value = tmp_v[0];
   bool violated_constr = false;
@@ -86,8 +109,8 @@ void CSPopulation::evaluate(Nest& solution) {
 
 
 std::vector<std::vector<double>> CSPopulation::getPopulationPosition() {
-  std::vector<std::vector<double>> positions(m_harmonies.size());
-  for (size_t i = 0; i < m_harmonies.size(); ++i) positions[i] = m_harmonies[i].getPosition();
+  std::vector<std::vector<double>> positions(m_nests.size());
+  for (size_t i = 0; i < m_nests.size(); ++i) positions[i] = m_nests[i].getPosition();
   return positions;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

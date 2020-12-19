@@ -6,8 +6,8 @@ Population::Population(Function func) :
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Population::setParRange(const ParametersRange& t_par_range) {
-  m_par_range = t_par_range;
+void Population::setSearchSpace(const SearchSpace& t_par_range) {
+  m_search_space = t_par_range;
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

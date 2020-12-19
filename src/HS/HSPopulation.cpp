@@ -6,15 +6,11 @@ HSPopulation::HSPopulation(Function func) : Population(func) {};
 
 void HSPopulation::init() {
   size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_par_range.getNumberOfParameters();
+  size_t d = m_search_space.getNumberOfParameters();
   m_harmonies.resize(pop_size, Individual(d));
 
-  for (size_t j = 0; j < d; ++j) { // loop on dimension
-    std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
-
-    for (size_t i = 0; i < m_harmonies.size(); ++i) { // loop on population
-      m_harmonies[i].setPosition(j, u_pos(m_mt));
-    }
+  for (size_t i = 0; i < m_harmonies.size(); ++i) {
+    m_harmonies[i].setPosition(m_search_space.getRandom());
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -39,7 +35,7 @@ size_t HSPopulation::size() const {
 
 
 void HSPopulation::generateNewHarmony() {
-  size_t d = m_par_range.getNumberOfParameters();
+  size_t d = m_search_space.getNumberOfParameters();
   std::uniform_real_distribution<double> u_0_1(0., 1.);
   std::uniform_real_distribution<double> u_1_1(-1., 1.);
   std::uniform_int_distribution<> u_pop(0, m_harmonies.size()-1);
@@ -47,21 +43,24 @@ void HSPopulation::generateNewHarmony() {
   Individual new_solution(d);
 
   for (size_t j = 0; j < d; ++j) { // loop on dimension
-    std::uniform_real_distribution<double> u_pos(m_par_range.getParameterMin(j), m_par_range.getParameterMax(j));
-
     if (u_0_1(m_mt) < m_config.getHmcr()) {
       // choose from history
-      val = m_harmonies[u_pop(m_mt)].getPosition(j);
+      val = m_harmonies[u_pop(m_mt)][j];
 
       // check for pitch adjustment for recalled
       if (u_0_1(m_mt) < m_config.getPar()) {
         val += u_1_1(m_mt)*m_config.getBw();
       }
 
-      new_solution.setPosition(j, val);
+      // if the position is not in the range a new solution is generated
+      if (val < m_search_space[j].getMin() || val > m_search_space[j].getMax()) {
+        val = m_search_space[j].getRandom();
+      }
+
+      new_solution[j] = val;
     } else {
       // generate a new one
-      new_solution.setPosition(j, u_pos(m_mt));
+      new_solution[j] = m_search_space[j].getRandom();
     }
   }
 
@@ -83,15 +82,6 @@ void HSPopulation::evaluate() {
 
 
 void HSPopulation::evaluate(Individual& solution) {
-  // check if the solution is out of range
-  for (size_t j = 0; j < m_par_range.getNumberOfParameters(); ++j) {
-    if (solution.getPosition(j) < m_par_range.getParameterMin(j) ||
-        solution.getPosition(j) > m_par_range.getParameterMax(j)) {
-      solution.setCost(std::numeric_limits<double>::max());
-      return;
-    }
-  }
-
   NumericVector tmp_v = m_obj_func(solution.getPosition());
   double value = tmp_v[0];
   bool violated_constr = false;

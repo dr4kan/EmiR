@@ -1,7 +1,7 @@
 #ifndef EmiR_Algorithm_h
 #define EmiR_Algorithm_h
 
-#include "ParametersRange.h"
+#include "SearchSpace.h"
 #include "Utility.h"
 #include <Rcpp.h>
 #include <vector>
@@ -23,7 +23,7 @@ protected:
 
   Function m_obj_function;
   List m_constraints;
-  ParametersRange m_parameters;
+  SearchSpace m_parameters;
   std::mt19937 m_mt;
   std::vector<std::string> m_parameter_names;
   std::vector<std::vector<double>> m_parameter_range;

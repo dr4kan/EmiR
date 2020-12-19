@@ -7,9 +7,18 @@ class CSConfig : public Config {
 public:
   /// CSConfig default constructor
   CSConfig();
-  
-private:
 
+  void setPa(double);
+
+  void setAlpha(double);
+
+  double getPa() const;
+
+  double getAlpha() const;
+
+private:
+  double m_pa;     /**< Discovery rate */
+  double m_alpha;  /**< Step size */
 };
 
 #endif

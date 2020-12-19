@@ -21,7 +21,7 @@ public:
   size_t size() const;
 
   /// Access the specified solution
-  Nest &operator[](size_t t) { return m_harmonies[t]; };
+  Nest &operator[](size_t t) { return m_nests[t]; };
 
   /// Return the position of all particles
   std::vector<std::vector<double>> getPopulationPosition();
@@ -30,10 +30,15 @@ public:
 
   void evaluate(Nest&);
 
+  void updateWithLevyFlight(size_t);
+
 private:
+  /// Choose a random nest excluding the one with the best cost
+  Nest& chooseRndNest();
+
   CSConfig          m_config;
-  std::vector<Nest> m_harmonies;
-  
+  std::vector<Nest> m_nests;
+
 };
 
 #endif

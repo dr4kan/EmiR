@@ -3,24 +3,22 @@ using namespace Rcpp;
 
 // [[depends(RcppProgress)]]
 #include <progress.hpp>
-#include "HS_algorithm.h"
+#include "CS_algorithm.h"
 
 
-HS_algorithm::HS_algorithm(Function obj_function, S4 config) :
+CS_algorithm::CS_algorithm(Function obj_function, S4 config) :
 Algorithm(obj_function),
-m_population(HSPopulation(obj_function)) {
-  m_algo_config = HSConfig();
+m_population(CSPopulation(obj_function)) {
+  m_algo_config = CSConfig();
   m_algo_config.setNMaxIterations(config.slot("iterations"));
   m_algo_config.setPopulationSize(config.slot("population_size"));
   m_algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
-  m_algo_config.setHmcr(config.slot("considering_rate"));
-  m_algo_config.setPar(config.slot("adjusting_rate"));
-  m_algo_config.setBw(config.slot("distance_bandwidth"));
+
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HS_algorithm::addPopulationPosition() {
+void CS_algorithm::addPopulationPosition() {
   std::vector<double> v;
   for (size_t i = 0; i < m_population.size(); ++i) {
     v = m_population[i].getPosition();
@@ -31,7 +29,7 @@ void HS_algorithm::addPopulationPosition() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void HS_algorithm::minimize() {
+void CS_algorithm::minimize() {
   // Initialize the progress bar
   m_iter = 0;
   size_t n_iter = m_algo_config.getNMaxIterations();
@@ -57,14 +55,14 @@ void HS_algorithm::minimize() {
   int n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) {
 
-    // Generate a new harmony
-    m_population.generateNewHarmony();
-
-    // Sort the population
-    m_population.sort();
-
-    // Update the cost history
-    m_cost_history.push_back(m_population[0].getCost());
+    // // Generate a new harmony
+    // m_population.generateNewHarmony();
+    //
+    // // Sort the population
+    // m_population.sort();
+    //
+    // // Update the cost history
+    // m_cost_history.push_back(m_population[0].getCost());
 
     // Update the population position history
     if (m_save_population) addPopulationPosition();
@@ -85,7 +83,7 @@ void HS_algorithm::minimize() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-S4 HS_algorithm::getResults() {
+S4 CS_algorithm::getResults() {
   S4 result("MinimizationResult");
   result.slot("algorithm")       = "HS";
   result.slot("iterations")      = m_iter;

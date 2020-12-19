@@ -11,17 +11,14 @@ public:
   /// Individual default constructor
   Individual(int n);
 
-  /// Set a position component
-  void setPosition(size_t, double);
-
   /// Set the cost
   void setCost(double);
 
+  /// Set the positions
+  void setPosition(const std::vector<double>&);
+
   /// Return the the number of dimensions of the search space
   size_t getDimension() const;
-
-  /// Return a position component
-  double getPosition(size_t t);
 
   /// Return the position
   const std::vector<double>& getPosition() const { return m_position; };
@@ -29,10 +26,13 @@ public:
   /// Return the cost
   double getCost();
 
+  /// Access the specified component
+  double &operator[](size_t t) { return m_position[t]; };
+
   friend bool operator<(const Individual &l, const Individual &r) { return l.m_cost < r.m_cost; };
 
 protected:
-  
+
   std::vector<double> m_position;
   double              m_cost;
 };
