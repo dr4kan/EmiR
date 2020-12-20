@@ -26,7 +26,9 @@ config_cs <- function(iterations,
     p@iterations_same_cost <- iterations_same_cost
   }
   p@population_size <- population_size
+
   p@discovery_rate  <- discovery_rate
+  p@step_size       <- step_size
   return(p)
 }
 
@@ -36,6 +38,18 @@ config_cs <- function(iterations,
 #' Minimize an objective function, possibly subjected to inequality constraints, using
 #' the Cuckoo Search (CS) algorithm.
 #'
+#' 1. An egg represents a solution and is stored in a nest. An artificial cuckoo can
+#' lay only one egg at a time.
+#' 1. The cuckoo bird searches for the most suitable nest to lay the eggs in (solution)
+#' to maximize its eggs’ survival rate. An elitist selection strategy is applied, so that
+#' only high-quality eggs (best solutions near the optimal value) which are more similar
+#' to the host bird’s eggs have the opportunity to develop (next generation) and become
+#' mature cuckoos.
+#' 1.	The number of host nests (population) is fixed. The host bird can discover the
+#' alien egg (worse solutions away from the optimal value) with a probability of , and
+#' these eggs are thrown away or the nest is abandoned and a completely new nest is built in
+#' a new location. Otherwise, the egg matures and lives to the next generation. New eggs
+#' (solutions) laid by a cuckoo choose the nest by Lévy flights around the current best solutions.
 #' The Levy exponent lambda is randomly generated in [1, 3]
 #' XXXIn case of a constrained optimization only inequality constraints are allowed. The
 #'
@@ -50,9 +64,16 @@ config_cs <- function(iterations,
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Yang2009}{EmiR}
 #' @export
-minimize_cs <- function(obj_func, constraints = NULL, parameters, config) {
+minimize_cs <- function(obj_func, parameters, config, constraints = NULL, ...) {
+  minimizer_options <- list(...)
+
+  opt <- new("MinimizerOpts")
+  if ("silent_mode" %in% names(minimizer_options)) {
+    opt@silent_mode = minimizer_options[["silent_mode"]]
+  }
+
   tictoc::tic()
-  out <- cstr_minimize_cs(obj_func, constraints, parameters, config)
-  tictoc::toc(log = TRUE)
+  out <- cpp_minimize_cs(obj_func, constraints, parameters, config, opt)
+  tictoc::toc(log = TRUE, quiet = opt@silent_mode)
   return(out)
 }

@@ -5,7 +5,9 @@ S4 cpp_minimize_bat(Function obj_function,
   List constraints,
   List parameters,
   S4 config,
-  bool silent_mode) {
+  S4 opt) {
+  bool silent_mode = opt.slot("silent_mode");
+
   BAT_algorithm bat(obj_function, config);
   bat.setConstraints(constraints);
   bat.setParameters(parameters);

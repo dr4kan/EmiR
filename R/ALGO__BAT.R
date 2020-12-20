@@ -34,6 +34,7 @@ config_bat <- function(iterations,
     p@iterations_same_cost <- iterations_same_cost
   }
   p@population_size    <- population_size
+
   p@initial_loudness   <- initial_loudness
   p@alpha              <- alpha
   p@initial_pulse_rate <- initial_pulse_rate
@@ -67,18 +68,25 @@ config_bat <- function(iterations,
 #' @param obj_func objective function be minimized.
 #' @param constraints list of constraints. Constraints are requested to be objects of
 #' class `Constraint` (see \link[EmiR]{constraint}).
-#' @param parameters list of parameters the function is minimized with respect to.
+#' @param parameters list of parameters composing the search space for the objective function.
 #' Parmeters are requested to be objects of class `Parameter`(see \link[EmiR]{parameter}).
 #' @param config an object of class `BATConfig` with the configuration parameters
 #' used by algorithm (see \link[EmiR]{config_bat}).
-#' @param silent_mode if `TRUE` no messages are shown.
+#' @param ... additional options (see \link[EmiR]{MinimizerOpts}).
 #' @return `minimize_sa` returns an object of class `MinimizationResult`.
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{yang2010new}{EmiR}
 #' @export
-minimize_bat <- function(obj_func, parameters, config, constraints = NULL, silent_mode = FALSE) {
+minimize_bat <- function(obj_func, parameters, config, constraints = NULL, ...) {
+  minimizer_options <- list(...)
+
+  opt <- new("MinimizerOpts")
+  if ("silent_mode" %in% names(minimizer_options)) {
+    opt@silent_mode = minimizer_options[["silent_mode"]]
+  }
+
   tictoc::tic()
-  out <- cpp_minimize_bat(obj_func, constraints, parameters, config, silent_mode)
-  tictoc::toc(log = TRUE, quiet = silent_mode)
+  out <- cpp_minimize_bat(obj_func, constraints, parameters, config, opt)
+  tictoc::toc(log = TRUE, quiet = opt@silent_mode)
   return(out)
 }

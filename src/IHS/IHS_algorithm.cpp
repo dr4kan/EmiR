@@ -92,7 +92,7 @@ void IHS_algorithm::minimize() {
 
 S4 IHS_algorithm::getResults() {
   S4 result("MinimizationResult");
-  result.slot("algorithm")       = "HS";
+  result.slot("algorithm")       = "IHS";
   result.slot("iterations")      = m_iter;
   result.slot("obj_function")    = m_obj_function;
   result.slot("best_cost")       = m_population[0].getCost();

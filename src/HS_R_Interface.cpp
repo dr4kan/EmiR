@@ -5,7 +5,9 @@ S4 cpp_minimize_hs(Function obj_function,
   List constraints,
   List parameters,
   S4 config,
-  bool silent_mode) {
+  S4 opt) {
+  bool silent_mode = opt.slot("silent_mode");
+
   HS_algorithm hs(obj_function, config);
   hs.setConstraints(constraints);
   hs.setParameters(parameters);

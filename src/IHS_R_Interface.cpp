@@ -5,7 +5,9 @@ S4 cpp_minimize_ihs(Function obj_function,
   List constraints,
   List parameters,
   S4 config,
-  bool silent_mode) {
+  S4 opt) {
+  bool silent_mode = opt.slot("silent_mode");
+
   IHS_algorithm ihs(obj_function, config);
   ihs.setConstraints(constraints);
   ihs.setParameters(parameters);

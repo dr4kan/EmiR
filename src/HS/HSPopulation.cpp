@@ -36,20 +36,18 @@ size_t HSPopulation::size() const {
 
 void HSPopulation::generateNewHarmony() {
   size_t d = m_search_space.getNumberOfParameters();
-  std::uniform_real_distribution<double> u_0_1(0., 1.);
-  std::uniform_real_distribution<double> u_1_1(-1., 1.);
   std::uniform_int_distribution<> u_pop(0, m_harmonies.size()-1);
   double val = 0.;
   Individual new_solution(d);
 
   for (size_t j = 0; j < d; ++j) { // loop on dimension
-    if (u_0_1(m_mt) < m_config.getHmcr()) {
+    if (getRand_0_1() < m_config.getHmcr()) {
       // choose from history
       val = m_harmonies[u_pop(m_mt)][j];
 
       // check for pitch adjustment for recalled
-      if (u_0_1(m_mt) < m_config.getPar()) {
-        val += u_1_1(m_mt)*m_config.getBw();
+      if (getRand_0_1() < m_config.getPar()) {
+        val += getRand_1_1()*m_config.getBw();
       }
 
       // if the position is not in the range a new solution is generated

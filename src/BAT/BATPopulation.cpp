@@ -6,9 +6,9 @@ BATPopulation::BATPopulation(Function func) : Population(func) {};
 
 void BATPopulation::init() {
   size_t pop_size = m_config.getPopulationSize();
+  size_t d = m_search_space.getNumberOfParameters();
   m_loudness = m_config.getInitialLoudness();
   m_pulse_rate = m_config.getInitialPulseRate() * (1 - exp(-m_config.getGamma()));
-  size_t d = m_search_space.getNumberOfParameters();
   m_bats.resize(pop_size, Bat(d));
 
   std::uniform_real_distribution<double> u_freq(m_config.getMinFrequency(), m_config.getMaxFrequency());
@@ -60,10 +60,7 @@ void BATPopulation::updateLoudnessAndPulse(size_t t) {
 
 void BATPopulation::moveBats() {
   size_t d = m_search_space.getNumberOfParameters();
-  std::uniform_real_distribution<double> u_freq(m_config.getMinFrequency(),
-  m_config.getMaxFrequency());
-  std::uniform_real_distribution<double> u_1_1(-1., 1.);
-  std::uniform_real_distribution<double> u_0_1(-1., 1.);
+  std::uniform_real_distribution<double> u_freq(m_config.getMinFrequency(), m_config.getMaxFrequency());
   double v = 0.;
   bool update_p = false;
   bool update_l = false;
@@ -72,8 +69,8 @@ void BATPopulation::moveBats() {
 
   for (size_t i = 0; i < m_bats.size(); ++i) { // loop on population
 
-    update_p = u_0_1(m_mt) < m_pulse_rate ? true : false;
-    update_l = u_0_1(m_mt) < m_loudness ? true : false;
+    update_p = getRand_0_1() < m_pulse_rate ? true : false;
+    update_l = getRand_0_1() < m_loudness ? true : false;
 
     // update the frequency
     tmp.setFrequency(u_freq(m_mt));
@@ -86,7 +83,7 @@ void BATPopulation::moveBats() {
 
       // improving the best solution
       if (update_p) {
-        tmp[j] = m_best_solution[j] + u_1_1(m_mt)*m_loudness;
+        tmp[j] = m_best_solution[j] + getRand_1_1()*m_loudness;
       }
 
       // if the position is not in the range a new solution is generated

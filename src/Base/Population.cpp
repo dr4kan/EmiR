@@ -2,7 +2,10 @@
 
 Population::Population(Function func) :
   m_mt((std::random_device())()),
-  m_obj_func(func) {};
+  m_obj_func(func) {
+    m_pt_0_1 = rand_pt{ 0., 1.};
+    m_pt_1_1 = rand_pt{-1., 1.};
+  };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -14,5 +17,17 @@ void Population::setSearchSpace(const SearchSpace& t_par_range) {
 
 void Population::setConstraints(List constraints) {
   m_constraints = constraints;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+double Population::getRand_0_1() {
+  return m_rand_0_1(m_mt, m_pt_0_1);
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+double Population::getRand_1_1() {
+  return m_rand_1_1(m_mt, m_pt_1_1);
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -30,7 +30,7 @@ public:
 
   void evaluate(Nest&);
 
-  void updateWithLevyFlight(size_t);
+  void generateCuckooEgg();
 
 private:
   /// Choose a random nest excluding the one with the best cost

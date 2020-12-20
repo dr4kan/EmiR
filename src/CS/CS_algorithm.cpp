@@ -13,7 +13,8 @@ m_population(CSPopulation(obj_function)) {
   m_algo_config.setNMaxIterations(config.slot("iterations"));
   m_algo_config.setPopulationSize(config.slot("population_size"));
   m_algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
-
+  m_algo_config.setPa(config.slot("discovery_rate"));
+  m_algo_config.setAlpha(config.slot("step_size"));
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -55,14 +56,14 @@ void CS_algorithm::minimize() {
   int n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) {
 
-    // // Generate a new harmony
-    // m_population.generateNewHarmony();
-    //
-    // // Sort the population
-    // m_population.sort();
-    //
-    // // Update the cost history
-    // m_cost_history.push_back(m_population[0].getCost());
+    // Generate a cuckoo egg
+    m_population.generateCuckooEgg();
+
+    // Sort the population
+    m_population.sort();
+
+    // Update the cost history
+    m_cost_history.push_back(m_population[0].getCost());
 
     // Update the population position history
     if (m_save_population) addPopulationPosition();
@@ -85,7 +86,7 @@ void CS_algorithm::minimize() {
 
 S4 CS_algorithm::getResults() {
   S4 result("MinimizationResult");
-  result.slot("algorithm")       = "HS";
+  result.slot("algorithm")       = "CS";
   result.slot("iterations")      = m_iter;
   result.slot("obj_function")    = m_obj_function;
   result.slot("best_cost")       = m_population[0].getCost();

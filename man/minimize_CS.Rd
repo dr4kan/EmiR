@@ -4,19 +4,25 @@
 \alias{minimize_cs}
 \title{Cuckoo Search function minimization}
 \usage{
-minimize_cs(obj_func, constraints = NULL, parameters, config)
+minimize_cs(
+  obj_func,
+  parameters,
+  config,
+  constraints = NULL,
+  silent_mode = FALSE
+)
 }
 \arguments{
 \item{obj_func}{objective function be minimized.}
-
-\item{constraints}{list of constraints. Constraints are requested to be objects of
-class \code{Constraint} (see \link[EmiR]{constraint}).}
 
 \item{parameters}{list of parameters the function is minimized with respect to.
 Parmeters are requested to be objects of class \code{Parameter}(see \link[EmiR]{parameter}).}
 
 \item{config}{an object of class \code{CSConfig} with the configuration parameters
 used by algorithm (see \link[EmiR]{config_cs}).}
+
+\item{constraints}{list of constraints. Constraints are requested to be objects of
+class \code{Constraint} (see \link[EmiR]{constraint}).}
 }
 \value{
 \code{minimize_cs} returns an object of class \code{MinimizationResult}.
@@ -26,7 +32,22 @@ Minimize an objective function, possibly subjected to inequality constraints, us
 the Cuckoo Search (CS) algorithm.
 }
 \details{
+\enumerate{
+\item An egg represents a solution and is stored in a nest. An artificial cuckoo can
+lay only one egg at a time.
+\item The cuckoo bird searches for the most suitable nest to lay the eggs in (solution)
+to maximize its eggs’ survival rate. An elitist selection strategy is applied, so that
+only high-quality eggs (best solutions near the optimal value) which are more similar
+to the host bird’s eggs have the opportunity to develop (next generation) and become
+mature cuckoos.
+\item The number of host nests (population) is fixed. The host bird can discover the
+alien egg (worse solutions away from the optimal value) with a probability of , and
+these eggs are thrown away or the nest is abandoned and a completely new nest is built in
+a new location. Otherwise, the egg matures and lives to the next generation. New eggs
+(solutions) laid by a cuckoo choose the nest by Lévy flights around the current best solutions.
+The Levy exponent lambda is randomly generated in \link{1, 3}
 XXXIn case of a constrained optimization only inequality constraints are allowed. The
+}
 }
 \references{
 \insertRef{Yang2009}{EmiR}

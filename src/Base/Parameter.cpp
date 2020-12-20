@@ -25,7 +25,7 @@ void Parameter::setName(const std::string& t_name) {
 void Parameter::setRange(double t_min,  double t_max) {
   m_min_val = t_min;
   m_max_val = t_max;
-  m_range = r_pt{m_min_val, m_max_val};
+  m_range = rand_pt{m_min_val, m_max_val};
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

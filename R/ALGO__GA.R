@@ -85,9 +85,16 @@ config_ga <- function(iterations,
 #'                   config = config)
 #' print(ga)
 #' @export
-minimize_ga <- function(obj_func, constraints = NULL, parameters, config) {
+minimize_ga <- function(obj_func, parameters, config, constraints = NULL, ...) {
+  minimizer_options <- list(...)
+
+  opt <- new("MinimizerOpts")
+  if ("silent_mode" %in% names(minimizer_options)) {
+    opt@silent_mode = minimizer_options[["silent_mode"]]
+  }
+
   tictoc::tic()
-  out <- cstr_minimize_ga(obj_func, constraints, parameters, config)
-  tictoc::toc(log = TRUE)
+  out <- cpp_minimize_ga(obj_func, constraints, parameters, config, opt)
+  tictoc::toc(log = TRUE, quiet = opt@silent_mode)
   return(out)
 }

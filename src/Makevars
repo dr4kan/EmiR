@@ -20,6 +20,7 @@ SOURCES = BAT/BATConfig.cpp \
 	IHS/IHS_algorithm.cpp
 
 OBJECTS.src = BAT_R_Interface.o \
+	CS_R_Interface.o \
 	HS_R_Interface.o \
 	IHS_R_Interface.o \
 	RcppExports.o

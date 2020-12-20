@@ -6,7 +6,7 @@
 
 class Parameter {
 
-  typedef typename std::uniform_real_distribution<double>::param_type r_pt;
+  typedef typename std::uniform_real_distribution<double>::param_type rand_pt;
 
 public:
 
@@ -43,7 +43,7 @@ private:
   double       m_min_val; /**< Minimum value of the range */
   double       m_max_val; /**< Maximum value of the range */
 
-  r_pt         m_range;
+  rand_pt      m_range;
   std::uniform_real_distribution<double> m_r_range;
 };
 #endif

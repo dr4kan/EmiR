@@ -4,18 +4,12 @@
 \alias{minimize_bat}
 \title{Bat algorithm for function minimization}
 \usage{
-minimize_bat(
-  obj_func,
-  parameters,
-  config,
-  constraints = NULL,
-  silent_mode = FALSE
-)
+minimize_bat(obj_func, parameters, config, constraints = NULL, ...)
 }
 \arguments{
 \item{obj_func}{objective function be minimized.}
 
-\item{parameters}{list of parameters the function is minimized with respect to.
+\item{parameters}{list of parameters composing the search space for the objective function.
 Parmeters are requested to be objects of class \code{Parameter}(see \link[EmiR]{parameter}).}
 
 \item{config}{an object of class \code{BATConfig} with the configuration parameters
@@ -24,7 +18,7 @@ used by algorithm (see \link[EmiR]{config_bat}).}
 \item{constraints}{list of constraints. Constraints are requested to be objects of
 class \code{Constraint} (see \link[EmiR]{constraint}).}
 
-\item{silent_mode}{if \code{TRUE} no messages are shown.}
+\item{...}{additional options (see \link[EmiR]{MinimizerOpts}).}
 }
 \value{
 \code{minimize_sa} returns an object of class \code{MinimizationResult}.

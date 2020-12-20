@@ -31,6 +31,7 @@ config_hs <- function(iterations,
     p@iterations_same_cost <- iterations_same_cost
   }
   p@population_size    <- population_size
+
   p@considering_rate   <- considering_rate
   p@adjusting_rate     <- adjusting_rate
   p@distance_bandwidth <- distance_bandwidth
@@ -85,9 +86,16 @@ config_hs <- function(iterations,
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Lee2004}{EmiR}
 #' @export
-minimize_hs <- function(obj_func, parameters, config, constraints = NULL, silent_mode = FALSE) {
+minimize_hs <- function(obj_func, parameters, config, constraints = NULL, ...) {
+  minimizer_options <- list(...)
+
+  opt <- new("MinimizerOpts")
+  if ("silent_mode" %in% names(minimizer_options)) {
+    opt@silent_mode = minimizer_options[["silent_mode"]]
+  }
+
   tictoc::tic()
-  out <- cpp_minimize_hs(obj_func, constraints, parameters, config, silent_mode)
-  tictoc::toc(log = TRUE, quiet = silent_mode)
+  out <- cpp_minimize_hs(obj_func, constraints, parameters, config, opt)
+  tictoc::toc(log = TRUE, quiet = opt@silent_mode)
   return(out)
 }

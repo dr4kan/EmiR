@@ -8,8 +8,8 @@ config_cs(
   iterations,
   population_size,
   iterations_same_cost = NULL,
-  mutation_rate = 0.25,
-  penalty_parameter = 10
+  discovery_rate = 0.25,
+  step_size = 1
 )
 }
 \arguments{
@@ -21,9 +21,9 @@ config_cs(
 ending the minimization. If \code{NULL} the minimization continues for the number of iterations
 specified by the parameter \code{iterations}.}
 
-\item{mutation_rate}{???.}
+\item{discovery_rate}{???.}
 
-\item{penalty_parameter}{penalty parameter in constrained optimization.}
+\item{step_size}{step size in the Levy flight.}
 }
 \value{
 \code{config_cs} returns an object of class \code{CSConfig}.

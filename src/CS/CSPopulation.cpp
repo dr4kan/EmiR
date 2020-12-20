@@ -9,12 +9,9 @@ void CSPopulation::init() {
   size_t d = m_search_space.getNumberOfParameters();
   m_nests.resize(pop_size, Nest(d));
 
-  for (size_t j = 0; j < d; ++j) { // loop on dimension
-    std::uniform_real_distribution<double> u_pos(m_search_space[j].getMin(), m_search_space[j].getMax());
-
-    for (size_t i = 0; i < m_nests.size(); ++i) { // loop on population
-      m_nests[i][j] = u_pos(m_mt);
-    }
+  // Each nest contains only an egg (nest = solution)
+  for (size_t i = 0; i < m_nests.size(); ++i) {
+    m_nests[i].setPosition(m_search_space.getRandom());
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -45,27 +42,50 @@ Nest& CSPopulation::chooseRndNest() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void CSPopulation::updateWithLevyFlight(size_t t) {
+void CSPopulation::generateCuckooEgg() {
+
+  // new solution by Lévy flights around the current best solutions
+  double beta = 1.5;
+  double sigma = 0.6966;
+  std::normal_distribution<double> norm_v{0, 1};
+  std::normal_distribution<double> norm_u{0, sigma};
+
+  double step = 0.;
   size_t d = m_search_space.getNumberOfParameters();
-  std::uniform_real_distribution<double> u_1_3(1., 3.);
-  double lambda = 0.;
+  Nest tmp(d);
+  for (size_t j = 0; j < d; ++j) {
+    step = m_config.getAlpha() * norm_u(m_mt) / (pow(fabs(norm_v(m_mt)), 1 / beta));
+    tmp[j] = m_nests[0][j] + step;
 
-  for (size_t i = 0; i < m_nests.size(); ++i) {
-    for (size_t j = 0; j < d; ++j) {
+    // if the position is not in the range
+    if (tmp[j] < m_search_space[j].getMin()) tmp[j] = m_search_space[j].getMin();
+    if (tmp[j] > m_search_space[j].getMax()) tmp[j] = m_search_space[j].getMax();
 
-      // generate the levy exponent uniformly in [1, 3]
-      lambda = u_1_3(m_mt);
-
-      m_nests[i][j] = m_nests[i][j] + m_config.getAlpha() * pow(t, -lambda);
-
-      // if the position is not in the range a new solution is generated
-      if (m_nests[i][j] < m_search_space[j].getMin() ||
-          m_nests[i][j] > m_search_space[j].getMax()) {
-
-      }
-
-    }
+    // if the position is not in the range
+    // if (tmp[j] < m_search_space[j].getMin() || tmp[j] > m_search_space[j].getMax()) {
+    //   tmp[j] = m_search_space[j].getRandom();
+    // }
   }
+
+  // evaluate the new solution
+  evaluate(tmp);
+
+  // choose a random nest (excluding the best)
+  std::uniform_int_distribution<int> r_int(1, m_nests.size() - 1);
+  int k = r_int(m_mt);
+
+  // if the new solution is better replace the selected nestå
+  if (tmp.getCost() < m_nests[k].getCost()) m_nests[k] = tmp;
+
+  // a pa fraction of the sub-optimal solution are replaced by new ones
+  size_t to_replace = std::round(m_config.getPa()*m_nests.size());
+  for (size_t i = 1; i <= to_replace; ++i) {
+    m_nests[m_nests.size()-i].setPosition(m_search_space.getRandom());
+
+    // evaluate the new solutions
+    evaluate(m_nests[m_nests.size()-i]);
+  }
+
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
