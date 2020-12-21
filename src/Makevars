@@ -1,4 +1,7 @@
-SOURCES = BAT/BATConfig.cpp \
+SOURCES = ABC/ABCConfig.cpp \
+	ABC/ABCPopulation.cpp \
+	ABC/Bee.cpp \
+	BAT/BATConfig.cpp \
 	BAT/BATPopulation.cpp \
 	BAT/BAT_algorithm.cpp \
 	BAT/Bat.cpp \
@@ -17,7 +20,8 @@ SOURCES = BAT/BATConfig.cpp \
 	HS/HS_algorithm.cpp \
 	IHS/IHSConfig.cpp \
 	IHS/IHSPopulation.cpp \
-	IHS/IHS_algorithm.cpp
+	IHS/IHS_algorithm.cpp \
+	NEW/Particle.cpp
 
 OBJECTS.src = BAT_R_Interface.o \
 	CS_R_Interface.o \

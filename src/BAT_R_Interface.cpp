@@ -7,11 +7,13 @@ S4 cpp_minimize_bat(Function obj_function,
   S4 config,
   S4 opt) {
   bool silent_mode = opt.slot("silent_mode");
+  bool save_population = opt.slot("save_population");
 
   BAT_algorithm bat(obj_function, config);
   bat.setConstraints(constraints);
   bat.setParameters(parameters);
   bat.setSilent(silent_mode);
+  bat.savePopulation(save_population);
   bat.minimize();
   return bat.getResults();
 }

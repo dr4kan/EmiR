@@ -4,13 +4,7 @@
 \alias{minimize_cs}
 \title{Cuckoo Search function minimization}
 \usage{
-minimize_cs(
-  obj_func,
-  parameters,
-  config,
-  constraints = NULL,
-  silent_mode = FALSE
-)
+minimize_cs(obj_func, parameters, config, constraints = NULL, ...)
 }
 \arguments{
 \item{obj_func}{objective function be minimized.}

@@ -30,6 +30,8 @@ public:
 
   void evaluate(Nest&);
 
+  //// begin of custom methods
+
   void generateCuckooEgg();
 
 private:

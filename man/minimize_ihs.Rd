@@ -4,13 +4,7 @@
 \alias{minimize_ihs}
 \title{Improved Harmony Search algorithm for function minimization}
 \usage{
-minimize_ihs(
-  obj_func,
-  parameters,
-  config,
-  constraints = NULL,
-  silent_mode = FALSE
-)
+minimize_ihs(obj_func, parameters, config, constraints = NULL, ...)
 }
 \arguments{
 \item{obj_func}{objective function be minimized.}

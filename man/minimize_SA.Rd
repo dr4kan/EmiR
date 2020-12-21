@@ -4,19 +4,19 @@
 \alias{minimize_sa}
 \title{Simulated Annealing function minimization}
 \usage{
-minimize_sa(obj_func, constraints = NULL, parameters, config)
+minimize_sa(obj_func, parameters, config, constraints = NULL, ...)
 }
 \arguments{
 \item{obj_func}{objective function be minimized.}
-
-\item{constraints}{list of constraints. Constraints are requested to be objects of
-class \code{Constraint} (see \link[EmiR]{constraint}).}
 
 \item{parameters}{list of parameters the function is minimized with respect to.
 Parmeters are requested to be objects of class \code{Parameter}(see \link[EmiR]{parameter}).}
 
 \item{config}{an object of class \code{SAConfig} with the configuration parameters
 used by algorithm (see \link[EmiR]{config_sa}).}
+
+\item{constraints}{list of constraints. Constraints are requested to be objects of
+class \code{Constraint} (see \link[EmiR]{constraint}).}
 }
 \value{
 \code{minimize_sa} returns an object of class \code{MinimizationResult}.

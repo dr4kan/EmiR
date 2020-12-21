@@ -9,12 +9,14 @@ setClass (
 
   # Defining slot type
   slots = c(
-    silent_mode = "logical"
+    silent_mode     = "logical",
+    save_population = "logical"
   ),
 
   # Initializing slots
   prototype = list(
-    silent_mode = FALSE
+    silent_mode     = FALSE,
+    save_population = FALSE
   )
 )
 
@@ -22,6 +24,7 @@ setClass (
 setMethod(f = "show",
           signature = "MinimizerOpts",
           definition = function(object) {
-            cat("silent_mode: ", object@silent_mode, sep = "")
+            cat("    silent_mode: ", object@silent_mode, sep = "")
+            cat("save_population: ", object@save_population, sep = "")
           }
 )

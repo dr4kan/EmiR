@@ -84,6 +84,9 @@ minimize_bat <- function(obj_func, parameters, config, constraints = NULL, ...) 
   if ("silent_mode" %in% names(minimizer_options)) {
     opt@silent_mode = minimizer_options[["silent_mode"]]
   }
+  if ("save_population" %in% names(minimizer_options)) {
+    opt@save_population = minimizer_options[["save_population"]]
+  }
 
   tictoc::tic()
   out <- cpp_minimize_bat(obj_func, constraints, parameters, config, opt)
