@@ -73,7 +73,7 @@ config_bat <- function(iterations,
 #' @param config an object of class `BATConfig` with the configuration parameters
 #' used by algorithm (see \link[EmiR]{config_bat}).
 #' @param ... additional options (see \link[EmiR]{MinimizerOpts}).
-#' @return `minimize_sa` returns an object of class `MinimizationResult`.
+#' @return `minimize_bat` returns an object of class `MinimizationResult`.
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{yang2010new}{EmiR}
 #' @export

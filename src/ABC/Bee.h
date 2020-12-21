@@ -11,10 +11,9 @@ public:
   /// Bat default constructor
   Bee(int n);
 
+  double getFitness();
+
 private:
-  // for onlooker bee
-  std::vector<double> m_best_solution; // for onlooker bee
-  double              m_best_cost;
 
 };
 

@@ -31,3 +31,10 @@ double Population::getRand_1_1() {
   return m_rand_1_1(m_mt, m_pt_1_1);
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+int Population::genIntRand(int tmin, int tmax) {
+  rint_pt int_pt {tmin, tmax};
+  return m_int_rand(m_mt, int_pt);
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

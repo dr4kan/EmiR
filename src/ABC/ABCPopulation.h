@@ -21,7 +21,7 @@ public:
   size_t size() const;
 
   /// Access the specified solution
-  Bee &operator[](size_t t) { return m_bees[t]; };
+  Bee &operator[](size_t t) { return m_food[t]; };
 
   /// Return the position of all particles
   std::vector<std::vector<double>> getPopulationPosition();
@@ -30,20 +30,31 @@ public:
 
   void evaluate(Bee&);
 
-  void newEmployedBeesSolutions();
+  void employedBeesEvalutaion();
+
+  void onlookerBeesEvaluation();
+
+  Bee getBestSolution() {return m_best_solution;}
 
 private:
-  double fitness(Bee&);
+  void generateSolution(Bee&, size_t);
+
+  void computeProbabilities();
 
   /// Return a random integer in [0, pop_size-1] different from the passed value
   size_t getRandomPopulationIndex(size_t);
 
   // there is only one artificial employed bee for each food source
 
-  ABCConfig          m_config;
-  std::vector<Bee>   m_bees;
-  size_t             m_unemployed_bees;
-
+  ABCConfig           m_config;
+  std::vector<Bee>    m_food; // the size of the entire colony
+  std::vector<double> m_prob;
+  std::vector<int>    m_trial;
+  size_t              m_onlookers;
+  size_t              m_scouters;
+  double              m_fitness_sum;
+  size_t              m_limit_scout; // lmit for scout
+  Bee                 m_best_solution;
 };
 
 #endif

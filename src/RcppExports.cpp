@@ -5,6 +5,21 @@
 
 using namespace Rcpp;
 
+// cpp_minimize_abc
+S4 cpp_minimize_abc(Function obj_function, List constraints, List parameters, S4 config, S4 opt);
+RcppExport SEXP _EmiR_cpp_minimize_abc(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type obj_function(obj_functionSEXP);
+    Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
+    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
+    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
+    Rcpp::traits::input_parameter< S4 >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_minimize_abc(obj_function, constraints, parameters, config, opt));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_minimize_bat
 S4 cpp_minimize_bat(Function obj_function, List constraints, List parameters, S4 config, S4 opt);
 RcppExport SEXP _EmiR_cpp_minimize_bat(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP optSEXP) {
@@ -67,6 +82,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_EmiR_cpp_minimize_abc", (DL_FUNC) &_EmiR_cpp_minimize_abc, 5},
     {"_EmiR_cpp_minimize_bat", (DL_FUNC) &_EmiR_cpp_minimize_bat, 5},
     {"_EmiR_cpp_minimize_cs", (DL_FUNC) &_EmiR_cpp_minimize_cs, 5},
     {"_EmiR_cpp_minimize_hs", (DL_FUNC) &_EmiR_cpp_minimize_hs, 5},

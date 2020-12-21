@@ -21,7 +21,7 @@ class \code{Constraint} (see \link[EmiR]{constraint}).}
 \item{...}{additional options (see \link[EmiR]{MinimizerOpts}).}
 }
 \value{
-\code{minimize_sa} returns an object of class \code{MinimizationResult}.
+\code{minimize_bat} returns an object of class \code{MinimizationResult}.
 }
 \description{
 Minimize an objective function, possibly subjected to inequality constraints, using
