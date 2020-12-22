@@ -31,7 +31,7 @@
 #' print(SA)
 #' @export
 config_sa <- function(iterations,
-                      n_particles,
+                      population_size,
                       iterations_same_cost = NULL,
                       T0 = 50.,
                       annealing_schedule = "linear") {
@@ -42,7 +42,7 @@ config_sa <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@n_particles        <- n_particles
+  p@population_size    <- population_size
   p@T0                 <- T0
   p@annealing_schedule <- annealing_schedule
   return(p)

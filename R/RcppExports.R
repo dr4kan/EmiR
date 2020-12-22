@@ -25,3 +25,7 @@ cpp_minimize_new <- function(obj_function, constraints, parameters, config, opt)
     .Call('_EmiR_cpp_minimize_new', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
 }
 
+cpp_minimize_sa <- function(obj_function, constraints, parameters, config, opt) {
+    .Call('_EmiR_cpp_minimize_sa', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
+}
+

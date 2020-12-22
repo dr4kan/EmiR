@@ -95,6 +95,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cpp_minimize_sa
+S4 cpp_minimize_sa(Function obj_function, List constraints, List parameters, S4 config, S4 opt);
+RcppExport SEXP _EmiR_cpp_minimize_sa(SEXP obj_functionSEXP, SEXP constraintsSEXP, SEXP parametersSEXP, SEXP configSEXP, SEXP optSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Function >::type obj_function(obj_functionSEXP);
+    Rcpp::traits::input_parameter< List >::type constraints(constraintsSEXP);
+    Rcpp::traits::input_parameter< List >::type parameters(parametersSEXP);
+    Rcpp::traits::input_parameter< S4 >::type config(configSEXP);
+    Rcpp::traits::input_parameter< S4 >::type opt(optSEXP);
+    rcpp_result_gen = Rcpp::wrap(cpp_minimize_sa(obj_function, constraints, parameters, config, opt));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_EmiR_cpp_minimize_abc", (DL_FUNC) &_EmiR_cpp_minimize_abc, 5},
@@ -103,6 +118,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EmiR_cpp_minimize_hs", (DL_FUNC) &_EmiR_cpp_minimize_hs, 5},
     {"_EmiR_cpp_minimize_ihs", (DL_FUNC) &_EmiR_cpp_minimize_ihs, 5},
     {"_EmiR_cpp_minimize_new", (DL_FUNC) &_EmiR_cpp_minimize_new, 5},
+    {"_EmiR_cpp_minimize_sa", (DL_FUNC) &_EmiR_cpp_minimize_sa, 5},
     {NULL, NULL, 0}
 };
 

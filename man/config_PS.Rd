@@ -6,7 +6,7 @@
 \usage{
 config_ps(
   iterations,
-  n_particles,
+  population_size,
   iterations_same_cost = NULL,
   cognitive = 2,
   social = 2,
@@ -16,8 +16,6 @@ config_ps(
 }
 \arguments{
 \item{iterations}{maximum number of iterations.}
-
-\item{n_particles}{number of particles.}
 
 \item{iterations_same_cost}{maximum number of consecutive iterations with the same cost before
 ending the minimization. If \code{NULL} the minimization continues for the number of iterations
@@ -30,6 +28,8 @@ specified by the parameter \code{iterations}.}
 \item{inertia}{inertia factor.}
 
 \item{max_velocity}{a measure of the maximum distance particles travel at each iteration.}
+
+\item{n_particles}{number of particles.}
 }
 \value{
 \code{config_ps} returns an object of class \code{PSConfig}.

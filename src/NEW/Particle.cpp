@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle() {};
+Particle::Particle() : Individual() {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -28,7 +28,7 @@ int Particle::getCharge() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double Particle::getVelocity(size_t t) {
+double& Particle::getVelocity(size_t t) {
   return m_velocity[t];
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

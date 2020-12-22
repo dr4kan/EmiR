@@ -6,7 +6,7 @@
 \usage{
 config_sa(
   iterations,
-  n_particles,
+  population_size,
   iterations_same_cost = NULL,
   T0 = 50,
   annealing_schedule = "linear"
@@ -15,8 +15,6 @@ config_sa(
 \arguments{
 \item{iterations}{maximum number of iterations.}
 
-\item{n_particles}{number of particles.}
-
 \item{iterations_same_cost}{maximum number of consecutive iterations with the same cost before
 ending the minimization. If \code{NULL} the minimization continues for the number of iterations
 specified by the parameter \code{iterations}.}
@@ -24,6 +22,8 @@ specified by the parameter \code{iterations}.}
 \item{T0}{initial temperature.}
 
 \item{annealing_schedule}{???.}
+
+\item{n_particles}{number of particles.}
 }
 \value{
 \code{config_sa} returns an object of class \code{SAConfig}.

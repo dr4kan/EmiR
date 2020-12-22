@@ -1,4 +1,6 @@
 #include "Algorithm.h"
+#include <Rcpp.h>
+using namespace Rcpp;
 
 
 Algorithm::Algorithm(Function obj_function) :
@@ -52,6 +54,8 @@ void Algorithm::setOOB(std::string t) {
     m_oob_sol = DIS;
   } else if (t == "RBC") {
     m_oob_sol = RBC;
+  } else {
+    Rcout << "Unknown OOB method '" << t << "', using default.\n";
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -17,17 +17,7 @@ public:
 
   int getCharge();
 
-  double getVelocity(size_t);
-
-  Particle& operator=(const Particle& rhs) {
-    if (this != &rhs) {
-      m_position = rhs.m_position;
-      m_cost     = rhs.m_cost;
-      m_velocity = rhs.m_velocity;
-      m_charge   = rhs.m_charge;
-    }
-    return *this;
-  };
+  double& getVelocity(size_t);
 
 private:
   std::vector<double> m_velocity;

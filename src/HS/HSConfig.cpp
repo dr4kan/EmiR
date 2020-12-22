@@ -1,6 +1,6 @@
 #include "HSConfig.h"
 
-HSConfig::HSConfig() {
+HSConfig::HSConfig() : Config() {
   m_hmcr = 0.5;
   m_par = 0.5;
   m_bw = 0.1;

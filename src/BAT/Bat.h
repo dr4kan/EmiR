@@ -22,16 +22,6 @@ public:
 
   double getFrequency() const;
 
-  Bat& operator=(const Bat& rhs) {
-    if (this != &rhs) {
-      m_position = rhs.m_position;
-      m_cost     = rhs.m_cost;
-      m_velocity = rhs.m_velocity;
-      m_freq     = rhs.m_freq;
-    }
-    return *this;
-  };
-
 private:
   std::vector<double> m_velocity;
   double              m_freq;

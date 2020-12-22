@@ -53,28 +53,25 @@ void NEWPopulation::moveParicles() {
   double deltaE, v = 0.;
   Particle tmp;
   for (size_t i = 0; i < m_charges.size(); ++i) { // loop on population
-    tmp = m_charges[i];
 
     // new position
     for (size_t j = 0; j < d; ++j) { // loop on dimension
-      m_charges[i][j] += m_charges[i].getVelocity(j);
+      // set the tmp solution equale to initial state so that
+      // only one component at the time is changed
+      tmp = m_charges[i];
 
-      checkBoundary(m_charges[i][j], j);
-    }
+      // only changing the j-th component
+      tmp[j] += m_charges[i].getVelocity(j);
 
-    // evaluate new solution
-    evaluate(m_charges[i]);
+      checkBoundary(tmp[j], tmp.getVelocity(j), j);
 
-    // neutral particles do not accelerate
-    if (m_charges[i].getCharge() == 0) {
-      if (m_charges[i].getCost() < m_best_solution.getCost()) m_best_solution = m_charges[i];
-      continue;
-    }
+      // evaluate new solution
+      evaluate(tmp);
 
-    // update the velocity
-    deltaE = m_charges[i].getCost() - tmp.getCost();
-    for (size_t j = 0; j < d; ++j) { // loop on dimension
-      v = m_charges[i].getVelocity(j) + m_charges[i].getCharge() * Utility::sgn(deltaE) * sqrt(fabs(deltaE));
+      // update the velocity of the j-th component
+      deltaE = 0.01 * (m_charges[i].getCost() - tmp.getCost());
+      v = tmp.getVelocity(j) + m_charges[i].getCharge() * Utility::sgn(deltaE) * sqrt(fabs(deltaE));
+      m_charges[i][j] = tmp[j];
       m_charges[i].setVelocity(j, v);
     }
 

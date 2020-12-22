@@ -25,7 +25,11 @@ SOURCES = ABC/ABCConfig.cpp \
 	NEW/NEWConfig.cpp \
 	NEW/NEWPopulation.cpp \
 	NEW/NEW_algorithm.cpp \
-	NEW/Particle.cpp
+	NEW/Particle.cpp \
+	SA/SAConfig.cpp \
+	SA/SAParticle.cpp \
+	SA/SAPopulation.cpp \
+	SA/SA_algorithm.cpp
 
 OBJECTS.src = ABC_R_Interface.o \
 	BAT_R_Interface.o \
@@ -33,6 +37,7 @@ OBJECTS.src = ABC_R_Interface.o \
 	HS_R_Interface.o \
 	IHS_R_Interface.o \
 	NEW_R_Interface.o \
-	RcppExports.o
+	RcppExports.o \
+	SA_R_Interface.o
 
 OBJECTS = $(OBJECTS.src) $(SOURCES:.cpp=.o)

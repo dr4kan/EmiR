@@ -30,7 +30,7 @@ protected:
 
   int genIntRand(int, int);
 
-  void checkBoundary(double&, size_t);
+  void checkBoundary(double&, double&, size_t);
 
   std::mt19937 m_mt;
   SearchSpace  m_search_space;

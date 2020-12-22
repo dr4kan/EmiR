@@ -33,7 +33,7 @@
 #' print(ps)
 #' @export
 config_ps <- function(iterations,
-                      n_particles,
+                      population_size,
                       iterations_same_cost = NULL,
                       cognitive = 2.0,
                       social = 2.0,
@@ -46,7 +46,7 @@ config_ps <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@n_particles       <- n_particles
+  p@n_particles       <- population_size
   p@cognitive         <- cognitive
   p@social            <- social
   p@inertia           <- inertia

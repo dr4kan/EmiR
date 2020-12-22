@@ -5,7 +5,20 @@
 \alias{MinimizerOpts-class}
 \title{Options for EmiR optimization algorithms}
 \arguments{
-\item{silent_mode}{if \code{TRUE} no output to console is generated.}
+\item{silent_mode}{if \code{TRUE} no output to console is generated. Default is \code{FALSE}.}
+
+\item{save_population}{if \code{TRUE} the position of all individuals in the population at
+each iteration is stored. This is necessary for \code{plot_population} and \code{animate_population}
+functions to work, but it should not be used for optimizations involving large populations and/or
+large numbers of iterations.}
+
+\item{oob_solutions}{strategy to treat out-of-bound solutions. Possible values are:
+\itemize{
+\item \code{"PBC"} - Periodic Boundary Condition
+\item \code{"RBC"} - Reflective Boundary Condition
+\item \code{"BAB"} - Back At Boundary
+\item \code{"DIS"} - Disregard the solution and generate a new one
+}}
 }
 \description{
 Options for EmiR optimization algorithms

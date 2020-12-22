@@ -5,7 +5,7 @@ setClass (
   slots = c(
     iterations           = "numeric",
     iterations_same_cost = "numeric",
-    n_particles          = "numeric",
+    population_size      = "numeric",
     cognitive            = "numeric",
     social               = "numeric",
     inertia              = "numeric",
@@ -16,7 +16,7 @@ setClass (
   prototype = list(
     iterations           = as.integer(NULL),
     iterations_same_cost = as.integer(NULL),
-    n_particles          = as.integer(NULL),
+    population_size      = as.integer(NULL),
     cognitive            = as.double(NULL),
     social               = as.double(NULL),
     inertia              = as.double(NULL),
@@ -31,7 +31,7 @@ setMethod(f = "show",
             cat("         PS minimizer options\n")
             cat("          iterations:", object@iterations, "\n")
             cat("iterations_same_cost:", object@iterations_same_cost, "\n")
-            cat("         n_particles:", object@n_particles, "\n")
+            cat("     population size:", object@population_size, "\n")
             cat("           cognitive:", object@cognitive, "\n")
             cat("              social:", object@social, "\n")
             cat("             inertia:", object@inertia, "\n")

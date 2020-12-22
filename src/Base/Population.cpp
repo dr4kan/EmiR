@@ -1,11 +1,11 @@
 #include "Population.h"
 
 Population::Population(Function func) :
-  m_mt((std::random_device())()),
-  m_obj_func(func) {
-    m_pt_0_1 = rand_pt{ 0., 1.};
-    m_pt_1_1 = rand_pt{-1., 1.};
-  };
+m_mt((std::random_device())()),
+m_obj_func(func) {
+  m_pt_0_1 = rand_pt{ 0., 1.};
+  m_pt_1_1 = rand_pt{-1., 1.};
+};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -46,7 +46,7 @@ int Population::genIntRand(int tmin, int tmax) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Population::checkBoundary(double& t, size_t j) {
+void Population::checkBoundary(double& t, double& v, size_t j) {
   if (m_oob_sol == PBC) {
 
     // Periodic Boundary Condition (PBC)
@@ -67,9 +67,14 @@ void Population::checkBoundary(double& t, size_t j) {
   } else if (m_oob_sol == RBC) {
 
     // Reflective Boundary Condition (RBC)
-    if (t < m_search_space[j].getMin()) t = m_search_space[j].getMin() + (m_search_space[j].getMin() - t);
-    if (t > m_search_space[j].getMax()) t = m_search_space[j].getMax() - (t - m_search_space[j].getMax());
-
+    if (t < m_search_space[j].getMin()) {
+      t = m_search_space[j].getMin();// + (m_search_space[j].getMin() - t);
+      v = -v;
+    }
+    if (t > m_search_space[j].getMax()) {
+      t = m_search_space[j].getMax();// - (t - m_search_space[j].getMax());
+      v = -v;
+    }
   }
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

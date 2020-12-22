@@ -1,6 +1,4 @@
 #include "NEWConfig.h"
 
-NEWConfig::NEWConfig() {
-
-};
+NEWConfig::NEWConfig() : Config() {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

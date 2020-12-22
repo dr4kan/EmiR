@@ -50,8 +50,12 @@ plot_history <- function(minimizer_result, ...) {
 #' @export
 plot_population <- function(minimizer_result, iteration, n_points = 1000, ...) {
   n_par = length(minimizer_result@parameter_names)
-  try(if(n_par > 2 || n_par < 1) stop("only 1D and 2D functions are supported"))
-  try(if(iteration < 1 || iteration > minimizer_result@iterations) stop("iteration out of range"))
+
+  # check on number of parameters
+  if (n_par > 2 || n_par < 1) stop("only 1D and 2D functions are supported.")
+
+  # check on the iteration number
+  if (iteration < 1 || iteration > minimizer_result@iterations) stop("iteration out of range.")
 
   df <- as.data.frame(do.call(rbind, minimizer_result@particles))
   df <- df[df[, ncol(df)] == (iteration-1),]
@@ -129,7 +133,12 @@ plot_population <- function(minimizer_result, iteration, n_points = 1000, ...) {
 #' @export
 animate_population <- function(minimizer_result, n_points = 1000, ...) {
   n_par = length(minimizer_result@parameter_names)
-  try(if(n_par > 2 || n_par < 1) stop("only 1D and 2D functions are supported"))
+
+  # check on number of parameters
+  if (n_par > 2 || n_par < 1) stop("only 1D and 2D functions are supported.")
+
+  # check if the population was saved
+  if (length(minimizer_result@particles) == 0) stop("population data not stored, use option 'save_population = TRUE'.")
 
   df <- as.data.frame(do.call(rbind, minimizer_result@particles))
 
