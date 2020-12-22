@@ -74,6 +74,9 @@ minimize_cs <- function(obj_func, parameters, config, constraints = NULL, ...) {
   if ("save_population" %in% names(minimizer_options)) {
     opt@save_population = minimizer_options[["save_population"]]
   }
+  if ("oob_solutions" %in% names(minimizer_options)) {
+    opt@oob_solutions = minimizer_options[["oob_solutions"]]
+  }
 
   tictoc::tic()
   out <- cpp_minimize_cs(obj_func, constraints, parameters, config, opt)

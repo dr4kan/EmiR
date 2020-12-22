@@ -18,11 +18,11 @@
 #' @return `config_hs` returns an object of class `HSConfig`.
 #' @export
 config_hs <- function(iterations,
-                       population_size,
-                       iterations_same_cost = NULL,
-                       considering_rate = 0.5,
-                       adjusting_rate = 0.5,
-                       distance_bandwidth = 0.1) {
+                      population_size,
+                      iterations_same_cost = NULL,
+                      considering_rate = 0.5,
+                      adjusting_rate = 0.5,
+                      distance_bandwidth = 0.1) {
   p <- new("HSConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
@@ -95,6 +95,9 @@ minimize_hs <- function(obj_func, parameters, config, constraints = NULL, ...) {
   }
   if ("save_population" %in% names(minimizer_options)) {
     opt@save_population = minimizer_options[["save_population"]]
+  }
+  if ("oob_solutions" %in% names(minimizer_options)) {
+    opt@oob_solutions = minimizer_options[["oob_solutions"]]
   }
 
   tictoc::tic()
