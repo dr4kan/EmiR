@@ -21,3 +21,7 @@ cpp_minimize_ihs <- function(obj_function, constraints, parameters, config, opt)
     .Call('_EmiR_cpp_minimize_ihs', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
 }
 
+cpp_minimize_new <- function(obj_function, constraints, parameters, config, opt) {
+    .Call('_EmiR_cpp_minimize_new', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
+}
+

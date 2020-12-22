@@ -10,7 +10,7 @@ public:
 
   /// Individual default constructor
   Individual(int n);
-
+  
   /// Set the cost
   void setCost(double);
 
@@ -30,6 +30,14 @@ public:
   double &operator[](size_t t) { return m_position[t]; };
 
   friend bool operator<(const Individual &l, const Individual &r) { return l.m_cost < r.m_cost; };
+
+  Individual& operator=(const Individual& rhs) {
+    if (this != &rhs) {
+      m_position = rhs.m_position;
+      m_cost = rhs.m_cost;
+    }
+    return *this;
+  };
 
 protected:
 

@@ -22,6 +22,9 @@ SOURCES = ABC/ABCConfig.cpp \
 	IHS/IHSConfig.cpp \
 	IHS/IHSPopulation.cpp \
 	IHS/IHS_algorithm.cpp \
+	NEW/NEWConfig.cpp \
+	NEW/NEWPopulation.cpp \
+	NEW/NEW_algorithm.cpp \
 	NEW/Particle.cpp
 
 OBJECTS.src = ABC_R_Interface.o \
@@ -29,6 +32,7 @@ OBJECTS.src = ABC_R_Interface.o \
 	CS_R_Interface.o \
 	HS_R_Interface.o \
 	IHS_R_Interface.o \
+	NEW_R_Interface.o \
 	RcppExports.o
 
 OBJECTS = $(OBJECTS.src) $(SOURCES:.cpp=.o)

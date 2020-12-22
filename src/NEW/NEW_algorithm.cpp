@@ -3,23 +3,21 @@ using namespace Rcpp;
 
 // [[depends(RcppProgress)]]
 #include <progress.hpp>
-#include "ABC_algorithm.h"
+#include "NEW_algorithm.h"
 
 
-ABC_algorithm::ABC_algorithm(Function obj_function, S4 config) :
+NEW_algorithm::NEW_algorithm(Function obj_function, S4 config) :
 Algorithm(obj_function),
-m_population(ABCPopulation(obj_function)) {
-  m_algo_config = ABCConfig();
+m_population(NEWPopulation(obj_function)) {
+  m_algo_config = NEWConfig();
   m_algo_config.setNMaxIterations(config.slot("iterations"));
   m_algo_config.setPopulationSize(config.slot("population_size"));
   m_algo_config.setNMaxIterationsAtSameCost(config.slot("iterations_same_cost"));
-  m_algo_config.setEmployedFraction(config.slot("employed_frac"));
-  m_algo_config.setNScoutBees(config.slot("n_scout"));
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void ABC_algorithm::addPopulationPosition() {
+void NEW_algorithm::addPopulationPosition() {
   std::vector<double> v;
   for (size_t i = 0; i < m_population.size(); ++i) {
     v = m_population[i].getPosition();
@@ -30,7 +28,7 @@ void ABC_algorithm::addPopulationPosition() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void ABC_algorithm::minimize() {
+void NEW_algorithm::minimize() {
   // Initialize the progress bar
   m_iter = 0;
   size_t n_iter = m_algo_config.getNMaxIterations();
@@ -45,6 +43,9 @@ void ABC_algorithm::minimize() {
   // Evaluate the cost for the population
   m_population.evaluate();
 
+  // Move particles
+  m_population.moveParicles();
+
   // Update the cost history
   m_cost_history.push_back(m_population.getBestSolution().getCost());
 
@@ -54,11 +55,8 @@ void ABC_algorithm::minimize() {
   int n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) {
 
-    // employed bees work
-    m_population.employedBeesEvalutaion();
-
-    // onlooker bees work + scout bees work
-    m_population.onlookerBeesEvaluation();
+    // Move particles
+    m_population.moveParicles();
 
     // Update the cost history
     m_cost_history.push_back(m_population.getBestSolution().getCost());
@@ -77,13 +75,14 @@ void ABC_algorithm::minimize() {
     // Update progress bar
     progress_bar.increment();
   }
+
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-S4 ABC_algorithm::getResults() {
+S4 NEW_algorithm::getResults() {
   S4 result("MinimizationResult");
-  result.slot("algorithm")       = "ABC";
+  result.slot("algorithm")       = "NEW";
   result.slot("iterations")      = m_iter;
   result.slot("obj_function")    = m_obj_function;
   result.slot("best_cost")       = m_population.getBestSolution().getCost();

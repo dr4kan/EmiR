@@ -5,8 +5,9 @@ Individual::Individual() {};
 
 
 Individual::Individual(int n) :
-m_position(n, 0),
-m_cost(0.) {};
+m_position(n, 0) {
+  m_cost = std::numeric_limits<double>::max();
+};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 

@@ -13,6 +13,14 @@ public:
 
   double getFitness();
 
+  Bee& operator=(const Bee& rhs) {
+    if (this != &rhs) {
+      m_position = rhs.m_position;
+      m_cost = rhs.m_cost;
+    }
+    return *this;
+  };
+
 private:
 
 };

@@ -2,6 +2,7 @@
 #define EmiR_Population_h
 
 #include "SearchSpace.h"
+#include "OOB.h"
 #include <random>
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -19,6 +20,8 @@ public:
 
   void setConstraints(List);
 
+  void setOOB(OOBMethod);
+
 protected:
 
   double getRand_0_1();
@@ -27,10 +30,13 @@ protected:
 
   int genIntRand(int, int);
 
+  void checkBoundary(double&, size_t);
+
   std::mt19937 m_mt;
   SearchSpace  m_search_space;
   Function     m_obj_func;
   List         m_constraints;
+  OOBMethod    m_oob_sol;
 
   rand_pt      m_pt_0_1;
   rand_pt      m_pt_1_1;

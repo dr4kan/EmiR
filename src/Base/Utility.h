@@ -9,11 +9,16 @@ class Utility {
 public:
 
   /// Check if two numbers are approximately equal
-  template<class T>
+  template<typename T>
   static typename std::enable_if<!std::numeric_limits<T>::is_integer, bool>::type areEqual(T x, T y, int ulp = 2) {
     return fabs(x-y) <= std::numeric_limits<T>::epsilon() * fabs(x+y) * ulp
     || fabs(x-y) < std::numeric_limits<T>::min();
   };
+
+  template<typename T>
+  static int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+  }
 
   /// Center-align a string within a field of specified width
   static std::string centerAlign(const std::string s, const int w) {

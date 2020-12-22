@@ -1,4 +1,5 @@
 #include "BAT/BAT_algorithm.h"
+#include "Base/OOB.h"
 
 // [[Rcpp::export]]
 S4 cpp_minimize_bat(Function obj_function,
@@ -8,12 +9,14 @@ S4 cpp_minimize_bat(Function obj_function,
   S4 opt) {
   bool silent_mode = opt.slot("silent_mode");
   bool save_population = opt.slot("save_population");
+  std::string oob_method = opt.slot("oob_solutions");
 
   BAT_algorithm bat(obj_function, config);
   bat.setConstraints(constraints);
   bat.setParameters(parameters);
   bat.setSilent(silent_mode);
   bat.savePopulation(save_population);
+  bat.setOOB(oob_method);
   bat.minimize();
   return bat.getResults();
 }
