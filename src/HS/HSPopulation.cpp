@@ -80,30 +80,7 @@ void HSPopulation::evaluate() {
 
 
 void HSPopulation::evaluate(Individual& solution) {
-  NumericVector tmp_v = m_obj_func(solution.getPosition());
-  double value = tmp_v[0];
-  bool violated_constr = false;
-
-  for (int i = 0; i < m_constraints.length(); ++i) {
-    S4 constraint = m_constraints[i];
-    Function g = constraint.slot("func");
-    std::string inequality = constraint.slot("inequality");
-    tmp_v = g(solution.getPosition());
-    double tmp_d = tmp_v[0];
-
-    if (inequality == "<" && tmp_d >= 0) {
-      violated_constr = true;
-    } else if (inequality == "<=" && tmp_d > 0) {
-      violated_constr = true;
-    } else if (inequality == ">=" && tmp_d < 0) {
-      violated_constr = true;
-    } else if (inequality == ">" && tmp_d <= 0) {
-      violated_constr = true;
-    }
-  }
-
-  if (violated_constr) value = std::numeric_limits<double>::max();
-
+  double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

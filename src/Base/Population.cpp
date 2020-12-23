@@ -46,6 +46,36 @@ int Population::genIntRand(int tmin, int tmax) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
+double Population::evaluateCost(const std::vector<double>& v) {
+  NumericVector tmp_v = m_obj_func(v);
+  double value = tmp_v[0];
+  bool violated_constr = false;
+
+  for (int i = 0; i < m_constraints.length(); ++i) {
+    S4 constraint = m_constraints[i];
+    Function g = constraint.slot("func");
+    std::string inequality = constraint.slot("inequality");
+    tmp_v = g(v);
+    double tmp_d = tmp_v[0];
+
+    if (inequality == "<" && tmp_d >= 0) {
+      violated_constr = true;
+    } else if (inequality == "<=" && tmp_d > 0) {
+      violated_constr = true;
+    } else if (inequality == ">=" && tmp_d < 0) {
+      violated_constr = true;
+    } else if (inequality == ">" && tmp_d <= 0) {
+      violated_constr = true;
+    }
+  }
+
+  if (violated_constr) value = std::numeric_limits<double>::max();
+
+  return value;
+};
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
 void Population::checkBoundary(double& t, double& v, size_t j) {
   if (m_oob_sol == PBC) {
 

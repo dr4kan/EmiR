@@ -32,6 +32,8 @@ protected:
 
   void checkBoundary(double&, double&, size_t);
 
+  double evaluateCost(const std::vector<double>&);
+
   std::mt19937 m_mt;
   SearchSpace  m_search_space;
   Function     m_obj_func;
