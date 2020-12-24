@@ -24,7 +24,7 @@ public:
   Individual &operator[](size_t t) { return m_particles[t]; };
 
   /// Return the position of all particles
-  std::vector<std::vector<double>> getPopulationPosition();
+  std::vector<std::vector<double> > getPopulationPosition();
 
   void evaluate();
 

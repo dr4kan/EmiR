@@ -21,7 +21,7 @@ void Algorithm::setConstraints(List constraints) {
 void Algorithm::setParameters(List parameters) {
   int n = parameters.length();
   m_search_space = SearchSpace(n);
-  m_parameter_range = std::vector<std::vector<double>>(n);
+  m_parameter_range = std::vector<std::vector<double> >(n);
 
   for (int i = 0; i < n; ++i) {
     S4 par = parameters[i];

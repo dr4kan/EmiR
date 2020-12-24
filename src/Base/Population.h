@@ -9,8 +9,8 @@ using namespace Rcpp;
 
 class Population {
 
-  typedef typename std::uniform_real_distribution<double>::param_type rand_pt;
-  typedef typename std::uniform_int_distribution<int>::param_type rint_pt;
+  typedef std::uniform_real_distribution<double>::param_type rand_pt;
+  typedef std::uniform_int_distribution<int>::param_type rint_pt;
 
 public:
 

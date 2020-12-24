@@ -24,7 +24,7 @@ public:
   Bat &operator[](size_t t) { return m_bats[t]; };
 
   /// Return the position of all particles
-  std::vector<std::vector<double>> getPopulationPosition();
+  std::vector<std::vector<double> > getPopulationPosition();
 
   double getPulseRate() const;
 

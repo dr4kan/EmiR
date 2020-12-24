@@ -173,8 +173,8 @@ void ABCPopulation::evaluate(Bee& solution) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-std::vector<std::vector<double>> ABCPopulation::getPopulationPosition() {
-  std::vector<std::vector<double>> positions(m_food.size());
+std::vector<std::vector<double> > ABCPopulation::getPopulationPosition() {
+  std::vector<std::vector<double> > positions(m_food.size());
   for (size_t i = 0; i < m_food.size(); ++i) positions[i] = m_food[i].getPosition();
   return positions;
 };

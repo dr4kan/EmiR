@@ -6,7 +6,7 @@
 
 class Parameter {
 
-  typedef typename std::uniform_real_distribution<double>::param_type rand_pt;
+  typedef std::uniform_real_distribution<double>::param_type rand_pt;
 
 public:
 

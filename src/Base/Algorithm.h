@@ -24,16 +24,16 @@ public:
 protected:
 
   Function m_obj_function;
-  List                             m_constraints;
-  SearchSpace                      m_search_space;
-  std::mt19937                     m_mt;
-  std::vector<std::string>         m_parameter_names;
-  std::vector<std::vector<double>> m_parameter_range;
-  std::vector<double>              m_cost_history;
-  List                             m_population_position;
-  bool                             m_save_population;
-  bool                             m_silent;
-  OOBMethod                        m_oob_sol;
+  List                              m_constraints;
+  SearchSpace                       m_search_space;
+  std::mt19937                      m_mt;
+  std::vector<std::string>          m_parameter_names;
+  std::vector<std::vector<double> > m_parameter_range;
+  std::vector<double>               m_cost_history;
+  List                              m_population_position;
+  bool                              m_save_population;
+  bool                              m_silent;
+  OOBMethod                         m_oob_sol;
 };
 
 #endif

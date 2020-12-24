@@ -14,5 +14,6 @@ LinkingTo: Rcpp, RcppProgress
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
 RdMacros: mathjaxr, Rdpack
+SystemRequirements: C++11
 Suggests: 
     testthat
