@@ -136,7 +136,7 @@ void ABCPopulation::onlookerBeesEvaluation() {
 
     // If a position cannot be improved over a predefined number (called limit)
     // of cycles, then the food source is abandoned
-    if (m_trial[sel] > m_limit_scout) {
+    if (m_trial[sel] > (int)m_limit_scout) {
       m_food[sel].setPosition(m_search_space.getRandom());
       evaluate(m_food[sel]);
       m_trial[sel] = 0;

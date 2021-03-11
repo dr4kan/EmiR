@@ -26,6 +26,8 @@ void SAPopulation::init() {
     }
   }
 
+  // [HAL]sort?
+
   m_best_solution = m_particles[0];
 };
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

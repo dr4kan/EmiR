@@ -16,6 +16,14 @@ SOURCES = ABC/ABCConfig.cpp \
 	CS/CSPopulation.cpp \
 	CS/CS_algorithm.cpp \
 	CS/Nest.cpp \
+	GA/GAChromosome.cpp \
+	GA/GAConfig.cpp \
+	GA/GAPopulation.cpp \
+	GA/GA_algorithm.cpp \
+	GSA/GSAConfig.cpp \
+	GSA/GSAPlanets.cpp \
+	GSA/GSAPopulation.cpp \
+	GSA/GSA_algorithm.cpp \
 	HS/HSConfig.cpp \
 	HS/HSPopulation.cpp \
 	HS/HS_algorithm.cpp \
@@ -26,6 +34,10 @@ SOURCES = ABC/ABCConfig.cpp \
 	NEW/NEWPopulation.cpp \
 	NEW/NEW_algorithm.cpp \
 	NEW/Particle.cpp \
+	PS/PSConfig.cpp \
+	PS/PSParticle.cpp \
+	PS/PSPopulation.cpp \
+	PS/PS_algorithm.cpp \
 	SA/SAConfig.cpp \
 	SA/SAParticle.cpp \
 	SA/SAPopulation.cpp \
@@ -34,9 +46,12 @@ SOURCES = ABC/ABCConfig.cpp \
 OBJECTS.src = ABC_R_Interface.o \
 	BAT_R_Interface.o \
 	CS_R_Interface.o \
+	GA_R_Interface.o \
+	GSA_R_Interface.o \
 	HS_R_Interface.o \
 	IHS_R_Interface.o \
 	NEW_R_Interface.o \
+	PS_R_Interface.o \
 	RcppExports.o \
 	SA_R_Interface.o
 

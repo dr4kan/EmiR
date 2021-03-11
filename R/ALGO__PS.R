@@ -38,7 +38,7 @@ config_ps <- function(iterations,
                       cognitive = 2.0,
                       social = 2.0,
                       inertia = 0.4,
-                      max_velocity = 0.1) {
+                      velocity_max = 0.1) {
   p <- new("PSConfig")
   p@iterations           <- iterations
   if (is.null(iterations_same_cost)) {
@@ -46,11 +46,11 @@ config_ps <- function(iterations,
   } else {
     p@iterations_same_cost <- iterations_same_cost
   }
-  p@n_particles       <- population_size
+  p@population_size       <- population_size
   p@cognitive         <- cognitive
   p@social            <- social
   p@inertia           <- inertia
-  p@max_velocity      <- max_velocity
+  p@velocity_max      <- velocity_max
   return(p)
 }
 
@@ -60,7 +60,7 @@ config_ps <- function(iterations,
 #' Minimize an objective function, possibly subjected to inequality constraints, using
 #' the Particle Swarm (PS) algorithm.
 #'
-#' XXXIn case of a constrained optimization only inequality constraints are allowed. The
+#' In case of a constrained optimization only inequality constraints are allowed...
 #'
 #' @param obj_func objective function be minimized.
 #' @param constraints list of constraints. Constraints are requested to be objects of
@@ -71,7 +71,7 @@ config_ps <- function(iterations,
 #' used by algorithm (see \link[EmiR]{config_ps}).
 #' @return `minimize_ps` returns an object of class `MinimizationResult`.
 #' @importFrom Rdpack reprompt
-#' @references \insertRef{eberhart1995new}{EmiR}
+#' @references \insertRef{XXX}{EmiR}
 #' @examples
 #' library(EmiR)
 #'

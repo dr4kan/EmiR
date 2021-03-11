@@ -72,7 +72,7 @@ void ABC_algorithm::minimize() {
     } else {
       n_sc = 0;
     }
-    if (n_sc > m_algo_config.getNMaxIterationsSameCost()) break;
+    if (n_sc > (int)m_algo_config.getNMaxIterationsSameCost()) break;
 
     // Update progress bar
     progress_bar.increment();

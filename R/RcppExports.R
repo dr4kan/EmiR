@@ -13,6 +13,14 @@ cpp_minimize_cs <- function(obj_function, constraints, parameters, config, opt) 
     .Call('_EmiR_cpp_minimize_cs', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
 }
 
+cpp_minimize_ga <- function(obj_function, constraints, parameters, config, opt) {
+    .Call('_EmiR_cpp_minimize_ga', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
+}
+
+cpp_minimize_gsa <- function(obj_function, constraints, parameters, config, opt) {
+    .Call('_EmiR_cpp_minimize_gsa', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
+}
+
 cpp_minimize_hs <- function(obj_function, constraints, parameters, config, opt) {
     .Call('_EmiR_cpp_minimize_hs', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
 }
@@ -23,6 +31,10 @@ cpp_minimize_ihs <- function(obj_function, constraints, parameters, config, opt)
 
 cpp_minimize_new <- function(obj_function, constraints, parameters, config, opt) {
     .Call('_EmiR_cpp_minimize_new', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
+}
+
+cpp_minimize_ps <- function(obj_function, constraints, parameters, config, opt) {
+    .Call('_EmiR_cpp_minimize_ps', PACKAGE = 'EmiR', obj_function, constraints, parameters, config, opt)
 }
 
 cpp_minimize_sa <- function(obj_function, constraints, parameters, config, opt) {

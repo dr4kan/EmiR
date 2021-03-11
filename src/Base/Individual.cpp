@@ -1,4 +1,5 @@
 #include "Individual.h"
+#include <limits>
 
 Individual::Individual() {};
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

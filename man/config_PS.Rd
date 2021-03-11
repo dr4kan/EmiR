@@ -11,7 +11,7 @@ config_ps(
   cognitive = 2,
   social = 2,
   inertia = 0.4,
-  max_velocity = 0.1
+  velocity_max = 0.1
 )
 }
 \arguments{
@@ -27,9 +27,9 @@ specified by the parameter \code{iterations}.}
 
 \item{inertia}{inertia factor.}
 
-\item{max_velocity}{a measure of the maximum distance particles travel at each iteration.}
-
 \item{n_particles}{number of particles.}
+
+\item{max_velocity}{a measure of the maximum distance particles travel at each iteration.}
 }
 \value{
 \code{config_ps} returns an object of class \code{PSConfig}.
