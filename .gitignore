@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+src/*.o
+src/*.tmp
+src/*/*.o
+src/*.so
+src/*.dll
+.DS_Store
+*/.DS_Store
+
+
