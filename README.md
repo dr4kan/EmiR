@@ -8,7 +8,7 @@ Classical minimization methods, like *gradient descent* or *quasi-Newton techniq
 * *Genetic Algorithm*;
 * *Gravitationl Search Algorithm*;
 * *Harmonic Search*;
-* *Improved HarmonicSearch*;
+* *Improved Harmonic Search*;
 * *Particle Swarm*;
 * *Simulated Annealing*. 
 
