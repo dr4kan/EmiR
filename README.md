@@ -1,5 +1,5 @@
 
-## EmiR: Evolutionary minimizer for R
+# EmiR: Evolutionary minimizer for R <img src="man/figures/EmirLogo.png" align="right" width="200" />
 
 Classical minimization methods, like *gradient descent* or *quasi-Newton techniques*,have been proved to struggle in dealing with optimization problems with a high-dimensional search space or subject to complex nonlinear constraints. In last decade, the interest on metaheuristic nature inspired algorithms has been growing steadily, due to their flexibility and effectiveness. EmiR is a package for R which implements several methauristic algorithms for optimization problems:
 
