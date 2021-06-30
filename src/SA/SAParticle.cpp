@@ -24,7 +24,7 @@ SAParticle::SAParticle() : Individual() {}
 
 SAParticle::SAParticle(int n) : Individual(n), m_success(n, 0), m_velocity(n, 0), m_position_best(n, 0) {
   m_cost_best = std::numeric_limits<double>::max();
-  m_has_velocity = false;
+  m_has_velocity = true;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

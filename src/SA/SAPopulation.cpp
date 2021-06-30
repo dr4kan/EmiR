@@ -82,19 +82,20 @@ void SAPopulation::move() {
       tmp = m_individuals[i];
       tmp[h] += m_random.rand(-1., 1.) * m_individuals[i].getVelocity(h);
 
+      checkBoundary(tmp);
+
       evaluate(tmp);
       cost_tmp = tmp.getCost();
       cost_part = m_individuals[i].getCost();
 
-      if (tmp[h] > m_search_space[h].getMin() && tmp[h] < m_search_space[h].getMax()) {
-        if (cost_tmp < cost_part){
-          m_individuals[i] = tmp;
-          m_individuals[i].upSuccess(h);
-        } else if (m_random.rand() < exp((cost_part - cost_tmp) / temperature)) {
-          m_individuals[i] = tmp;
-          m_individuals[i].upSuccess(h);
-        };
+      if (cost_tmp < cost_part){
+        m_individuals[i] = tmp;
+        m_individuals[i].upSuccess(h);
+      } else if (m_random.rand() < exp((cost_part - cost_tmp) / temperature)) {
+        m_individuals[i] = tmp;
+        m_individuals[i].upSuccess(h);
       };
+
     }
   }
 }
