@@ -123,6 +123,47 @@ void SAPopulation::setVelocity() {
 
 }
 
+void SAPopulation::setStartingPoint(size_t iter) {
+  size_t d = m_search_space.getNumberOfParameters();
+  size_t n_pop = m_individuals.size();
+  double w = m_config.getWmax() - ((double)iter / (double)m_config.getNMaxIterations()) * (m_config.getWmax() - m_config.getWmin());
+
+  //select elite solutions by roulette wheel
+  for (size_t i = 0; i < n_pop; ++i) {
+
+    size_t elite1 = 0;
+    double ra1 = m_random.rand();
+      for (size_t u = 1; u < n_pop; u++) {
+        if (ra1 > m_config.getProb(u - 1) && ra1 <= m_config.getProb(u)) elite1 = u;
+      };
+
+    size_t elite2 = 0;
+    double ra2 = m_random.rand();
+      for (size_t u = 1; u < n_pop; u++) {
+        if (ra2 > m_config.getProb(u - 1) && ra2 <= m_config.getProb(u)) elite2 = u;
+      };
+
+    //set initial point on the basis of the current position and elite best position
+    for (size_t j = 0; j < d; ++j) {
+      double ra3 = m_random.rand();
+      double ra4 = m_random.rand();
+
+      double best_position = m_individuals[j].getBestPositionComponent(j);
+      m_individuals[i][j] = best_position + w * (ra3 * (m_individuals[elite1].getBestPositionComponent(j) - best_position)
+                                  + ra4 * (m_individuals[elite2].getBestPositionComponent(j) - best_position));
+
+    }
+  checkBoundary(m_individuals[i]);
+  }
+
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+void SAPopulation::sort() {
+  std::sort(m_individuals.begin(), m_individuals.end());
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 void SAPopulation::evaluate() {
   for (size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
@@ -137,9 +178,3 @@ void SAPopulation::evaluate(SAParticle& solution) {
   if (solution.getCost() < m_best_solution.getCost()) m_best_solution = solution;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-void SAPopulation::restartFromOpt(){
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
-    m_individuals[i].restartFromOpt();
-  }
-}

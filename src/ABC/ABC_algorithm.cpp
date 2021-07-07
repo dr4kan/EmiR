@@ -82,7 +82,7 @@ void ABC_algorithm::minimize() {
     m_population.scalePenaltyCoeff();
 
     // employed bees work
-    m_population.employedBeesEvalutaion();
+    m_population.employedBeesEvaluation();
 
     // onlooker bees work + scout bees work
     m_population.onlookerBeesEvaluation();

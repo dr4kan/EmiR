@@ -35,6 +35,8 @@ public:
 
   const std::vector<double>& getBestPositionParticle() const { return m_position_best; };
 
+  double getBestPositionComponent(size_t j);
+
   double getBestCostParticle();
 
   void setBest();
@@ -45,7 +47,7 @@ public:
 
   void resetSuccess();
 
-  void restartFromOpt();
+  friend bool operator<(const SAParticle &l, const SAParticle &r) { return l.m_cost_best < r.m_cost_best; };
 
 private:
   std::vector<size_t> m_success;

@@ -27,7 +27,9 @@ setClass (
     Ns                   = "numeric",
     c_step               = "numeric",
     Nt                   = "numeric",
-    Rt                   = "numeric"
+    Rt                   = "numeric",
+    Wmax                 = "numeric",
+    Wmin                 = "numeric"
   ),
 
   # Initializing slots
@@ -40,7 +42,9 @@ setClass (
     Ns                   = as.integer(NULL),
     c_step               = as.double(NULL),
     Nt                   = as.integer(NULL),
-    Rt                   = as.double(NULL)
+    Rt                   = as.double(NULL),
+    Wmax                 = as.double(NULL),
+    Wmin                 = as.double(NULL)
   )
 )
 
@@ -58,5 +62,7 @@ setMethod(f = "show",
             cat("              c_step:", object@c_step, "\n")
             cat("                  Nt:", object@Nt, "\n")
             cat("                  Rt:", object@Rt, "\n")
+            cat("                  Wmax:", object@Wmax, "\n")
+            cat("                  Wmin:", object@Wmin, "\n")
           }
 )

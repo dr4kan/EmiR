@@ -53,7 +53,9 @@ public:
 
   void setVelocity();
 
-  void restartFromOpt();
+  void setStartingPoint(size_t);
+
+  void sort();
 
 private:
   SAConfig                m_config;

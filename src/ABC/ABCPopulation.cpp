@@ -113,7 +113,7 @@ void ABCPopulation::generateSolution(Bee &tmp, size_t i) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void ABCPopulation::employedBeesEvalutaion() {
+void ABCPopulation::employedBeesEvaluation() {
   // Each employed bee xi generates a new candidate solution
   // vi in the neighborhood of its present position
   Bee tmp;

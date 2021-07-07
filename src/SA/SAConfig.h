@@ -28,7 +28,6 @@ public:
   /// SAConfig default constructor
   SAConfig();
 
-  /// Set the initial temperature
   void setT0(double t);
 
   void setNs(size_t t);
@@ -39,7 +38,12 @@ public:
 
   void setRt(double t);
 
-  /// Return the initial temperature
+  void setWmax(double t);
+
+  void setWmin(double t);
+
+  void setRouletteWheel();
+
   double getT0() const;
 
   size_t getNs() const;
@@ -50,8 +54,13 @@ public:
 
   double getRt() const;
 
+  double getWmax() const;
 
-  //AnnealingSchedule getAnnealingSchedule() const;
+  double getWmin() const;
+
+  /// Return m_prob
+  double getProb(int) const;
+
 
 private:
   double              m_T0;    /**< Initial temperature */
@@ -59,5 +68,8 @@ private:
   size_t              m_C;    /**< Step criterion  */
   size_t              m_Nt;   /**< Maximum number of cycles before temperature variation  */
   size_t              m_Rt;   /**< Reduction coefficient for temperature  */
+  double              m_Wmax; /**< Maximum value of the weight employed in the formula for the starting point  */
+  double              m_Wmin; /**< Minimum value of the weight employed in the formula for the starting point  */
+  std::vector<double> m_Prob; /**< Vector of probabilities used in the Roulette Wheel selection */
   };
 #endif

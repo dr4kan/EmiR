@@ -33,6 +33,8 @@
 #' @param Nt number of iterations before changing the temperature. Default is `5`.
 #' @param c_step parameter involved in the velocity update. Default is `2`.
 #' @param Rt scaling factor for the temperature. Default is `0.85`.
+#' @param Wmax parameter involved in the generation of the starting point. Default is `1.25`.
+#' @param Wmin parameter involved in the generation of the starting point. Default is `0.25`.
 #' @return `config_sa` returns an object of class `SAConfig`.
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Kirkpatrick1983}{EmiR}
@@ -42,10 +44,12 @@ config_sa <- function(iterations,
                       iterations_same_cost = NULL,
                       absolute_tol         = NULL,
                       T0                   = 50.,
-                      Ns                   = 5.,
-                      Nt                   = 5.,
+                      Ns                   = 3.,
+                      Nt                   = 3.,
                       c_step               = 2.,
-                      Rt                   = 0.85) {
+                      Rt                   = 0.85,
+                      Wmax                 = 1.25,
+                      Wmin                 = 0.25) {
   p <- new("SAConfig")
   commonOpt              <- checkCommonConfigOptions(iterations, population_size, iterations_same_cost, absolute_tol)
   p@iterations           <- commonOpt$iterations
@@ -58,6 +62,8 @@ config_sa <- function(iterations,
   p@c_step             <- c_step
   p@Nt                 <- Nt
   p@Rt                 <- Rt
+  p@Wmax               <- Wmax
+  p@Wmin               <- Wmin
   return(p)
 }
 
@@ -75,6 +81,10 @@ check_algo_options_sa <- function(p, ...) {
       p@Nt            <- config_options[[i]]
     } else if (names(config_options[i]) == "Rt") {
       p@Rt            <- config_options[[i]]
+    } else if (names(config_options[i]) == "Wmax") {
+      p@Wmax            <- config_options[[i]]
+    } else if (names(config_options[i]) == "Wmin") {
+      p@Wmin            <- config_options[[i]]
     } else {
       stop(paste0("Unknown option '", names(config_options[i]), "' for algorithm SA."))
     }

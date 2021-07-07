@@ -37,6 +37,9 @@ m_population(SAPopulation(obj_function)) {
   m_algo_config.setC(config.slot("c_step"));
   m_algo_config.setNt(config.slot("Nt"));
   m_algo_config.setRt(config.slot("Rt"));
+  m_algo_config.setWmax(config.slot("Wmax"));
+  m_algo_config.setWmin(config.slot("Wmin"));
+  m_algo_config.setRouletteWheel();
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -70,6 +73,8 @@ void SA_algorithm::minimize() {
   // Evaluate the cost for the population
   m_population.evaluate();
 
+  m_population.setStartingPoint(0);
+
   // Update the cost history
   double current_best_cost = m_maximize ? -m_population.getBestSolution()->getCost() : m_population.getBestSolution()->getCost();
   m_cost_history.push_back(current_best_cost);
@@ -94,10 +99,12 @@ void SA_algorithm::minimize() {
       m_population.setVelocity();
     }
 
-    m_population.restartFromOpt();
-
     // Update the temperature
     temperature *= Rt;
+
+    m_population.sort();
+
+    m_population.setStartingPoint(m_iter);
 
     // Update the cost history
     current_best_cost = m_maximize ? -m_population.getBestSolution()->getCost() : m_population.getBestSolution()->getCost();

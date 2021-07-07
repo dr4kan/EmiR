@@ -40,7 +40,7 @@ config_gsa <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,
                       absolute_tol         = NULL,
-                      grav                 = 50,
+                      grav                 = 1000,
                       grav_evolution       = 20.) {
   p <- new("GSAConfig")
   commonOpt              <- checkCommonConfigOptions(iterations, population_size, iterations_same_cost, absolute_tol)

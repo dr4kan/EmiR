@@ -51,7 +51,7 @@ public:
   ///////////////////////////////////////////////////////////
 
   //// Specific methods /////////////////////////////////////
-  void employedBeesEvalutaion();
+  void employedBeesEvaluation();
 
   void onlookerBeesEvaluation();
 

@@ -47,6 +47,11 @@ double SAParticle::getVelocity(size_t t) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+double SAParticle::getBestPositionComponent(size_t t) {
+  return m_position_best[t];
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 double SAParticle::getBestCostParticle() {
   return m_cost_best;
 }
@@ -64,11 +69,5 @@ void SAParticle::upSuccess(size_t j) {
 
 void SAParticle::resetSuccess() {
   m_success.assign(m_success.size(), 0);
-}
-//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-
-void SAParticle::restartFromOpt() {
-  m_position = m_position_best;
-  m_cost = m_cost_best;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

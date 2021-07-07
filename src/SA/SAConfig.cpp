@@ -19,10 +19,16 @@
 #include "SAConfig.h"
 
 SAConfig::SAConfig() : Config() {
-  m_T0                 = 0.;
-  m_Ns                 = 0.;
-  m_Nt                 = 0.;
-  m_Rt                 = 0.;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+void SAConfig::setRouletteWheel() {
+   double m_keep   = getPopulationSize();
+   double k = m_keep * (m_keep + 1) / 2;
+   m_Prob.push_back(m_keep / k);
+   for (size_t i = 2; i <= m_keep; i++) {
+      m_Prob.push_back((m_keep - i + 1) / k + m_Prob[i - 2]);
+   }
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -51,6 +57,16 @@ void SAConfig::setRt(double t) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void SAConfig::setWmax(double t) {
+  m_Wmax = t;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+void SAConfig::setWmin(double t) {
+  m_Wmin = t;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 double SAConfig::getT0() const {
   return m_T0;
 }
@@ -73,5 +89,20 @@ size_t SAConfig::getC() const{
 
 double SAConfig::getRt() const{
   return m_Rt;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double SAConfig::getWmax() const{
+  return m_Wmax;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double SAConfig::getWmin() const{
+  return m_Wmin;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+double SAConfig::getProb(int t) const{
+   return m_Prob[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
