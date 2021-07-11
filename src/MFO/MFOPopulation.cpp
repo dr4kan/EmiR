@@ -122,8 +122,6 @@ void MFOPopulation::moveMoths() {
 
   // keep the best
   m_flames.resize(m_individuals.size());
-
-  m_best_solution = m_flames[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -139,5 +137,12 @@ void MFOPopulation::evaluate() {
 void MFOPopulation::evaluate(Moth& solution) {
   double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
+
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
+
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

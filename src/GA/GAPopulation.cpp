@@ -78,8 +78,6 @@ GAChromosome* GAPopulation::getBestSolution() {
 
 void GAPopulation::sort() {
   std::sort(m_individuals.begin(), m_individuals.end());
-
-  m_best_solution = m_individuals[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -146,9 +144,11 @@ void GAPopulation::evaluate(GAChromosome& solution) {
   solution.setCost(value);
   solution.setIndicatorDown();
 
-  // Update the best whale
-  if (value < m_best_solution.getCost()) {
-    m_best_solution = solution;
-  }
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
+
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

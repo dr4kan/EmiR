@@ -63,6 +63,7 @@ private:
   Wolf              m_delta;
   std::vector<Wolf> m_individuals;    /**< Wolves in the population */
   double            m_a;
+  Wolf              m_best_solution;
 };
 
 #endif

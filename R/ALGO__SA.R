@@ -28,9 +28,9 @@
 #' Default is `NULL`.
 #' @param absolute_tol absolute tolerance when comparing best costs from consecutive iterations.
 #' If `NULL` the machine epsilon is used. Default is `NULL`.
-#' @param T0 initial temperature. Default is `100`.
-#' @param Ns number of iterations before changing velocity. Default is `5`.
-#' @param Nt number of iterations before changing the temperature. Default is `5`.
+#' @param T0 initial temperature. Default is `50`.
+#' @param Ns number of iterations before changing velocity. Default is `3`.
+#' @param Nt number of iterations before changing the temperature. Default is `3`.
 #' @param c_step parameter involved in the velocity update. Default is `2`.
 #' @param Rt scaling factor for the temperature. Default is `0.85`.
 #' @param Wmax parameter involved in the generation of the starting point. Default is `1.25`.

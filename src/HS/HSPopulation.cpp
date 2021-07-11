@@ -79,8 +79,6 @@ Individual* HSPopulation::getBestSolution() {
 
 void HSPopulation::sort() {
   std::sort(m_individuals.begin(), m_individuals.end());
-
-  m_best_solution = m_individuals[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -130,6 +128,12 @@ void HSPopulation::evaluate() {
 void HSPopulation::evaluate(Individual& solution) {
   double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
-  // Best individual updated during the sorting
+
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
+
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

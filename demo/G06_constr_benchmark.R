@@ -16,7 +16,7 @@
 
 # Adapted from 'Evolutionary Computation with Biogeography-based Optimization'
 # Haiping Ma and Dan Simon.
-
+#G06 Function
 library(EmiR)
 library(ggpubr)
 ob <- function(x) (x[1]-10)^3 + (x[2]-20)^3
@@ -27,28 +27,31 @@ g2 <- function(x)  (x[1]-6)^2 + (x[2]-5)^2 - 82.81
 c1 <- constraint(g1, "<=")
 c2 <- constraint(g2, "<=")
 
-p1 <- parameter("x1", 14, 16)
-p2 <- parameter("x2", -2, 12)
+p1 <- parameter("x1", 13, 100)
+p2 <- parameter("x2", 0, 100)
 
-algo <- "SA"
+#BAT, GWO, MFO, PS, SA, WOA 6961
+
+algo <- "PS"
 an <- list_of_algorithms()
 
-conf <- config_algo(algorithm_id = algo, population_size = 100, iterations = 500)
+conf <- config_algo(algorithm_id = algo, population_size = 200, iterations = 7000)
 results <- minimize(algorithm_id = algo,
                     obj_func = ob,
                     config = conf,
                     parameters = list(p1,p2),
                     constraints = list(c1,c2),
                     save_pop_history = TRUE,
-                    constrained_method = "BARRIER", #or PENALTY or ACCREJ
+                    constrained_method = "PENALTY", #or PENALTY or ACCREJ
                     constr_init_pop = FALSE,
-                    oob_solutions = "BAB",
-                    penalty_scale = 2)
+                    oob_solutions = "RBC",
+                    penalty_scale = 5,
+                    seed = 1)
 print(results)
 p1  <- plot_population(results, 1)
-p10 <- plot_population(results, 50)
-p25 <- plot_population(results, 200)
-p50 <- plot_population(results, 500)
+p10 <- plot_population(results, 200)
+p25 <- plot_population(results, 500)
+p50 <- plot_population(results, 1000)
 figure <- ggarrange(p1, p10, p25, p50,
                     ncol = 2, nrow = 2)
 figure <- annotate_figure(figure, top = text_grob(an[an$Id==algo,2], color = "black", face = "bold", size = 18))

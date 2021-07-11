@@ -31,10 +31,10 @@ void PSPopulation::init() {
 
   // check on the size of alpha_vel
   if (alpha.length() == 1 && alpha.length() < d) {
-      std::vector<double> v(d);
-      std::fill(v.begin(), v.end(), alpha[0]);
-      alpha = v;
-      m_config.setAlpha(alpha);
+    std::vector<double> v(d);
+    std::fill(v.begin(), v.end(), alpha[0]);
+    alpha = v;
+    m_config.setAlpha(alpha);
   } else if (alpha.length() > 1 && alpha.length() != d) {
     stop("Wrong size for parameter alpha_vel.\n");
   }
@@ -66,7 +66,7 @@ void PSPopulation::init() {
 
   // Dummy assignment of the best planet. When the cost of
   // the population is actually evaluated this is fixed.
-  m_best_solution = m_individuals[0];
+    m_best_solution = m_individuals[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -111,9 +111,9 @@ void PSPopulation::setVelocity(size_t iter) {
     for (size_t i = 0; i < m_individuals.size(); ++i) {
       // Compute the step and assign if it satisfies the constraint on the maximum velocity
       double cognitive = cognitive_par * m_random.rand() *
-        (m_individuals[i].getBestPositionParticle(j) - m_individuals[i][j]);
+      (m_individuals[i].getBestPositionParticle(j) - m_individuals[i][j]);
       double social = social_par * m_random.rand() *
-        (m_best_solution[j] - m_individuals[i][j]);
+      (m_best_solution[j] - m_individuals[i][j]);
       double vel = (m_individuals[i].getVelocity(j) * inertia + cognitive + social);
 
       if (fabs(vel) < alpha[j] * delta) {
@@ -159,12 +159,17 @@ void PSPopulation::evaluate() {
 void PSPopulation::evaluate(PSParticle& solution) {
   double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
-  // Update personal best solution
-  solution.setPersonalBest();
 
-  // Update the global best solution
-  if (value < m_best_solution.getCost()) {
-    m_best_solution = solution;
-  }
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+
+    // Update personal best solution
+    solution.setPersonalBest();
+
+    // Update the global best solution
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+
+  };
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -79,8 +79,6 @@ Nest* CSPopulation::getBestSolution() {
 
 void CSPopulation::sort() {
   std::sort(m_individuals.begin(), m_individuals.end());
-
-  m_best_solution = m_individuals[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -134,6 +132,11 @@ void CSPopulation::evaluate() {
 void CSPopulation::evaluate(Nest& solution) {
   double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
-  // Best individual updated during the sorting
+
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

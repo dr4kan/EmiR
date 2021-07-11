@@ -192,9 +192,12 @@ void GSAPopulation::evaluate(Planet& solution) {
   solution.setCost(value);
 
   // Update the best solution
-  if (value < m_best_solution.getCost()) {
-    m_best_solution = solution;
-  }
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
+
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

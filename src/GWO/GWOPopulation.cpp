@@ -52,11 +52,12 @@ void GWOPopulation::init() {
 
   }
 
-  // Dummy assignment of the alpha, beta and delta wolves. When the cost of
-  // the population is actually evaluated this is fixed.
+  // Dummy assignment of the alpha, beta and delta wolves and best solution.
+  // When the cost of the population is actually evaluated this is fixed.
   m_alpha = m_individuals[0];
   m_beta  = m_individuals[1];
   m_delta = m_individuals[2];
+  m_best_solution = m_individuals[0];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -76,7 +77,7 @@ std::vector<std::vector<double> > GWOPopulation::getPopulationPosition() {
 
 
 Wolf* GWOPopulation::getBestSolution() {
-  return &m_alpha;
+  return &m_best_solution;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -153,5 +154,12 @@ void GWOPopulation::evaluate(Wolf& solution) {
       value < m_delta.getCost()) {
     m_delta = solution;
   }
+
+  if (ckeckViolateConstraints(solution.getPosition()) == false) {
+    if (value < m_best_solution.getCost()) {
+      m_best_solution = solution;
+    }
+  };
+
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
