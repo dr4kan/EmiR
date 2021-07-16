@@ -102,7 +102,7 @@ void ABCPopulation::generateSolution(Bee &tmp, size_t i) {
   // random index in the dimension
   size_t j = m_random.randUInt(0, m_search_space.getNumberOfParameters()); // [0, m_search_space.getNumberOfParameters)
 
-  tmp[j] = m_individuals[i][j] + m_random.rand(-1., 1.) * (m_individuals[i][j] - m_individuals[k][j]);
+  tmp[j] += m_random.rand(-1., 1.) * (tmp[j] - m_individuals[k][j]);
 
   // boundary check
   checkBoundary(tmp);
