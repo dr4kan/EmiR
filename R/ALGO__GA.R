@@ -1,0 +1,72 @@
+###############################################################################
+# Emir: EmiR: Evolutionary minimization forR                                  #
+# Copyright (C) 2021 Davide Pagano & Lorenzo Sostero                          #
+#                                                                             #
+# This program is free software: you can redistribute it and/or modify        #
+# it under the terms of the GNU General Public License as published by        #
+# the Free Software Foundation, either version 3 of the License, or           #
+# any later version.                                                          #
+#                                                                             #
+# This program is distributed in the hope that it will be useful, but         #
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY  #
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License    #
+# for more details: <https://www.gnu.org/licenses/>.                          #
+###############################################################################
+
+
+#' Configuration object for the Genetic Algorithm
+#'
+#' Create a configuration object for the Genetic Algorithm (GA). At minimum the number of iterations
+#' (parameter `iterations`) and the number of chromosomes (parameter `population_size`) have
+#' to be provided.
+#'
+#' @param iterations maximum number of iterations.
+#' @param population_size number of chromosomes.
+#' @param iterations_same_cost maximum number of consecutive iterations with the \emph{same}
+#' (see the parameter `absolute_tol`) best cost before ending the minimization. If `NULL` the
+#' minimization continues for the number of iterations specified by the parameter `iterations`.
+#' Default is `NULL`.
+#' @param absolute_tol absolute tolerance when comparing best costs from consecutive iterations.
+#' If `NULL` the machine epsilon is used. Default is `NULL`.
+#' @param keep_fraction fraction of the population that survives for the next step of
+#' mating. Default is `0.4`.
+#' @param mutation_rate probability of mutation. Default is `0.1`.
+#' @return `config_ga` returns an object of class `GAConfig`.
+#' @importFrom Rdpack reprompt
+#' @references \insertRef{holland}{EmiR}
+#' @export
+config_ga <- function(iterations,
+                      population_size,
+                      iterations_same_cost = NULL,
+                      absolute_tol         = NULL,
+                      keep_fraction        = 0.4,
+                      mutation_rate        = 0.1) {
+  p <- new("GAConfig")
+  commonOpt              <- checkCommonConfigOptions(iterations, population_size, iterations_same_cost, absolute_tol)
+  p@iterations           <- commonOpt$iterations
+  p@population_size      <- commonOpt$population_size
+  p@iterations_same_cost <- commonOpt$iterations_same_cost
+  p@absolute_tol         <- commonOpt$absolute_tol
+
+  p@population_size   <- population_size
+  p@keep_fraction     <- keep_fraction
+  p@mutation_rate     <- mutation_rate
+  return(p)
+}
+
+check_algo_options_ga <- function(p, ...) {
+  config_options <- list(...)
+  if (length(config_options) == 0) return(p)
+  for (i in 1:length(config_options)) {
+    if (names(config_options[i]) == "population_size") {
+      p@population_size      <- config_options[[i]]
+    } else if (names(config_options[i]) == "keep_fraction") {
+      p@keep_fraction            <- config_options[[i]]
+    } else if (names(config_options[i]) == "mutation_rate") {
+      p@mutation_rate            <- config_options[[i]]
+    } else {
+      stop(paste0("Unknown option '", names(config_options[i]), "' for algorithm GA."))
+    }
+  }
+  return(p)
+}

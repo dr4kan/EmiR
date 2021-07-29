@@ -1,0 +1,3 @@
+G06_constr_benchmark          Benchmark test for contrained optimization (adapted from doi:10.1002/9781119136507)
+Integer_unconst               Benchmark test for integer unconstrined optimization (from doi:10.1007/s10589-005-0985-7)
+Pressure_vessel_design_constr Optimisation of a pressure vessel (based on http://ijoce.iust.ac.ir/article-1-53-en.html)

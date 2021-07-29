@@ -1,0 +1,71 @@
+SOURCES = ABC/ABCConfig.cpp \
+	ABC/ABCPopulation.cpp \
+	ABC/ABC_algorithm.cpp \
+	ABC/Bee.cpp \
+	BAT/BATConfig.cpp \
+	BAT/BATPopulation.cpp \
+	BAT/BAT_algorithm.cpp \
+	BAT/Bat.cpp \
+	Base/Algorithm.cpp \
+	Base/Config.cpp \
+	Base/Individual.cpp \
+	Base/Parameter.cpp \
+	Base/Population.cpp \
+	Base/Random.cpp \
+	Base/SearchSpace.cpp \
+	CS/CSConfig.cpp \
+	CS/CSPopulation.cpp \
+	CS/CS_algorithm.cpp \
+	CS/Nest.cpp \
+	GA/GAChromosome.cpp \
+	GA/GAConfig.cpp \
+	GA/GAPopulation.cpp \
+	GA/GA_algorithm.cpp \
+	GSA/GSAConfig.cpp \
+	GSA/GSAPopulation.cpp \
+	GSA/GSA_algorithm.cpp \
+	GSA/Planet.cpp \
+	GWO/GWOConfig.cpp \
+	GWO/GWOPopulation.cpp \
+	GWO/GWO_algorithm.cpp \
+	GWO/Wolf.cpp \
+	HS/HSConfig.cpp \
+	HS/HSPopulation.cpp \
+	HS/HS_algorithm.cpp \
+	IHS/IHSConfig.cpp \
+	IHS/IHSPopulation.cpp \
+	IHS/IHS_algorithm.cpp \
+	MFO/MFOConfig.cpp \
+	MFO/MFOPopulation.cpp \
+	MFO/MFO_algorithm.cpp \
+	MFO/Moth.cpp \
+	PS/PSConfig.cpp \
+	PS/PSParticle.cpp \
+	PS/PSPopulation.cpp \
+	PS/PS_algorithm.cpp \
+	SA/SAConfig.cpp \
+	SA/SAParticle.cpp \
+	SA/SAPopulation.cpp \
+	SA/SA_algorithm.cpp \
+	WOA/WOAConfig.cpp \
+	WOA/WOAPopulation.cpp \
+	WOA/WOA_algorithm.cpp \
+	WOA/Whale.cpp
+
+OBJECTS.src = ABC_R_Interface.o \
+	BAT_R_Interface.o \
+	CS_R_Interface.o \
+	GA_R_Interface.o \
+	GSA_R_Interface.o \
+	GWO_R_Interface.o \
+	HS_R_Interface.o \
+	IHS_R_Interface.o \
+	MFO_R_Interface.o \
+	PS_R_Interface.o \
+	RcppExports.o \
+	SA_R_Interface.o \
+	WOA_R_Interface.o \
+	test-example.o \
+	test-runner.o
+
+OBJECTS = $(OBJECTS.src) $(SOURCES:.cpp=.o)
