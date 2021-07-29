@@ -4,7 +4,7 @@ Title: Evolutionary Minimizer for R
 Version: 1.0.0
 Author: Davide Pagano & Lorenzo Sostero
 Maintainer: Davide Pagano <davide.pagano@unibs.it>
-Description: This package, written in C++ , implements the following evolutionary 
+Description: A C++ implementation of the following evolutionary 
     algorithms: Bat Algorithm (Yang, 2010 <doi:10.1007/978-3-642-12538-6_6>),
     Cuckoo Search (Yang, 2009 <doi:10.1109/nabic.2009.5393690>),
     Genetic Algorithms (Holland, 1992, ISBN:978-0262581110),
