@@ -3,6 +3,8 @@
 .RData
 .Ruserdata
 src/*.o
+src/*.o.tmp
 src/*/*.o
+src/*/*.o.tmp
 src/*.so
 src/*.dll
