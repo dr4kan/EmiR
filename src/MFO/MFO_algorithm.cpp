@@ -13,7 +13,7 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License    #
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
-*/
+ */
 
 
 #include <Rcpp.h>
@@ -25,8 +25,8 @@ using namespace Rcpp;
 
 
 MFO_algorithm::MFO_algorithm(Function obj_function, S4 config) :
-Algorithm(obj_function),
-m_population(MFOPopulation(obj_function)) {
+  Algorithm(obj_function),
+  m_population(MFOPopulation(obj_function)) {
   m_algo_config = MFOConfig();
   m_algo_config.setNMaxIterations(config.slot("iterations"));
   m_algo_config.setPopulationSize(config.slot("population_size"));
@@ -72,10 +72,15 @@ void MFO_algorithm::minimize() {
 
   // Update the cost history
   double current_best_cost = m_maximize ? -m_population.getBestSolution()->getCost() : m_population.getBestSolution()->getCost();
-  m_cost_history.push_back(current_best_cost);
+  m_cost_history.resize(n_iter);
+  m_cost_history[0] = current_best_cost;
 
   // Update the population position history
   if (m_save_population) addPopulationPosition(m_population.getPopulationPosition());
+
+  // Check if it is necessary to control the number of iterations at the same cost
+  bool do_check_same_cost = false;
+  if (n_iter > m_algo_config.getNMaxIterationsSameCost()) do_check_same_cost = true;
 
   size_t n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) {
@@ -95,23 +100,28 @@ void MFO_algorithm::minimize() {
 
     // Update the cost history
     current_best_cost = m_maximize ? -m_population.getBestSolution()->getCost() : m_population.getBestSolution()->getCost();
-    m_cost_history.push_back(current_best_cost);
+    m_cost_history[m_iter] = current_best_cost;
 
     // Update the population position history
     if (m_save_population) addPopulationPosition(m_population.getPopulationPosition());
 
     // Check on same cost iterations
-    if (m_iter > 0 && tolerance == 0 && Utility::areEqual(m_cost_history[m_iter-1], m_cost_history[m_iter], 2) ) { //check machine defined precision
-      n_sc++;
-    } else if (m_iter > 0 && tolerance != 0 && (m_cost_history[m_iter-1] - m_cost_history[m_iter]) < tolerance) { //check using user defined precision
-      n_sc++;
-    }  else {
-      n_sc = 0;
-    };
-    if (n_sc > m_algo_config.getNMaxIterationsSameCost()) break;
+    if (do_check_same_cost) {
+      if (m_iter > 0 && tolerance == 0 && Utility::areEqual(m_cost_history[m_iter-1], m_cost_history[m_iter], 2) ) { //check machine defined precision
+        n_sc++;
+      } else if (m_iter > 0 && tolerance != 0 && (m_cost_history[m_iter-1] - m_cost_history[m_iter]) < tolerance) { //check using user defined precision
+        n_sc++;
+      }  else {
+        n_sc = 0;
+      };
+      if (n_sc > m_algo_config.getNMaxIterationsSameCost()) {
+        m_cost_history.resize(m_iter+1);
+        break;
+      }
+    }
 
     // Update progress bar
-    progress_bar.increment();
+    if (!m_silent) progress_bar.increment();
   }
 
   m_population_base = &m_population;
