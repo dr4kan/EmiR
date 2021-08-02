@@ -2,7 +2,11 @@ Package: EmiR
 Type: Package
 Title: Evolutionary Minimizer for R
 Version: 1.0.0
-Author: Davide Pagano & Lorenzo Sostero
+Authors@R: c(
+    person("Davide", "Pagano", email = "davide.pagano@unibs.it, role = c("aut","cre")),
+    person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"),
+Author: Davide Pagano [aut, cre],
+  Lorenzo Sostero [aut]
 Maintainer: Davide Pagano <davide.pagano@unibs.it>
 Description: A C++ implementation of the following evolutionary 
     algorithms: Bat Algorithm (Yang, 2010 <doi:10.1007/978-3-642-12538-6_6>),
@@ -16,7 +20,7 @@ Description: A C++ implementation of the following evolutionary
     Particle Swarm Optimization (Kennedy et al., 2001 ISBN:1558605959),
     Simulated Annealing (Kirkpatrick et al., 1983 <doi:10.1126/science.220.4598.671>),
     Whale Optimization Algorithm (Mirjalili and Lewis, 2016 <doi:10.1016/j.advengsoft.2016.01.008>).
-    EmiR can be used not only for unconstrained optimization problems, but also 
+    'EmiR' can be used not only for unconstrained optimization problems, but also 
     in presence of inequality constrains, and variables restricted to be integers.
 License: GPL-3
 Encoding: UTF-8
