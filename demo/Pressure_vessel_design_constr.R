@@ -16,7 +16,7 @@
 library(EmiR)
 
 ob <- function(x) {
-  0.6224*(x[1]*0.0625)*x[3]*x[4] + 1.7781*(x[2]*0.0625)*x[3]^2 + 3.1661*(x[1]*0.0625)^2*x[4] + 19.84*(x[1]*0.0625)^2*x[3]
+  0.6224*(x[1]*0.0625)*x[3]*x[4] + 1.7781*(x[2]*0.0625)*x[3]^2 + 3.1611*(x[1]*0.0625)^2*x[4] + 19.8621*(x[1]*0.0625)^2*x[3]
 }
 
 g1 <- function(x){
@@ -39,7 +39,7 @@ p2 <- parameter("x2", 10, 32, integer = TRUE)
 p3 <- parameter("x3", 10, 240)
 p4 <- parameter("x4", 10, 240)
 
-conf <- config_algo(algorithm_id = "BAT", population_size = 300, iterations = 5000)
+conf <- config_algo(algorithm_id = "BAT", population_size = 500, iterations = 7000)
 results <- minimize(algorithm_id = "BAT",
                    obj_func = ob,
                    config = conf,
@@ -49,5 +49,5 @@ results <- minimize(algorithm_id = "BAT",
                    constrained_method = "BARRIER",
                    constr_init_pop = TRUE,
                    oob_solutions = "RBC",
-                   seed = 2)
+                   seed = 1)
 print(results)
