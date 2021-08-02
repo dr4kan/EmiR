@@ -3,8 +3,8 @@ Type: Package
 Title: Evolutionary Minimizer for R
 Version: 1.0.0
 Authors@R: c(
-    person("Davide", "Pagano", email = "davide.pagano@unibs.it, role = c("aut","cre")),
-    person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"),
+    person("Davide", "Pagano", email = "davide.pagano@unibs.it", role = c("aut","cre")),
+    person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"))
 Author: Davide Pagano [aut, cre],
   Lorenzo Sostero [aut]
 Maintainer: Davide Pagano <davide.pagano@unibs.it>
