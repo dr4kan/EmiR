@@ -34,13 +34,13 @@ public:
   void setConfig(const GWOConfig&);
 
   /// Access the specified wolf
-  Wolf &operator[](size_t t) { return m_individuals[t]; };
+  Wolf &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all wolves
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best wolf
   Wolf* getBestSolution();
@@ -51,7 +51,7 @@ public:
   ///////////////////////////////////////////////////////////
 
   //// Specific methods /////////////////////////////////////
-  void updateAParameter(size_t);
+  void updateAParameter(std::size_t);
 
   void moveWolves();
 

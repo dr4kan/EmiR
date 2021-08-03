@@ -25,17 +25,17 @@ PSPopulation::PSPopulation(Function func) : Population(func) {}
 
 
 void PSPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   NumericVector alpha = m_config.getAlpha();
 
   // check on the size of alpha_vel
-  if (alpha.length() == 1 && (size_t) alpha.length() < d) {
+  if (alpha.length() == 1 && (std::size_t) alpha.length() < d) {
     std::vector<double> v(d);
     std::fill(v.begin(), v.end(), alpha[0]);
     alpha = v;
     m_config.setAlpha(alpha);
-  } else if (alpha.length() > 1 && (size_t) alpha.length() != d) {
+  } else if (alpha.length() > 1 && (std::size_t) alpha.length() != d) {
     stop("Wrong size for parameter alpha_vel.\n");
   }
   //////////////////////////////////////
@@ -44,7 +44,7 @@ void PSPopulation::init() {
 
   if (m_initial_population.nrow() > 0) {
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -54,9 +54,9 @@ void PSPopulation::init() {
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
     double delta = 0.;
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
-      for (size_t j = 0; j < d; ++j) {
+      for (std::size_t j = 0; j < d; ++j) {
         delta = m_search_space[j].getMax()-m_search_space[j].getMin();
         m_individuals[i].setVelocity(j, m_random.rand(-delta*alpha[j], delta*alpha[j]));
       }
@@ -79,7 +79,7 @@ void PSPopulation::setConfig(const PSConfig& t_config) {
 
 std::vector<std::vector<double>> PSPopulation::getPopulationPosition() {
   std::vector<std::vector<double>> positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -91,11 +91,11 @@ PSParticle* PSPopulation::getBestSolution() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void PSPopulation::setVelocity(size_t iter) {
+void PSPopulation::setVelocity(std::size_t iter) {
   NumericVector alpha = m_config.getAlpha();
   double inertia_initial = m_config.getInertia();
   double h = m_config.getAlphaEvolution();
-  size_t iter_max = m_config.getNMaxIterations();
+  std::size_t iter_max = m_config.getNMaxIterations();
 
   double cognitive_par = m_config.getCognitiveParameter();
   double social_par = m_config.getSocialParameter();
@@ -104,11 +104,11 @@ void PSPopulation::setVelocity(size_t iter) {
 
   std::transform(alpha.begin(), alpha.end(), alpha.begin(), [k](double &c) { return c*k; });
 
-  for (size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
+  for (std::size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
 
     double delta = m_search_space[j].getMax() - m_search_space[j].getMin();
 
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       // Compute the step and assign if it satisfies the constraint on the maximum velocity
       double cognitive = cognitive_par * m_random.rand() *
       (m_individuals[i].getBestPositionParticle(j) - m_individuals[i][j]);
@@ -132,12 +132,12 @@ void PSPopulation::setVelocity(size_t iter) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void PSPopulation::moveParticles(size_t iter) {
+void PSPopulation::moveParticles(std::size_t iter) {
   // Change the velocity of the particles
   setVelocity(iter);
 
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
-    for (size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
       m_individuals[i][j] = m_individuals[i][j] + m_individuals[i].getVelocity(j);
     }
 
@@ -149,7 +149,7 @@ void PSPopulation::moveParticles(size_t iter) {
 
 
 void PSPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

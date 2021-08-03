@@ -14,32 +14,38 @@
 ###############################################################################
 
 
-#' Miele Cantrell Function
+#' Colville Function
 #'
 #' \loadmathjax
-#' Implementation of 4-dimensional Miele Cantrell Function.
+#' Implementation of 4-dimensional Colville function.
 #'
 #'
 #' On an 4-dimensional domain it is defined by
 #'
-#' \mjdeqn{f(\vec{x}) = \left(e^{-x_{1}} - x_{2} \right)^4 + 100(x_{2} - x_{3})^6 + \left(\tan(x_{3} - x_{4})\right)^4 + x_{1}^8}{f(x) = (e^{-x_{1}} - x_{2} )^4 + 100(x_{2} - x_{3})^6 + (tan(x_{3} - x_{4}))^4 + x_{1}^8}
+#' \mjdeqn{f(\vec{x}) = 100(x_1^2-x_2)^2+(x_1-1)^2+(x_3-1)^2+90(x_3^2-x_4)^2+10.1((x_2-1)^2+(x_4-1)^2)+19.8(x_2-1)(x_4-1),}{f(x) = 100(x_1^2-x_2)^2+(x_1-1)^2+(x_3-1)^2+90(x_3^2-x_4)^2+10.1((x_2-1)^2+(x_4-1)^2)+19.8(x_2-1)(x_4-1),}
 #' and is usually evaluated on
-#' \mjeqn{x_{i} \in \[ -2, 2 \]}{x_{i} in \[ -2, 2 \]}, for all
+#' \mjeqn{x_{i} \in \[ -10, 10 \]}{x_{i} in \[-10, 10\]}, for all
 #' \mjeqn{i=1,...,4}{i=1,...,4}. The function has one global minimum at
-#' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 0, 1, 1, 1 \]}{x = \[ 0, 1, 1, 1 \]}.
+#' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 1, 1, 1, 1 \]}{x = \[ 1, 1, 1, 1 \]}.
 #' @param x numeric or complex vector.
 #' @return The value of the function.
-#' @references \insertRef{cragg1969study}{EmiR}
+#' @references \insertRef{Grippo1989}{EmiR}
 #' @export
-miele_cantrell_func <- function(x) {
+colville_func <- function(x) {
   n <- length(x)
   if (n != 4) stop("Exactly 4 variables have to be provided")
-
   x1 <- x[[1]]
   x2 <- x[[2]]
   x3 <- x[[3]]
   x4 <- x[[4]]
 
-  value <- (exp(-x1) - x2)^4 + 100*(x2 - x3)^6 + (tan(x3 - x4))^4 + x1^8
+  term1 <- 100 * (x1^2-x2)^2
+  term2 <- (x1-1)^2
+  term3 <- (x3-1)^2
+  term4 <- 90 * (x3^2-x4)^2
+  term5 <- 10.1 * ((x2-1)^2 + (x4-1)^2)
+  term6 <- 19.8*(x2-1)*(x4-1)
+
+  value <- term1 + term2 + term3 + term4 + term5 + term6
   return(value)
 }

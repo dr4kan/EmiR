@@ -1,4 +1,3 @@
-/*
 ###############################################################################
 # Emir: EmiR: Evolutionary minimization forR                                  #
 # Copyright (C) 2021 Davide Pagano & Lorenzo Sostero                          #
@@ -13,47 +12,27 @@
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License    #
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
-*/
 
 
-#ifndef EmiR_SAParticle_h
-#define EmiR_SAParticle_h
+test_that("Colville function minimum", {
+  ### 4D
+  expect_equal(colville_func(c(1,2,3,4)), 2514.4, tolerance = 1e-1)
+  expect_equal(colville_func(list(1,2,3,4)), 2514.4, tolerance = 1e-1)
+})
 
-#include "../Base/Individual.h"
+test_that("Colville error", {
+  ### No arguments
+  expect_error(colville_func())
+  expect_error(colville_func(c()))
+  expect_error(colville_func(list()))
 
-class SAParticle : public Individual {
-public:
-  /// Empty constructor
-  SAParticle();
+  ### Number of arguments different from 4
+  expect_error(colville_func(c(1,2,3)))
+  expect_error(colville_func(list(2,3)))
 
-  /// Sa default constructor
-  SAParticle(int n);
+  ### Non numeric argument
+  expect_error(colville_func(c("0", 0)))
 
-  void setVelocity(std::size_t, double);
-
-  double getVelocity(std::size_t);
-
-  const std::vector<double>& getBestPositionParticle() const { return m_position_best; };
-
-  double getBestPositionComponent(std::size_t j);
-
-  double getBestCostParticle();
-
-  void setBest();
-
-  std::vector<std::size_t> getSuccess();
-
-  void upSuccess(std::size_t j);
-
-  void resetSuccess();
-
-  friend bool operator<(const SAParticle &l, const SAParticle &r) { return l.m_cost_best < r.m_cost_best; };
-
-private:
-  std::vector<std::size_t> m_success;
-  std::vector<double> m_velocity;
-  std::vector<double> m_position_best;
-  double              m_cost_best;
-};
-
-#endif
+  ### Multiple arguments
+  expect_error(colville_func(0, 0, 0))
+})

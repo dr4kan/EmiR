@@ -29,7 +29,7 @@ m_mass(0.), m_velocity(n, 0) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Planet::setVelocity(size_t i, double t) {
+void Planet::setVelocity(std::size_t i, double t) {
   m_velocity[i] = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -41,7 +41,7 @@ void Planet::setMass(double t_x)
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double Planet::getVelocity(size_t t) {
+double Planet::getVelocity(std::size_t t) {
   return m_velocity[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

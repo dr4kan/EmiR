@@ -30,7 +30,7 @@ m_freq(0.) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Bat::setVelocity(size_t t, double t_x) {
+void Bat::setVelocity(std::size_t t, double t_x) {
   m_velocity[t] = t_x;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -42,7 +42,7 @@ void Bat::setFrequency(double t) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double Bat::getVelocity(size_t t) {
+double Bat::getVelocity(std::size_t t) {
   return m_velocity[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

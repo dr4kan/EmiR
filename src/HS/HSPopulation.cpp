@@ -25,15 +25,15 @@ HSPopulation::HSPopulation(Function func) : Population(func) {}
 
 
 void HSPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_individuals.resize(pop_size, Individual(d));
 
   if (m_initial_population.nrow() > 0) {
 
     // Load the positions provided by the user
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -43,7 +43,7 @@ void HSPopulation::init() {
     // Generate randomly the position of the individuals
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
       progress_bar.increment();
     }
@@ -65,7 +65,7 @@ void HSPopulation::setConfig(const HSConfig& t_config) {
 
 std::vector<std::vector<double> > HSPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -84,11 +84,11 @@ void HSPopulation::sort() {
 
 
 void HSPopulation::generateNewHarmony() {
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t d = m_search_space.getNumberOfParameters();
   double val = 0.;
   Individual new_solution(d);
 
-  for (size_t j = 0; j < d; ++j) { // loop on dimension
+  for (std::size_t j = 0; j < d; ++j) { // loop on dimension
     if (m_random.rand() < m_config.getHmcr()) {
       // choose from history
       val = m_individuals[m_random.randUInt(0, m_individuals.size())][j]; // [0, m_individuals.size)
@@ -118,7 +118,7 @@ void HSPopulation::generateNewHarmony() {
 
 
 void HSPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

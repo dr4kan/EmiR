@@ -34,13 +34,13 @@ public:
   void setConfig(const PSConfig&);
 
   /// Access the specified particle
-  PSParticle &operator[](size_t t) { return m_individuals[t]; };
+  PSParticle &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all particles
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best particle
   PSParticle* getBestSolution();
@@ -51,9 +51,9 @@ public:
   ///////////////////////////////////////////////////////////
 
   //// Specific methods /////////////////////////////////////
-  void setVelocity(size_t);
+  void setVelocity(std::size_t);
 
-  void moveParticles(size_t);
+  void moveParticles(std::size_t);
 
 private:
   PSConfig                m_config;

@@ -36,13 +36,13 @@ public:
   SAConfig& getConfig() {return m_config;}
 
   /// Access the specified particle
-  SAParticle &operator[](size_t t) { return m_individuals[t]; };
+  SAParticle &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all particles
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best particle
   SAParticle *getBestSolution() {return &m_best_solution;}
@@ -55,7 +55,7 @@ public:
 
   void setVelocity();
 
-  void setStartingPoint(size_t);
+  void setStartingPoint(std::size_t);
 
   void sort();
 

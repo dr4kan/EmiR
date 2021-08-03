@@ -35,8 +35,8 @@ freudenstein_roth_func <- function(x) {
   n <- length(x)
   if (n != 2) stop("Exactly two variables have to be provided")
 
-  x1 <- x[1]
-  x2 <- x[2]
+  x1 <- x[[1]]
+  x2 <- x[[2]]
 
   value <- (x1 - 13 + ((5 - x2)*x2 - 2)*x2)^2 + (x1 - 29 + ((x2 + 1)*x2 - 14)*x2)^2
   return(value)

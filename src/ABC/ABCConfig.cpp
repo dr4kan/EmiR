@@ -31,7 +31,7 @@ void ABCConfig::setEmployedFraction(double t) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void ABCConfig::setNScoutBees(size_t t) {
+void ABCConfig::setNScoutBees(std::size_t t) {
   m_n_scout = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -43,7 +43,7 @@ double ABCConfig::getEmployedFraction() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t ABCConfig::getNScoutBees() {
+std::size_t ABCConfig::getNScoutBees() {
   return m_n_scout;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

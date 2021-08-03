@@ -26,7 +26,7 @@ Config::Config() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Config::setNMaxIterations(size_t t) {
+void Config::setNMaxIterations(std::size_t t) {
   m_nmax_iter = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -37,19 +37,19 @@ void Config::setAbsoluteTol(double t) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Config::setNMaxIterationsAtSameCost(size_t t) {
+void Config::setNMaxIterationsAtSameCost(std::size_t t) {
   m_nmax_iter_scost = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void Config::setPopulationSize(size_t t) {
+void Config::setPopulationSize(std::size_t t) {
   m_nparticles = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t Config::getNMaxIterations() const {
+std::size_t Config::getNMaxIterations() const {
   return m_nmax_iter;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -59,13 +59,13 @@ double Config::getAbsoluteTol() const {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-size_t Config::getNMaxIterationsSameCost() const {
+std::size_t Config::getNMaxIterationsSameCost() const {
   return m_nmax_iter_scost;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t Config::getPopulationSize() const {
+std::size_t Config::getPopulationSize() const {
   return m_nparticles;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

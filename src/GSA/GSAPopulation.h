@@ -33,22 +33,22 @@ public:
   void setConfig(const GSAConfig&);
 
   /// Access the specified planet
-  Planet &operator[](size_t t) { return m_individuals[t]; };
+  Planet &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all planets
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best planet
   Planet* getBestSolution();
 
   void setMass();
 
-  void setVelocity(size_t);
+  void setVelocity(std::size_t);
 
-  void move(size_t);
+  void move(std::size_t);
 
   void evaluate();
 

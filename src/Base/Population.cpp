@@ -144,7 +144,7 @@ double Population::evaluateCost(std::vector<double>& v) {
   double value;
 
   // In case of integer parameters
-  for (size_t j = 0; j < v.size(); ++j) {
+  for (std::size_t j = 0; j < v.size(); ++j) {
     if (m_search_space[j].isInteger()) {
       v[j] = round(v[j]); // floor the parameter
       if (v[j] < m_search_space[j].getMin()) {
@@ -184,7 +184,7 @@ double Population::evaluateCost(std::vector<double>& v) {
 
 
 void Population::checkBoundary(Individual& t) {
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t d = m_search_space.getNumberOfParameters();
 
   if (m_constraints.length() > 0 && m_oob_sol == DIS) { // Disregard the out-of-bound solution and generate new ones (DIS)
 
@@ -193,7 +193,7 @@ void Population::checkBoundary(Individual& t) {
   } else {
 
     // loop on dimension
-    for (size_t j = 0; j < d; ++j) {
+    for (std::size_t j = 0; j < d; ++j) {
 
       if (m_oob_sol == PBC) { // Periodic Boundary Condition (PBC)
 

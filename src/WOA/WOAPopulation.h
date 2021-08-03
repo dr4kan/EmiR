@@ -34,13 +34,13 @@ public:
   void setConfig(const WOAConfig&);
 
   /// Access the specified whale
-  Whale &operator[](size_t t) { return m_individuals[t]; };
+  Whale &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all whales
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best whale
   Whale* getBestSolution();
@@ -53,7 +53,7 @@ public:
   //// Specific methods /////////////////////////////////////
   void moveWhales();
 
-  void updateParameters(size_t);
+  void updateParameters(std::size_t);
 
 private:
 

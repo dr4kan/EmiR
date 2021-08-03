@@ -29,7 +29,7 @@ SAParticle::SAParticle(int n) : Individual(n), m_success(n, 0), m_velocity(n, 0)
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void SAParticle::setVelocity(size_t i, double t) {
+void SAParticle::setVelocity(std::size_t i, double t) {
   m_velocity[i] = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -42,12 +42,12 @@ void SAParticle::setBest() {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-double SAParticle::getVelocity(size_t t) {
+double SAParticle::getVelocity(std::size_t t) {
   return m_velocity[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-double SAParticle::getBestPositionComponent(size_t t) {
+double SAParticle::getBestPositionComponent(std::size_t t) {
   return m_position_best[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -57,12 +57,12 @@ double SAParticle::getBestCostParticle() {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-std::vector<size_t> SAParticle::getSuccess() {
+std::vector<std::size_t> SAParticle::getSuccess() {
   return m_success;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-void SAParticle::upSuccess(size_t j) {
+void SAParticle::upSuccess(std::size_t j) {
   m_success[j]++;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -25,13 +25,13 @@ SAPopulation::SAPopulation(Function func) : Population(func) {}
 
 
 void SAPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_individuals.resize(pop_size, SAParticle(d));
 
   if (m_initial_population.nrow() > 0) {
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -40,9 +40,9 @@ void SAPopulation::init() {
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
     double delta = 0.;
-    for (size_t i = 0; i < pop_size; ++i) {
+    for (std::size_t i = 0; i < pop_size; ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
-      for (size_t j = 0; j < d; ++j) {
+      for (std::size_t j = 0; j < d; ++j) {
         delta = m_search_space[j].getMax() - m_search_space[j].getMin();
         m_individuals[i].setVelocity(j, m_random.rand(0, delta));
       }
@@ -65,20 +65,20 @@ void SAPopulation::setConfig(const SAConfig& t_config) {
 
 std::vector<std::vector<double>> SAPopulation::getPopulationPosition() {
   std::vector<std::vector<double>> positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 void SAPopulation::move() {
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t d = m_search_space.getNumberOfParameters();
   SAParticle tmp;
   double cost_tmp;
   double cost_part;
   double temperature = m_config.getT0();
 
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
-    for (size_t h = 0; h < d; h++) { // loop on dimension
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
+    for (std::size_t h = 0; h < d; h++) { // loop on dimension
       tmp = m_individuals[i];
       tmp[h] += m_random.rand(-1., 1.) * m_individuals[i].getVelocity(h);
 
@@ -101,15 +101,15 @@ void SAPopulation::move() {
 }
 
 void SAPopulation::setVelocity() {
-  size_t d = m_search_space.getNumberOfParameters();
-  size_t Ns = m_config.getNs();
-  size_t c = m_config.getC();
-  std::vector<size_t> success;
+  std::size_t d = m_search_space.getNumberOfParameters();
+  std::size_t Ns = m_config.getNs();
+  std::size_t c = m_config.getC();
+  std::vector<std::size_t> success;
   double vel;
 
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
     success = m_individuals[i].getSuccess();
-    for (size_t h = 0; h < d; h++) { // loop on dimension
+    for (std::size_t h = 0; h < d; h++) { // loop on dimension
       if (success[h] > 0.6 * Ns){
         vel = m_individuals[i].getVelocity(h) * (1. + c * ((((double) success[h]) / ((double) Ns)) - 0.6) / 0.4);
         m_individuals[i].setVelocity(h, vel);
@@ -123,28 +123,28 @@ void SAPopulation::setVelocity() {
 
 }
 
-void SAPopulation::setStartingPoint(size_t iter) {
-  size_t d = m_search_space.getNumberOfParameters();
-  size_t n_pop = m_individuals.size();
+void SAPopulation::setStartingPoint(std::size_t iter) {
+  std::size_t d = m_search_space.getNumberOfParameters();
+  std::size_t n_pop = m_individuals.size();
   double w = m_config.getWmax() - ((double)iter / (double)m_config.getNMaxIterations()) * (m_config.getWmax() - m_config.getWmin());
 
   //select elite solutions by roulette wheel
-  for (size_t i = 0; i < n_pop; ++i) {
+  for (std::size_t i = 0; i < n_pop; ++i) {
 
-    size_t elite1 = 0;
+    std::size_t elite1 = 0;
     double ra1 = m_random.rand();
-    for (size_t u = 1; u < n_pop; u++) {
+    for (std::size_t u = 1; u < n_pop; u++) {
       if (ra1 > m_config.getProb(u - 1) && ra1 <= m_config.getProb(u)) elite1 = u;
     };
 
-    size_t elite2 = 0;
+    std::size_t elite2 = 0;
     double ra2 = m_random.rand();
-    for (size_t u = 1; u < n_pop; u++) {
+    for (std::size_t u = 1; u < n_pop; u++) {
       if (ra2 > m_config.getProb(u - 1) && ra2 <= m_config.getProb(u)) elite2 = u;
     };
 
     //set initial point on the basis of the current position and elite best position
-    for (size_t j = 0; j < d; ++j) {
+    for (std::size_t j = 0; j < d; ++j) {
       double ra3 = m_random.rand();
       double ra4 = m_random.rand();
 
@@ -165,7 +165,7 @@ void SAPopulation::sort() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 void SAPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

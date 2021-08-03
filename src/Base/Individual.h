@@ -40,7 +40,7 @@ public:
   void setPosition(const std::vector<double>&);
 
   /// Return the the number of dimensions of the search space
-  size_t getDimension() const;
+  std::size_t getDimension() const;
 
   /// Return the position
   std::vector<double>& getPosition() { return m_position; };
@@ -51,19 +51,19 @@ public:
   /// Return the cost
   double getCost();
 
-  virtual double getVelocity(size_t) {
+  virtual double getVelocity(std::size_t) {
     return 0.;
   };
 
   bool hasVelocity() {return m_has_velocity;}
 
-  virtual void setVelocity(size_t, double) {};
+  virtual void setVelocity(std::size_t, double) {};
 
   /// Access the specified component
-  double &operator[](size_t t) { return m_position[t]; };
+  double &operator[](std::size_t t) { return m_position[t]; };
 
   /// Access the specified component
-  double operator[](size_t t) const { return m_position[t]; };
+  double operator[](std::size_t t) const { return m_position[t]; };
 
   friend bool operator<(const Individual &l, const Individual &r) { return l.m_cost < r.m_cost; };
 

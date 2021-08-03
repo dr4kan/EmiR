@@ -31,7 +31,7 @@ using namespace Rcpp;
 bool equal_vec(std::vector<double>& v1, std::vector<double>& v2, double eps = 1.e-5) {
   if (v1.size() != v2.size()) return false;
 
-  for (size_t i = 0; i < v1.size(); ++i) {
+  for (std::size_t i = 0; i < v1.size(); ++i) {
     if (fabs(v1[i] - v2[i]) >= eps) return false;
   }
   return true;
@@ -43,12 +43,12 @@ bool equal_vec(PSPopulation& p1, PSPopulation& p2, double eps = 1.e-5) {
   std::vector<std::vector<double> > v2 = p2.getPopulationPosition();
   if (v1.size() != v2.size()) return false;
 
-  for (size_t i = 0; i < v1.size(); ++i) {
+  for (std::size_t i = 0; i < v1.size(); ++i) {
     std::vector<double> vv1 = v1[i];
     std::vector<double> vv2 = v2[i];
     if (vv1.size() != vv2.size()) return false;
 
-    for (size_t j = 0; j < vv1.size(); ++j) {
+    for (std::size_t j = 0; j < vv1.size(); ++j) {
       if (fabs(vv1[j] - vv2[j]) >= eps) return false;
     }
   }
@@ -57,7 +57,7 @@ bool equal_vec(PSPopulation& p1, PSPopulation& p2, double eps = 1.e-5) {
 
 ///////////////////////////////////////////////////////////
 void print(std::vector<double>& v) {
-  for (size_t i = 0; i < v.size(); ++i) {
+  for (std::size_t i = 0; i < v.size(); ++i) {
     Rcout << v[i] << " ";
   }
   Rcout << "\n";
@@ -67,9 +67,9 @@ void print(std::vector<double>& v) {
 void print(PSPopulation& pop) {
   Rcout << "--- Population ---\n";
   std::vector<std::vector<double> > v = pop.getPopulationPosition();
-  for (size_t i = 0; i < v.size(); ++i) {
+  for (std::size_t i = 0; i < v.size(); ++i) {
     std::vector<double> vv = v[i];
-    for (size_t j = 0; j < vv.size(); ++j) {
+    for (std::size_t j = 0; j < vv.size(); ++j) {
       Rcout << vv[j] << " ";
     }
     Rcout << "\n";
