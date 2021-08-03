@@ -34,13 +34,13 @@ public:
   void setConfig(const CSConfig&);
 
   /// Access the specified nest
-  Nest &operator[](size_t t) { return m_individuals[t]; };
+  Nest &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all nests
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best nest
   Nest* getBestSolution();

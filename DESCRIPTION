@@ -1,7 +1,7 @@
 Package: EmiR
 Type: Package
 Title: Evolutionary Minimizer for R
-Version: 1.1.0
+Version: 1.0.1
 Authors@R: c(
     person("Davide", "Pagano", email = "davide.pagano@unibs.it", role = c("aut","cre")),
     person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"))

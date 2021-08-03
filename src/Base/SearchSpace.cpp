@@ -33,7 +33,7 @@ void SearchSpace::setSeed(uint64_t t_seed) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void SearchSpace::setParameter(size_t t, const std::string& t_name, double t_min, double t_max, bool integer) {
+void SearchSpace::setParameter(std::size_t t, const std::string& t_name, double t_min, double t_max, bool integer) {
   if (t_name == "") {
     m_par[t].setName("p" + std::to_string(t));
   } else {
@@ -45,7 +45,7 @@ void SearchSpace::setParameter(size_t t, const std::string& t_name, double t_min
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void SearchSpace::setParameter(size_t t, const Parameter& t_par) {
+void SearchSpace::setParameter(std::size_t t, const Parameter& t_par) {
   m_par[t] = t_par;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -57,7 +57,7 @@ void SearchSpace::setConstraints(List constraints) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t SearchSpace::getNumberOfParameters() const {
+std::size_t SearchSpace::getNumberOfParameters() const {
   return m_par.size();
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -93,7 +93,7 @@ bool SearchSpace::ckeckConstraint() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double SearchSpace::getRandom(size_t i) {
+double SearchSpace::getRandom(std::size_t i) {
   double value = m_random.rand(m_par[i].getMin(), m_par[i].getMax());;
   return value;
 }
@@ -101,7 +101,7 @@ double SearchSpace::getRandom(size_t i) {
 
 
 std::vector<double> SearchSpace::getRandom() {
-  for (size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
+  for (std::size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
 
   // in case of a constrained optimization, check is
   // the solution violates any constraint

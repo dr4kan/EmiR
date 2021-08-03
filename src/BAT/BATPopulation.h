@@ -34,13 +34,13 @@ public:
   void setConfig(const BATConfig&);
 
   /// Access the specified bat
-  Bat &operator[](size_t t) { return m_individuals[t]; };
+  Bat &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all bats
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best bat
   Bat* getBestSolution();
@@ -55,7 +55,7 @@ public:
 
   double getLoudness() const;
 
-  void updateLoudnessAndPulse(size_t);
+  void updateLoudnessAndPulse(std::size_t);
 
   void moveBats();
 

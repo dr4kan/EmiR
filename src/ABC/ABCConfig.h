@@ -30,15 +30,15 @@ public:
   void setEmployedFraction(double);
 
   /// Set the number of scout bees
-  void setNScoutBees(size_t);
+  void setNScoutBees(std::size_t);
 
   double getEmployedFraction();
 
-  size_t getNScoutBees();
+  std::size_t getNScoutBees();
 
 private:
   double m_frac_employed;
-  size_t m_n_scout;
+  std::size_t m_n_scout;
 };
 
 #endif

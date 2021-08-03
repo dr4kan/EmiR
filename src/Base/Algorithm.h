@@ -66,7 +66,7 @@ protected:
   bool                              m_maximize;
   OOBMethod                         m_oob_sol;
   std::string                       m_algo_name;
-  size_t                            m_iter;
+  std::size_t                            m_iter;
   Population                        *m_population_base;
   NumericMatrix                     m_initial_population;
   std::ofstream                     m_out_file;

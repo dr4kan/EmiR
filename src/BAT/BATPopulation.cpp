@@ -25,8 +25,8 @@ BATPopulation::BATPopulation(Function func) : Population(func) {}
 
 
 void BATPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_loudness = m_config.getInitialLoudness();
   m_pulse_rate = m_config.getInitialPulseRate() * (1 - exp(-m_config.getGamma()));
   m_individuals.resize(pop_size, Bat(d));
@@ -35,7 +35,7 @@ void BATPopulation::init() {
 
     // Load the positions provided by the user
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -45,7 +45,7 @@ void BATPopulation::init() {
     // Generate randomly the position of the individuals
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setFrequency(m_random.rand(m_config.getMinFrequency(), m_config.getMaxFrequency()));
       m_individuals[i].setPosition(m_search_space.getRandom());
     }
@@ -67,7 +67,7 @@ void BATPopulation::setConfig(const BATConfig& t_config) {
 
 std::vector<std::vector<double> > BATPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -79,7 +79,7 @@ Bat* BATPopulation::getBestSolution() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void BATPopulation::updateLoudnessAndPulse(size_t t) {
+void BATPopulation::updateLoudnessAndPulse(std::size_t t) {
   m_loudness = m_config.getAlpha() * m_loudness;
   m_pulse_rate = m_config.getInitialPulseRate() * (1 - exp(-m_config.getGamma() * (t+1)));
 }
@@ -87,13 +87,13 @@ void BATPopulation::updateLoudnessAndPulse(size_t t) {
 
 
 void BATPopulation::moveBats() {
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t d = m_search_space.getNumberOfParameters();
   double v = 0.;
   bool update_p = false;
   bool update_l = false;
   Bat tmp(d);
 
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
 
     update_p = m_random.rand() < m_pulse_rate ? true : false;
     update_l = m_random.rand() < m_loudness ? true : false;
@@ -102,7 +102,7 @@ void BATPopulation::moveBats() {
     tmp.setFrequency(m_random.rand(m_config.getMinFrequency(), m_config.getMaxFrequency()));
 
     // update position and velocity
-    for (size_t j = 0; j < d; ++j) { // loop on dimension
+    for (std::size_t j = 0; j < d; ++j) { // loop on dimension
       v = tmp.getVelocity(j) + (tmp[j] - m_best_solution[j])*tmp.getFrequency();
       tmp.setVelocity(j, v);
       tmp[j] = tmp[j] + v;
@@ -144,7 +144,7 @@ double BATPopulation::getLoudness() const {
 
 
 void BATPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

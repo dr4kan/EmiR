@@ -26,7 +26,7 @@ void SAConfig::setRouletteWheel() {
    double m_keep   = getPopulationSize();
    double k = m_keep * (m_keep + 1) / 2;
    m_Prob.push_back(m_keep / k);
-   for (size_t i = 2; i <= m_keep; i++) {
+   for (std::size_t i = 2; i <= m_keep; i++) {
       m_Prob.push_back((m_keep - i + 1) / k + m_Prob[i - 2]);
    }
 }
@@ -37,17 +37,17 @@ void SAConfig::setT0(double t) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-void SAConfig::setNs(size_t t) {
+void SAConfig::setNs(std::size_t t) {
   m_Ns = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-void SAConfig::setNt(size_t t) {
+void SAConfig::setNt(std::size_t t) {
   m_Nt = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-void SAConfig::setC(size_t t) {
+void SAConfig::setC(std::size_t t) {
   m_C = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -72,17 +72,17 @@ double SAConfig::getT0() const {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-size_t SAConfig::getNs() const{
+std::size_t SAConfig::getNs() const{
   return m_Ns;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-size_t SAConfig::getNt() const{
+std::size_t SAConfig::getNt() const{
   return m_Nt;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-size_t SAConfig::getC() const{
+std::size_t SAConfig::getC() const{
   return m_C;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

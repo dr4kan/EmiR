@@ -40,7 +40,7 @@ void Individual::setPosition(const std::vector<double>& t) {
   m_position = t;
 }
 
-size_t Individual::getDimension() const {
+std::size_t Individual::getDimension() const {
   return m_position.size();
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

@@ -34,13 +34,13 @@ public:
   void setConfig(const IHSConfig&);
 
   /// Access the specified individual
-  Individual &operator[](size_t t) { return m_individuals[t]; };
+  Individual &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all individuals
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best individual
   Individual* getBestSolution();
@@ -51,7 +51,7 @@ public:
   ///////////////////////////////////////////////////////////
 
   //// Specific methods /////////////////////////////////////
-  void updateParameters(size_t);
+  void updateParameters(std::size_t);
 
   void generateNewHarmony();
 

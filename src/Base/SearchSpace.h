@@ -38,24 +38,24 @@ public:
    void setSeed(uint64_t);
 
    /// Set a parameter
-   void setParameter(size_t, const std::string&, double, double, bool);
-   void setParameter(size_t, const Parameter&);
+   void setParameter(std::size_t, const std::string&, double, double, bool);
+   void setParameter(std::size_t, const Parameter&);
 
    void setConstraints(List);
 
    void setCostrInitPop(bool);
 
    /// Return the number of parameters
-   size_t getNumberOfParameters() const;
+   std::size_t getNumberOfParameters() const;
 
    /// Return the specified component a random point in the search space
-   double getRandom(size_t);
+   double getRandom(std::size_t);
 
    /// Return a random point in the search space
    std::vector<double> getRandom();
 
    /// Access the specified parameter
-   Parameter &operator[](size_t t) { return m_par[t]; };
+   Parameter &operator[](std::size_t t) { return m_par[t]; };
 
    /// Return a random number in [0, 1]
    double rand();

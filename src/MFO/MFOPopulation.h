@@ -34,13 +34,13 @@ public:
   void setConfig(const MFOConfig&);
 
   /// Access the specified moth
-  Moth &operator[](size_t t) { return m_individuals[t]; };
+  Moth &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all moths
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best moth
   Moth* getBestSolution();
@@ -55,7 +55,7 @@ public:
   /// Flames are the best moth
   void createFlames();
 
-  void updateParameters(size_t);
+  void updateParameters(std::size_t);
 
   void moveMoths();
 
@@ -66,7 +66,7 @@ private:
   std::vector<Moth>  m_flames;       /**< Moths in the population */
   Moth               m_best_solution;
   double             m_a;
-  size_t             m_n_flame;
+  std::size_t             m_n_flame;
 };
 
 #endif

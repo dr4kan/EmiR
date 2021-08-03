@@ -34,13 +34,13 @@ public:
   void setConfig(const GAConfig&);
 
   /// Access the specified chromosome
-  GAChromosome &operator[](size_t t) { return m_individuals[t]; };
+  GAChromosome &operator[](std::size_t t) { return m_individuals[t]; };
 
   /// Return the position of all chromosomes
   std::vector<std::vector<double> > getPopulationPosition();
 
   /// Return the size of the population
-  size_t getSize() {return m_individuals.size();};
+  std::size_t getSize() {return m_individuals.size();};
 
   /// Return the best chromosome
   GAChromosome* getBestSolution();

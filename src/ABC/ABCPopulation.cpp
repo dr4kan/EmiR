@@ -25,11 +25,11 @@ ABCPopulation::ABCPopulation(Function func) : Population(func) {}
 
 
 void ABCPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
 
   // Number of food sources: pop_size/2
-  size_t f = (size_t) (m_config.getEmployedFraction() * pop_size);
+  std::size_t f = (std::size_t) (m_config.getEmployedFraction() * pop_size);
   m_scouters = m_config.getNScoutBees();
   m_onlookers = pop_size - f - m_scouters;
   m_individuals.resize(f, Bee(d));
@@ -40,7 +40,7 @@ void ABCPopulation::init() {
 
     // Load the positions provided by the user
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -50,7 +50,7 @@ void ABCPopulation::init() {
     // Generate randomly the position of the individuals
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
     }
 
@@ -60,7 +60,7 @@ void ABCPopulation::init() {
   // the population is actually evaluated this is fixed.
   m_best_solution = m_individuals[0];
 
-  m_limit_scout = (size_t) (0.5 * pop_size * d);
+  m_limit_scout = (std::size_t) (0.5 * pop_size * d);
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -73,7 +73,7 @@ void ABCPopulation::setConfig(const ABCConfig& t_config) {
 
 std::vector<std::vector<double> > ABCPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -85,8 +85,8 @@ Bee* ABCPopulation::getBestSolution() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-size_t ABCPopulation::getRandomPopulationIndex(size_t i) {
-  size_t j = i;
+std::size_t ABCPopulation::getRandomPopulationIndex(std::size_t i) {
+  std::size_t j = i;
   do {
     j = m_random.randUInt(0, m_individuals.size()); // [0, m_individuals.size)
   } while(j == i);
@@ -95,12 +95,12 @@ size_t ABCPopulation::getRandomPopulationIndex(size_t i) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void ABCPopulation::generateSolution(Bee &tmp, size_t i) {
+void ABCPopulation::generateSolution(Bee &tmp, std::size_t i) {
   // Random index in population with k != i
-  size_t k = getRandomPopulationIndex(i);
+  std::size_t k = getRandomPopulationIndex(i);
 
   // Random index in the dimension
-  size_t j = m_random.randUInt(0, m_search_space.getNumberOfParameters()); // [0, m_search_space.getNumberOfParameters)
+  std::size_t j = m_random.randUInt(0, m_search_space.getNumberOfParameters()); // [0, m_search_space.getNumberOfParameters)
 
   tmp[j] += m_random.rand(-1., 1.) * (tmp[j] - m_individuals[k][j]);
 
@@ -118,7 +118,7 @@ void ABCPopulation::employedBeesEvaluation() {
   // in the neighborhood of its present position
   Bee tmp;
   m_fitness_sum = 0.;
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
     tmp = m_individuals[i];
 
     // Generate a new solution
@@ -140,7 +140,7 @@ void ABCPopulation::employedBeesEvaluation() {
 
 
 void ABCPopulation::computeProbabilities() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) { // loop on population
     m_prob[i] = m_individuals[i].getFitness() / m_fitness_sum;
   }
 }
@@ -157,8 +157,8 @@ void ABCPopulation::onlookerBeesEvaluation() {
   bool discarded_solutions = false;
   std::discrete_distribution<> p(m_prob.begin(), m_prob.end());
   Bee tmp;
-  size_t sel = 0;
-  for (size_t k = 0; k < m_onlookers; ++k) {
+  std::size_t sel = 0;
+  for (std::size_t k = 0; k < m_onlookers; ++k) {
     sel = m_random.rand();
     tmp = m_individuals[sel];
 
@@ -187,8 +187,8 @@ void ABCPopulation::onlookerBeesEvaluation() {
   // if no solution was discarded, generate new random solutions
   if (discarded_solutions) return;
 
-  size_t s = 0;
-  for (size_t k = 0; k < m_scouters; ++k) {
+  std::size_t s = 0;
+  for (std::size_t k = 0; k < m_scouters; ++k) {
     s = m_random.randUInt(0, m_individuals.size()); // [0, m_individuals.size)
     m_individuals[s].setPosition(m_search_space.getRandom());
     evaluate(m_individuals[s]);
@@ -198,7 +198,7 @@ void ABCPopulation::onlookerBeesEvaluation() {
 
 
 void ABCPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

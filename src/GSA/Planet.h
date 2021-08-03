@@ -29,13 +29,13 @@ public:
   /// Planet default constructor
   Planet(int n);
 
-  void setVelocity(size_t, double);
+  void setVelocity(std::size_t, double);
 
   void setMass(double);
 
-  double getVelocity(size_t);
+  double getVelocity(std::size_t);
 
-  double& getVelocityAddress(size_t t) { return m_velocity[t]; };
+  double& getVelocityAddress(std::size_t t) { return m_velocity[t]; };
 
   double getMass();
 

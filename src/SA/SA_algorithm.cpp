@@ -51,7 +51,7 @@ void SA_algorithm::setSeed(uint64_t t_seed) {
 
 void SA_algorithm::minimize() {
   m_iter = 0;
-  size_t n_iter = m_algo_config.getNMaxIterations();
+  std::size_t n_iter = m_algo_config.getNMaxIterations();
   double tolerance = m_algo_config.getAbsoluteTol();
 
   // Initialization of the population
@@ -90,14 +90,14 @@ void SA_algorithm::minimize() {
   bool do_check_same_cost = false;
   if (n_iter > m_algo_config.getNMaxIterationsSameCost()) do_check_same_cost = true;
 
-  size_t n_sc = 0;
+  std::size_t n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) { //Every iteration is a change of temperature
     // scale the penalty coefficient for
     // constrained optimization
     m_population.scalePenaltyCoeff();
 
-    for (size_t m = 0; m < m_algo_config.getNt(); m++){
-      for (size_t j = 0; j < m_algo_config.getNs(); j++){
+    for (std::size_t m = 0; m < m_algo_config.getNt(); m++){
+      for (std::size_t j = 0; j < m_algo_config.getNs(); j++){
         m_population.move();
       }
       // Update the step vector

@@ -28,15 +28,15 @@ MFOPopulation::MFOPopulation(Function func) : Population(func) {
 
 
 void MFOPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_individuals.resize(pop_size, Moth(d));
 
   if (m_initial_population.nrow() > 0) {
 
     // Load the positions provided by the user
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -46,7 +46,7 @@ void MFOPopulation::init() {
     // Generate randomly the position of the individuals
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
       progress_bar.increment();
     }
@@ -68,7 +68,7 @@ void MFOPopulation::setConfig(const MFOConfig& t_config) {
 
 std::vector<std::vector<double> > MFOPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -87,9 +87,9 @@ void MFOPopulation::createFlames() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void MFOPopulation::updateParameters(size_t t) {
+void MFOPopulation::updateParameters(std::size_t t) {
   m_a       = -1. + t*(-1./m_config.getNMaxIterations());
-  m_n_flame = (size_t) round(m_individuals.size() - t*((m_individuals.size() - 1.)/m_config.getNMaxIterations()));
+  m_n_flame = (std::size_t) round(m_individuals.size() - t*((m_individuals.size() - 1.)/m_config.getNMaxIterations()));
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -97,10 +97,10 @@ void MFOPopulation::updateParameters(size_t t) {
 void MFOPopulation::moveMoths() {
   double d_flame, r, b = 1.;
   // Loop on the population of moths
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
 
     // Loop on dimension
-    for (size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
+    for (std::size_t j = 0; j < m_individuals[0].getDimension(); ++j) {
 
       d_flame = fabs(m_flames[i][j] - m_individuals[i][j]);
       r       = (m_a - 1.)*m_random.rand() + 1.;
@@ -127,7 +127,7 @@ void MFOPopulation::moveMoths() {
 
 
 void MFOPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

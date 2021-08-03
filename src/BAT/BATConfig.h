@@ -38,7 +38,7 @@ public:
 
   void setMaxFrequency(double);
 
-  double getMaxVelocity(size_t) const;
+  double getMaxVelocity(std::size_t) const;
 
   double getInitialLoudness() const;
 

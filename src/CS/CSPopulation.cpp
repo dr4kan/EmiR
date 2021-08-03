@@ -25,15 +25,15 @@ CSPopulation::CSPopulation(Function func) : Population(func) {}
 
 
 void CSPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_individuals.resize(pop_size, Nest(d));
 
   if (m_initial_population.nrow() > 0) {
 
     // Load the positions provided by the user
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -43,7 +43,7 @@ void CSPopulation::init() {
     // Generate randomly the position of the individuals
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
       progress_bar.increment();
     }
@@ -65,7 +65,7 @@ void CSPopulation::setConfig(const CSConfig& t_config) {
 
 std::vector<std::vector<double> > CSPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -89,9 +89,9 @@ void CSPopulation::generateCuckooEgg() {
   double beta = 1.5;
   double sigma = 0.6966;
   double step = 0.;
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t d = m_search_space.getNumberOfParameters();
   Nest tmp(d);
-  for (size_t j = 0; j < d; ++j) {
+  for (std::size_t j = 0; j < d; ++j) {
     step = m_config.getAlpha() * m_random.norm(0., sigma) / (pow(fabs(m_random.norm()), 1 / beta));
     tmp[j] = m_individuals[0][j] + step;
   }
@@ -109,8 +109,8 @@ void CSPopulation::generateCuckooEgg() {
   if (tmp.getCost() < m_individuals[k].getCost()) m_individuals[k] = tmp;
 
   // a pa fraction of the sub-optimal solution are replaced by new ones
-  size_t to_replace = std::round(m_config.getPa()*m_individuals.size());
-  for (size_t i = 1; i <= to_replace; ++i) {
+  std::size_t to_replace = std::round(m_config.getPa()*m_individuals.size());
+  for (std::size_t i = 1; i <= to_replace; ++i) {
     m_individuals[m_individuals.size()-i].setPosition(m_search_space.getRandom());
 
     // evaluate the new solutions
@@ -122,7 +122,7 @@ void CSPopulation::generateCuckooEgg() {
 
 
 void CSPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

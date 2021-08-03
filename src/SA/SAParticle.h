@@ -29,28 +29,28 @@ public:
   /// Sa default constructor
   SAParticle(int n);
 
-  void setVelocity(size_t, double);
+  void setVelocity(std::size_t, double);
 
-  double getVelocity(size_t);
+  double getVelocity(std::size_t);
 
   const std::vector<double>& getBestPositionParticle() const { return m_position_best; };
 
-  double getBestPositionComponent(size_t j);
+  double getBestPositionComponent(std::size_t j);
 
   double getBestCostParticle();
 
   void setBest();
 
-  std::vector<size_t> getSuccess();
+  std::vector<std::size_t> getSuccess();
 
-  void upSuccess(size_t j);
+  void upSuccess(std::size_t j);
 
   void resetSuccess();
 
   friend bool operator<(const SAParticle &l, const SAParticle &r) { return l.m_cost_best < r.m_cost_best; };
 
 private:
-  std::vector<size_t> m_success;
+  std::vector<std::size_t> m_success;
   std::vector<double> m_velocity;
   std::vector<double> m_position_best;
   double              m_cost_best;

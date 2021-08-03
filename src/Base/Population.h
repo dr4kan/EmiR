@@ -59,7 +59,7 @@ public:
 
   virtual Individual* getBestSolution() {return nullptr;};
 
-  virtual size_t getSize() {return 0;};
+  virtual std::size_t getSize() {return 0;};
 
 protected:
 

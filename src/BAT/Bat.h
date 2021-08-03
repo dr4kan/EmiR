@@ -33,10 +33,10 @@ public:
   void setFrequency(double);
 
   /// Set a velocity component
-  void setVelocity(size_t, double);
+  void setVelocity(std::size_t, double);
 
   /// Return a velocity component
-  double getVelocity(size_t t);
+  double getVelocity(std::size_t t);
 
   /// Return frequency range
   double getFrequency() const;

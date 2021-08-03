@@ -30,11 +30,11 @@ public:
 
   void setT0(double t);
 
-  void setNs(size_t t);
+  void setNs(std::size_t t);
 
-  void setNt(size_t t);
+  void setNt(std::size_t t);
 
-  void setC(size_t t);
+  void setC(std::size_t t);
 
   void setRt(double t);
 
@@ -46,11 +46,11 @@ public:
 
   double getT0() const;
 
-  size_t getNs() const;
+  std::size_t getNs() const;
 
-  size_t getNt() const;
+  std::size_t getNt() const;
 
-  size_t getC() const;
+  std::size_t getC() const;
 
   double getRt() const;
 
@@ -64,9 +64,9 @@ public:
 
 private:
   double              m_T0;    /**< Initial temperature */
-  size_t              m_Ns;   /**< Maximum number of cycles before step variation  */
-  size_t              m_C;    /**< Step criterion  */
-  size_t              m_Nt;   /**< Maximum number of cycles before temperature variation  */
+  std::size_t              m_Ns;   /**< Maximum number of cycles before step variation  */
+  std::size_t              m_C;    /**< Step criterion  */
+  std::size_t              m_Nt;   /**< Maximum number of cycles before temperature variation  */
   double              m_Rt;   /**< Reduction coefficient for temperature  */
   double              m_Wmax; /**< Maximum value of the weight employed in the formula for the starting point  */
   double              m_Wmin; /**< Minimum value of the weight employed in the formula for the starting point  */

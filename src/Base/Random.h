@@ -42,7 +42,7 @@ public:
   double rand(double, double);
 
   /// Returns a vector of double numbers in [a, b]
-  std::vector<double> randVector(size_t, double, double);
+  std::vector<double> randVector(std::size_t, double, double);
 
   /// Returns an unsigned integer number in [a, b)
   uint64_t randUInt(uint64_t, uint64_t);

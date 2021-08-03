@@ -45,9 +45,9 @@ double Random::rand(double t_min, double t_max) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-std::vector<double> Random::randVector(size_t n, double t_min, double t_max) {
+std::vector<double> Random::randVector(std::size_t n, double t_min, double t_max) {
   std::vector<double> v(n);
-  for (size_t i = 0; i < n; ++i) v[i] = rand(t_min, t_max);
+  for (std::size_t i = 0; i < n; ++i) v[i] = rand(t_min, t_max);
   return v;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

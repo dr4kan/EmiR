@@ -27,13 +27,13 @@ GAPopulation::GAPopulation(Function func) : Population(func) {}
 void GAPopulation::init() {
   m_config.setConfigCrossover();
 
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
   m_individuals.resize(pop_size, GAChromosome(d));
 
   if (m_initial_population.nrow() > 0) {
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -42,7 +42,7 @@ void GAPopulation::init() {
     // Generate randomly the position of the whales
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
       progress_bar.increment();
     }
@@ -64,7 +64,7 @@ void GAPopulation::setConfig(const GAConfig& t_config) {
 
 std::vector<std::vector<double> > GAPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -86,25 +86,25 @@ void GAPopulation::crossover() {
   // generate offspring
   double size = m_individuals.size();
   double ndof = m_search_space.getNumberOfParameters();
-  size_t keep = m_config.getKeep();
+  std::size_t keep = m_config.getKeep();
 
-  for (size_t i = 0; i < (size - keep); i = i + 2) {
+  for (std::size_t i = 0; i < (size - keep); i = i + 2) {
     m_individuals[size - 1 - i].setIndicatorDown();
     m_individuals[size - 2 - i].setIndicatorDown();
     int    ma = 0, pa = 0;
 
     // mother
     double ra1 = m_random.rand();
-    for (size_t u = 1; u < keep; u++) {
+    for (std::size_t u = 1; u < keep; u++) {
       if (ra1 > m_config.getProb(u - 1) && ra1 <= m_config.getProb(u)) ma = u;
     }
 
     // father
     double ra2 = m_random.rand();
-    for (size_t u = 1; u < keep; u++) {
+    for (std::size_t u = 1; u < keep; u++) {
       if (ra2 > m_config.getProb(u - 1) && ra2 <= m_config.getProb(u)) pa = u;
     }
-    for (size_t k = 0; k < ndof; k++) {
+    for (std::size_t k = 0; k < ndof; k++) {
       double beta = m_random.rand();
       m_individuals[size - 1 - i][k] = m_individuals[ma][k] -
       beta * (m_individuals[ma][k] - m_individuals[pa][k]);
@@ -132,7 +132,7 @@ void GAPopulation::mutation() {
 
 
 void GAPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

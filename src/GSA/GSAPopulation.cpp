@@ -26,14 +26,14 @@ GSAPopulation::GSAPopulation(Function func) : Population(func) {}
 
 
 void GSAPopulation::init() {
-  size_t pop_size = m_config.getPopulationSize();
-  size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
 
   m_individuals.resize(pop_size, Planet(d));
 
   if (m_initial_population.nrow() > 0) {
     NumericVector v;
-    for (size_t i = 0; i < (size_t) m_initial_population.nrow(); ++i) {
+    for (std::size_t i = 0; i < (std::size_t) m_initial_population.nrow(); ++i) {
       v = m_initial_population.row(i);
       m_individuals[i].setPosition(Rcpp::as<std::vector<double> >(v));
     }
@@ -43,9 +43,9 @@ void GSAPopulation::init() {
     if (!m_silent) Rcout << "Generating the initial population...\n";
     Progress progress_bar(pop_size, !m_silent);
     double delta = 0.;
-    for (size_t i = 0; i < m_individuals.size(); ++i) {
+    for (std::size_t i = 0; i < m_individuals.size(); ++i) {
       m_individuals[i].setPosition(m_search_space.getRandom());
-      for (size_t j = 0; j < d; ++j) {
+      for (std::size_t j = 0; j < d; ++j) {
         delta = m_search_space[j].getMax()-m_search_space[j].getMin();
         m_individuals[i].setVelocity(j, m_random.rand(-delta, delta));
       }
@@ -68,7 +68,7 @@ void GSAPopulation::setConfig(const GSAConfig& t_config) {
 
 std::vector<std::vector<double> > GSAPopulation::getPopulationPosition() {
   std::vector<std::vector<double> > positions(m_individuals.size());
-  for (size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) positions[i] = m_individuals[i].getPosition();
   return positions;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -88,11 +88,11 @@ void GSAPopulation::setMass() {
   double best_cost = m_individuals[0].getCost();
   double delta_mass = worst_cost - best_cost;
 
-  for (size_t i = 0; i < size ; ++i) {
+  for (std::size_t i = 0; i < size ; ++i) {
     mass.push_back((worst_cost - m_individuals[i].getCost())/delta_mass);
     sum_mass += mass[i];
   }
-  for (size_t j = 0; j < size; ++j) {
+  for (std::size_t j = 0; j < size; ++j) {
     m_individuals[j].setMass(mass[j] / sum_mass);
   }
 }
@@ -100,27 +100,27 @@ void GSAPopulation::setMass() {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void GSAPopulation::setVelocity(size_t iter) {
+void GSAPopulation::setVelocity(std::size_t iter) {
   double beta = m_config.getGravEvolution();
-  size_t iter_max = m_config.getNMaxIterations();
+  std::size_t iter_max = m_config.getNMaxIterations();
 
   double grav = m_config.getGrav() * exp(- beta * (double)(iter)/(double)iter_max);
 
   double Kbest = m_individuals.size() * (iter_max - iter) / (double)iter_max;
 
-  size_t d = m_search_space.getNumberOfParameters();
-  size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
 
   double accel = 0.;
 
   /// Compute distances between planets
   std::vector<std::vector<double>> distance;
   distance.resize(pop_size, std::vector<double>(pop_size, 0.));
-  for (size_t i = 0; i < pop_size; i++) {
-    for (size_t j = 0; j < pop_size; j++) {
+  for (std::size_t i = 0; i < pop_size; i++) {
+    for (std::size_t j = 0; j < pop_size; j++) {
       distance[i][j] = 0.;
       if (i < j) {
-        for (size_t v = 0; v < d; v++) {
+        for (std::size_t v = 0; v < d; v++) {
           distance[i][j] += pow(m_individuals[j][v] - m_individuals[i][v], 2);
         }
         distance[i][j] = pow(distance[i][j], 0.5);
@@ -132,11 +132,11 @@ void GSAPopulation::setVelocity(size_t iter) {
   }
 
   /// Compute the resulting acceleration of the i-planet due to the external gravitational forces
-  for (size_t i = 0; i < pop_size; i++) {
+  for (std::size_t i = 0; i < pop_size; i++) {
 
-    for (size_t k = 0; k < d; k++) {
+    for (std::size_t k = 0; k < d; k++) {
       double ref_accel    = 0.;
-      for (size_t j = 0; j < pop_size; j++) {
+      for (std::size_t j = 0; j < pop_size; j++) {
         if (distance[i][j] > 0. && j < Kbest) {
           accel = grav * m_individuals[j].getMass() / (distance[i][j]) * (m_individuals[j][k] - m_individuals[i][k]);
           ref_accel += m_random.rand() * accel;
@@ -154,18 +154,18 @@ void GSAPopulation::setVelocity(size_t iter) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void GSAPopulation::move(size_t iter) {
+void GSAPopulation::move(std::size_t iter) {
   // Change the mass of planets
   setMass();
 
   // Change the velocity of planets
   setVelocity(iter);
 
-  size_t d = m_search_space.getNumberOfParameters();
-  size_t pop_size = m_config.getPopulationSize();
+  std::size_t d = m_search_space.getNumberOfParameters();
+  std::size_t pop_size = m_config.getPopulationSize();
 
-  for (size_t i = 0; i < pop_size; ++i) {
-    for (size_t j = 0; j < d; ++j) {
+  for (std::size_t i = 0; i < pop_size; ++i) {
+    for (std::size_t j = 0; j < d; ++j) {
       m_individuals[i][j] = m_individuals[i][j] + m_individuals[i].getVelocity(j);
     }
 
@@ -177,7 +177,7 @@ void GSAPopulation::move(size_t iter) {
 
 
 void GSAPopulation::evaluate() {
-  for (size_t i = 0; i < m_individuals.size(); ++i) {
+  for (std::size_t i = 0; i < m_individuals.size(); ++i) {
     evaluate(m_individuals[i]);
   }
 }

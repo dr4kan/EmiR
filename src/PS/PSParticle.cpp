@@ -30,7 +30,7 @@ PSParticle::PSParticle(int n) : Individual(n), m_velocity(n, 0), m_position_best
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-void PSParticle::setVelocity(size_t i, double t) {
+void PSParticle::setVelocity(std::size_t i, double t) {
   m_velocity[i] = t;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -43,13 +43,13 @@ void PSParticle::setPersonalBest() {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-double PSParticle::getVelocity(size_t t) {
+double PSParticle::getVelocity(std::size_t t) {
   return m_velocity[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-double PSParticle::getBestPositionParticle(size_t t) {
+double PSParticle::getBestPositionParticle(std::size_t t) {
   return m_position_best[t];
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

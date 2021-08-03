@@ -43,7 +43,7 @@ void WOA_algorithm::setSeed(uint64_t t_seed) {
 
 void WOA_algorithm::minimize() {
   m_iter = 0;
-  size_t n_iter = m_algo_config.getNMaxIterations();
+  std::size_t n_iter = m_algo_config.getNMaxIterations();
   double tolerance = m_algo_config.getAbsoluteTol();
 
   // Initialization of the population
@@ -78,7 +78,7 @@ void WOA_algorithm::minimize() {
   bool do_check_same_cost = false;
   if (n_iter > m_algo_config.getNMaxIterationsSameCost()) do_check_same_cost = true;
 
-  size_t n_sc = 0;
+  std::size_t n_sc = 0;
   for (m_iter = 1; m_iter < n_iter; ++m_iter) {
 
     // scale the penalty coefficient for

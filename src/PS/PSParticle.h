@@ -33,13 +33,13 @@ public:
   /// Update the best position and particle
   void setPersonalBest();
 
-  void setVelocity(size_t, double);
+  void setVelocity(std::size_t, double);
 
-  double getVelocity(size_t);
+  double getVelocity(std::size_t);
 
-  double& getVelocityAddress(size_t t) { return m_velocity[t]; };
+  double& getVelocityAddress(std::size_t t) { return m_velocity[t]; };
 
-  double getBestPositionParticle(size_t);
+  double getBestPositionParticle(std::size_t);
 
   const std::vector<double>& getBestPositionParticle() const { return m_position_best; };
 
