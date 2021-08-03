@@ -14,32 +14,25 @@
 ###############################################################################
 
 
-#' Miele Cantrell Function
-#'
-#' \loadmathjax
-#' Implementation of 4-dimensional Miele Cantrell Function.
-#'
-#'
-#' On an 4-dimensional domain it is defined by
-#'
-#' \mjdeqn{f(\vec{x}) = \left(e^{-x_{1}} - x_{2} \right)^4 + 100(x_{2} - x_{3})^6 + \left(\tan(x_{3} - x_{4})\right)^4 + x_{1}^8}{f(x) = (e^{-x_{1}} - x_{2} )^4 + 100(x_{2} - x_{3})^6 + (tan(x_{3} - x_{4}))^4 + x_{1}^8}
-#' and is usually evaluated on
-#' \mjeqn{x_{i} \in \[ -2, 2 \]}{x_{i} in \[ -2, 2 \]}, for all
-#' \mjeqn{i=1,...,4}{i=1,...,4}. The function has one global minimum at
-#' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 0, 1, 1, 1 \]}{x = \[ 0, 1, 1, 1 \]}.
-#' @param x numeric or complex vector.
-#' @return The value of the function.
-#' @references \insertRef{cragg1969study}{EmiR}
-#' @export
-miele_cantrell_func <- function(x) {
-  n <- length(x)
-  if (n != 4) stop("Exactly 4 variables have to be provided")
+test_that("Colville function minimum", {
+  ### 4D
+  expect_equal(colville_func(c(1,2,3,4)), 2514.4, tolerance = 1e-1)
+  expect_equal(colville_func(list(1,2,3,4)), 2514.4, tolerance = 1e-1)
+})
 
-  x1 <- x[[1]]
-  x2 <- x[[2]]
-  x3 <- x[[3]]
-  x4 <- x[[4]]
+test_that("Colville error", {
+  ### No arguments
+  expect_error(colville_func())
+  expect_error(colville_func(c()))
+  expect_error(colville_func(list()))
 
-  value <- (exp(-x1) - x2)^4 + 100*(x2 - x3)^6 + (tan(x3 - x4))^4 + x1^8
-  return(value)
-}
+  ### Number of arguments different from 4
+  expect_error(colville_func(c(1,2,3)))
+  expect_error(colville_func(list(2,3)))
+
+  ### Non numeric argument
+  expect_error(colville_func(c("0", 0)))
+
+  ### Multiple arguments
+  expect_error(colville_func(0, 0, 0))
+})

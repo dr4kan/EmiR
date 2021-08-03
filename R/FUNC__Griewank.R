@@ -14,29 +14,31 @@
 ###############################################################################
 
 
-#' Qing Function
+#' Griewank Function
 #'
 #' \loadmathjax
-#' Implementation of n-dimensional Qing function.
+#' Implementation of n-dimensional Griewank function.
 #'
 #'
 #' On an n-dimensional domain it is defined by
 #'
-#' \mjdeqn{f(\vec{x}) = \sum_{i=1}^{n} \left( x_{i}^2 - i \right)^2,}{f(x) = sum_1^n ( x_i^2 - i )^2,}
+#' \mjdeqn{f(\vec{x}) = 1 + \sum_{i=1}^{n} \frac{x_i^{2}}{4000} - \prod_{i=1}^{n}\cos\left(\frac{x_i}{\sqrt{i}}\right),}{f(x) = 1 + \sum_{i=1}^{n} \frac{x_i^{2}}{4000} - \prod_{i=1}^{n}cos(\frac{x_i}{\sqrt{i}}),}
 #' and is usually evaluated on
-#' \mjeqn{x_{i} \in \[ -500, 500 \]}{x_{i} in \[-500, 500\]}, for all
+#' \mjeqn{x_{i} \in \[ -600, 600 \]}{x_{i} in \[-600, 600\]}, for all
 #' \mjeqn{i=1,...,n}{i=1,...,n}. The function has global minima at
-#' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{x_{i}=\pm \sqrt{i}}{x_i = +-sqrt(i)} for all \mjeqn{i=1,...,n}{i=1,...,n}.
+#' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{x_{i}=0}{x_i = 0} for all \mjeqn{i=1,...,n}{i=1,...,n}.
 #' @param x numeric or complex vector.
 #' @return The value of the function.
-#' @references \insertRef{Qing2006}{EmiR}
+#' @references \insertRef{griewank1981generalized}{EmiR}
 #' @export
-qing_func <- function(x) {
+griewank_func <- function(x) {
   n <- length(x)
   if (n < 1) stop("At least one variable has to be provided")
-  value <- 0
+  A <- 0
+  B <- 1
   for (i in 1:n) {
-    value <- value + (x[[i]]^2 - i)^2
+    A <- A + (x[[i]]^2/4000)
+    B <- B * cos(x[[i]]/sqrt(i))
   }
-  return(value)
+  return(1 + A - B)
 }

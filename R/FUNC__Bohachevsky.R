@@ -35,8 +35,8 @@ bohachevsky_func <- function(x) {
   n <- length(x)
   if (n != 2) stop("Exactly two variables have to be provided")
 
-  x1 <- x[1]
-  x2 <- x[2]
+  x1 <- x[[1]]
+  x2 <- x[[2]]
 
   value <- x1^2 + 2*x2^2 - 0.3*cos(3*pi*x1) - 0.4*cos(4*pi*x2) + 0.7
   return(value)
