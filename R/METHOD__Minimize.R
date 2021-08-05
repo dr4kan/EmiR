@@ -56,9 +56,10 @@ list_of_functions <- function() {
   emir_functions <- data.frame(rbind(
     c("ackley_func", "Ackley Function", 1, NA),
     c("bohachevsky_func", "Bohachevsky Function", 2, 2),
+    c("colville_func", "Colville Function", 4, 4),
     c("freudenstein_roth_func", "Freudenstein Roth Function", 2, 2),
+    c("griewank_func", "Griewank Function"  , 1, NA),
     c("miele_cantrell_func", "Miele Cantrell Function", 4, 4),
-    c("qing_func", "Qing Function"  , 1, NA),
     c("rastrigin_func", "Rastrigin Function"  , 1, NA),
     c("rosenbrock_func", "Rosenbrock Function"  , 2, NA),
     c("schwefel_func", "Schwefel Function"  , 1, NA),
