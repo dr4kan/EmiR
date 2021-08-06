@@ -85,6 +85,7 @@ protected:
   double        m_max_penalty_param;
   std::string   m_constrained_method;
   bool          m_silent;
+  std::size_t   m_n_constraints;
 };
 
 #endif

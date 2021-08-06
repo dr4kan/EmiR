@@ -41,6 +41,7 @@ void Population::setSearchSpace(const SearchSpace& t_search_space) {
 
 void Population::setConstraints(List constraints) {
   m_constraints = constraints;
+  m_n_constraints = constraints.length();
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -82,7 +83,7 @@ void Population::scalePenaltyCoeff() {
 
 
 bool Population::ckeckViolateConstraints(std::vector<double>& v) {
-  for (int i = 0; i < m_constraints.length(); ++i) {
+  for (int i = 0; i < m_n_constraints; ++i) {
     S4 constraint = m_constraints[i];
     Function g = constraint.slot("func");
     std::string inequality = constraint.slot("inequality");
@@ -117,7 +118,7 @@ double Population::constraintsPenaltyMethod(std::vector<double>& v) {
   NumericVector tmp_v;
   double penalty = 0.;
 
-  for (int i = 0; i < m_constraints.length(); ++i) {
+  for (int i = 0; i < m_n_constraints; ++i) {
     S4 constraint = m_constraints[i];
     Function g = constraint.slot("func");
     std::string inequality = constraint.slot("inequality");
@@ -155,6 +156,8 @@ double Population::evaluateCost(std::vector<double>& v) {
     }
   }
 
+  //Rcout << m_constrained_method << " - " << m_n_constraints << "\n";
+
   if (m_constrained_method == "PENALTY") {
 
     value = constraintsPenaltyMethod(v);
@@ -186,7 +189,7 @@ double Population::evaluateCost(std::vector<double>& v) {
 void Population::checkBoundary(Individual& t) {
   std::size_t d = m_search_space.getNumberOfParameters();
 
-  if (m_constraints.length() > 0 && m_oob_sol == DIS) { // Disregard the out-of-bound solution and generate new ones (DIS)
+  if (m_n_constraints > 0 && m_oob_sol == DIS) { // Disregard the out-of-bound solution and generate new ones (DIS)
 
     t.setPosition(m_search_space.getRandom());
 
