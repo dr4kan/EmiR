@@ -133,7 +133,10 @@ void GAPopulation::mutation() {
 
 void GAPopulation::evaluate() {
   for (std::size_t i = 0; i < m_individuals.size(); ++i) {
-    evaluate(m_individuals[i]);
+    if (m_individuals[i].getIndicator() == 0){
+      evaluate(m_individuals[i]);
+      m_individuals[i].setIndicatorUp();
+    };
   }
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -142,7 +145,6 @@ void GAPopulation::evaluate() {
 void GAPopulation::evaluate(GAChromosome& solution) {
   double value = evaluateCost(solution.getPosition());
   solution.setCost(value);
-  solution.setIndicatorDown();
 
   if (value < m_best_solution.getCost()) {
     if (ckeckViolateConstraints(solution.getPosition()) == false) {

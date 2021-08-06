@@ -18,7 +18,8 @@
 
 #include "GAChromosome.h"
 
-GAChromosome::GAChromosome() : Individual() {}
+GAChromosome::GAChromosome() : Individual(),
+m_indicator(0) {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
