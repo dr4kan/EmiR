@@ -2,7 +2,7 @@
 % Please edit documentation in R/FUNC__Freudenstein.R
 \name{freudenstein_roth_func}
 \alias{freudenstein_roth_func}
-\title{Freudenstein Roth Function}
+\title{Freudenstein and Roth Function}
 \usage{
 freudenstein_roth_func(x)
 }
@@ -14,7 +14,7 @@ The value of the function.
 }
 \description{
 \loadmathjax
-Implementation of 2-dimensional Freudenstein Roth function.
+Implementation of 2-dimensional Freudenstein and Roth function.
 }
 \details{
 On an 2-dimensional domain it is defined by
@@ -26,5 +26,5 @@ and is usually evaluated on
 \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = [ 5, 4 ]}{x = [ 5, 4 ]}.
 }
 \references{
-\insertRef{rao2019engineering}{EmiR}
+\insertRef{Freudenstein1963}{EmiR}
 }

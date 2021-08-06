@@ -14,10 +14,10 @@
 ###############################################################################
 
 
-#' Freudenstein Roth Function
+#' Freudenstein and Roth Function
 #'
 #' \loadmathjax
-#' Implementation of 2-dimensional Freudenstein Roth function.
+#' Implementation of 2-dimensional Freudenstein and Roth function.
 #'
 #'
 #' On an 2-dimensional domain it is defined by
@@ -29,7 +29,7 @@
 #' \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 5, 4 \]}{x = \[ 5, 4 \]}.
 #' @param x numeric or complex vector.
 #' @return The value of the function.
-#' @references \insertRef{rao2019engineering}{EmiR}
+#' @references \insertRef{Freudenstein1963}{EmiR}
 #' @export
 freudenstein_roth_func <- function(x) {
   n <- length(x)
