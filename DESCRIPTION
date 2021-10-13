@@ -1,7 +1,7 @@
 Package: EmiR
 Type: Package
 Title: Evolutionary Minimizer for R
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Davide", "Pagano", email = "davide.pagano@unibs.it", role = c("aut","cre")),
     person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"))
@@ -22,7 +22,7 @@ Description: A C++ implementation of the following evolutionary
     Whale Optimization Algorithm (Mirjalili and Lewis, 2016 <doi:10.1016/j.advengsoft.2016.01.008>).
     'EmiR' can be used not only for unconstrained optimization problems, but also 
     in presence of inequality constrains, and variables restricted to be integers.
-License: GPL-3
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.5.0)
