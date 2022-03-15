@@ -7,7 +7,7 @@ Authors@R: c(
     person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"))
 Author: Davide Pagano [aut, cre],
   Lorenzo Sostero [aut]
-Maintainer: Davide Pagano <davide.pagano@unibs.it>
+Maintainer: Lorenzo Sostero <l.sostero@studenti.unibs.it>
 Description: A C++ implementation of the following evolutionary 
     algorithms: Bat Algorithm (Yang, 2010 <doi:10.1007/978-3-642-12538-6_6>),
     Cuckoo Search (Yang, 2009 <doi:10.1109/nabic.2009.5393690>),
