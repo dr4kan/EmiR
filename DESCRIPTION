@@ -5,8 +5,8 @@ Version: 1.0.3
 Authors@R: c(
     person("Davide", "Pagano", email = "davide.pagano@unibs.it", role = c("aut","cre")),
     person("Lorenzo", "Sostero", email = "l.sostero@studenti.unibs.it", role = "aut"))
-Author: Davide Pagano [aut, cre],
-  Lorenzo Sostero [aut]
+Author: Davide Pagano [aut],
+  Lorenzo Sostero [aut, cre]
 Maintainer: Lorenzo Sostero <l.sostero@studenti.unibs.it>
 Description: A C++ implementation of the following evolutionary 
     algorithms: Bat Algorithm (Yang, 2010 <doi:10.1007/978-3-642-12538-6_6>),
