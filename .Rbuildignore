@@ -1,6 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^LICENSE\.md$
+^LICENSE\.txt$
 ^.*\.o$
 ^.*\.o.tmp$
 ^.*\.tmp$
