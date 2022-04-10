@@ -67,7 +67,7 @@ private:
    Random                 m_random;
    List                   m_constraints;
    std::vector<double>    m_gen_point;
-   bool                   m_constr_init_pop;
+   bool                   m_constr_init_pop = FALSE;
 };
 
 #endif
