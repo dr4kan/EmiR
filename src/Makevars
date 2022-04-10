@@ -65,7 +65,6 @@ OBJECTS.src = ABC_R_Interface.o \
 	RcppExports.o \
 	SA_R_Interface.o \
 	WOA_R_Interface.o \
-	test-example.o \
 	test-runner.o
 
 OBJECTS = $(OBJECTS.src) $(SOURCES:.cpp=.o)
