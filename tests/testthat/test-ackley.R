@@ -13,6 +13,8 @@
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
 
+library(testthat)
+library(EmiR)
 
 test_that("Ackley function minimum", {
   ### 1D

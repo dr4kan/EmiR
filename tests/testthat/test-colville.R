@@ -13,6 +13,8 @@
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
 
+library(testthat)
+library(EmiR)
 
 test_that("Colville function minimum", {
   ### 4D
