@@ -13,8 +13,6 @@
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
 
-library(testthat)
-library(EmiR)
 
 test_that("Styblinski-Tang function minimum", {
   ### 1D

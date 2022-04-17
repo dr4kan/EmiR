@@ -13,8 +13,6 @@
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
 
-library(testthat)
-library(EmiR)
 
 test_that("Rastrigin function minimum", {
   ### 1D
