@@ -19,11 +19,11 @@
 #include "SearchSpace.h"
 #include <iostream>
 
-SearchSpace::SearchSpace() : m_par(0) {}
+SearchSpace::SearchSpace() : m_par(0), m_constr_init_pop(false) {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n) {}
+SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n), m_constr_init_pop(false) {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
