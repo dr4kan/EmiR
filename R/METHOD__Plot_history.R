@@ -42,7 +42,7 @@ df_from_func2D <- function(n_points, min_x, max_x, min_y, max_y, func) {
 #' Plot the minimization history as a function of the number of iterations.
 #'
 #' @param minimizer_result an object of class `OptimizationResults` (see \link[EmiR]{OptimizationResults}).
-#' @param ... additional arguments, such as graphical parameters (see \link[base]{plot}).
+#' @param ... additional arguments, such as graphical parameters (see \link[graphics]{plot}).
 #' @export
 plot_history <- function(minimizer_result, ...) {
   plot(minimizer_result@cost_history, type = "l", lwd = 2, xlab = "Iteration",

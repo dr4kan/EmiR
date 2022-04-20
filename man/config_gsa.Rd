@@ -41,8 +41,8 @@ Create a configuration object for the Gravitational Search Algorithm (GSA). At m
 to be provided.
 }
 \examples{
-conf <- config_gsa(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
-grav = 1000, grav_evolution = 20.)
+conf <- config_gsa(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+absolute_tol = NULL, grav = 1000, grav_evolution = 20.)
 
 }
 \references{

@@ -34,7 +34,8 @@
 #' @export
 #'
 #' @examples
-#' conf <- config_woa(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+#' conf <- config_woa(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+#' absolute_tol = NULL)
 #'
 config_woa <- function(iterations,
                        population_size,

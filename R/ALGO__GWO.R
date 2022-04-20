@@ -34,7 +34,8 @@
 #' @export
 #'
 #' @examples
-#' conf <- config_gwo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+#' conf <- config_gwo(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+#' absolute_tol = NULL)
 #'
 config_gwo <- function(iterations,
                        population_size,

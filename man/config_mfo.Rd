@@ -33,7 +33,8 @@ Create a configuration object for the Moth-flame Optimization Algorithm (MFO). A
 to be provided.
 }
 \examples{
-conf <- config_mfo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+conf <- config_mfo(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+absolute_tol = NULL)
 
 }
 \references{

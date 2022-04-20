@@ -9,7 +9,7 @@ plot_history(minimizer_result, ...)
 \arguments{
 \item{minimizer_result}{an object of class \code{OptimizationResults} (see \link[EmiR]{OptimizationResults}).}
 
-\item{...}{additional arguments, such as graphical parameters (see \link[base]{plot}).}
+\item{...}{additional arguments, such as graphical parameters (see \link[graphics]{plot}).}
 }
 \description{
 Plot the minimization history as a function of the number of iterations.

@@ -33,7 +33,8 @@ Create a configuration object for the Grey Wolf Optimizer Algorithm (GWO). At mi
 to be provided.
 }
 \examples{
-conf <- config_gwo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+conf <- config_gwo(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+absolute_tol = NULL)
 
 }
 \references{

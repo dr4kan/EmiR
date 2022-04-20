@@ -39,8 +39,9 @@
 #' @export
 #'
 #' @examples
-#' conf <- config_hs(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
-#' considering_rate = 0.5, adjusting_rate = 0.5, distance_bandwidth = 0.1)
+#' conf <- config_hs(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+#' absolute_tol = NULL, considering_rate = 0.5, adjusting_rate = 0.5,
+#' distance_bandwidth = 0.1)
 #'
 #'
 config_hs <- function(iterations,

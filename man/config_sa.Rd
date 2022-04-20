@@ -53,6 +53,12 @@ Create a configuration object for the Simulated Annealing algorithm (SA). At min
 (parameter \code{iterations}) and the number of particles (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_sa(iterations = 100, population_size = 50, iterations_same_cost = NULL,
+absolute_tol = NULL, T0 = 50., Ns = 3., Nt = 3., c_step = 2., Rt = 0.85, Wmin = 0.25,
+ Wmax = 1.25)
+
+}
 \references{
 \insertRef{Kirkpatrick1983}{EmiR}
 }
