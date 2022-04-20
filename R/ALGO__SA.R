@@ -39,6 +39,11 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Kirkpatrick1983}{EmiR}
 #' @export
+#'
+#' #' @examples
+#' conf <- config_sa(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' T0 = 50., Ns = 3., Nt = 3., c_step = 2., Rt = 0.85, Wmin = 0.25, Wmax = 1.25)
+#'
 config_sa <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,

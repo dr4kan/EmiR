@@ -35,6 +35,11 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{holland}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_ga(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' keep_fraction = 0.4, mutation_rate = 0.1)
+#'
 config_ga <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,

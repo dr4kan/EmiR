@@ -53,6 +53,13 @@ Create a configuration object for the Bat Algorithm (BAT). At minimum the number
 (parameter \code{iterations}) and the number of bats (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_bat(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+initial_loudness = 1.5, alpha = 0.9, initial_pulse_rate = 0.5, gamma = 0.9,
+freq_min = 0., freq_max = 2.)
+
+
+}
 \references{
 \insertRef{yang2010new}{EmiR}
 }

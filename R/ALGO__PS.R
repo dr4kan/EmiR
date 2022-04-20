@@ -42,6 +42,12 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{eberhart1995new}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_ps(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' alpha_vel = 0.5, alpha_evolution = 1.0, cognitive = 2.0,
+#' social = 2.0, inertia = 0.9)
+#'
 config_ps <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,

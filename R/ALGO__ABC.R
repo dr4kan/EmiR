@@ -35,6 +35,9 @@
 #' @references \insertRef{Karaboga2007}{EmiR}
 #' @export
 #'
+#' @examples
+#' conf <- config_abc(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL, employed_frac = 0.5, n_scout = 1)
+#'
 config_abc <- function(iterations,
                        population_size,
                        iterations_same_cost = NULL,

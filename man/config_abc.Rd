@@ -38,6 +38,10 @@ Create a configuration object for the Artificial Bee Colony Algorithm (ABC). At 
 (parameter \code{iterations}) and the number of bees (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_abc(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL, employed_frac = 0.5, n_scout = 1)
+
+}
 \references{
 \insertRef{Karaboga2007}{EmiR}
 }

@@ -32,6 +32,10 @@ Create a configuration object for the Moth-flame Optimization Algorithm (MFO). A
 (parameter \code{iterations}) and the number of moths (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_mfo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+
+}
 \references{
 \insertRef{Mirjalili2015}{EmiR}
 }

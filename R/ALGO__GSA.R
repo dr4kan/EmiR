@@ -36,6 +36,11 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Rashedi2009}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_gsa(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' grav = 1000, grav_evolution = 20.)
+#'
 config_gsa <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,

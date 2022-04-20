@@ -45,3 +45,11 @@ class \code{Constraint} (see \link[EmiR]{constraint}).}
 Minimize (or maximize) an objective function, possibly subjected to inequality constraints, using
 any of the algorithms available in EmiR.
 }
+\examples{
+\dontrun{
+ results <- minimize(algorithm_id = "BAT", obj_func = ob, config = conf, parameters = list(p1,p2, p3, p4), constraints = list(c1,c2,c3),
+    save_pop_history = TRUE, constrained_method = "BARRIER", constr_init_pop = TRUE, oob_solutions = "RBC", seed = 1)
+}
+
+
+}

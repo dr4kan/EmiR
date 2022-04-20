@@ -35,6 +35,12 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Yang2009}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_cs(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' discovery_rate = 0.25, step_size = 1.0)
+#'
+#'
 config_cs <- function(iterations,
                       population_size,
                       iterations_same_cost = NULL,

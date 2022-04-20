@@ -32,6 +32,10 @@ Create a configuration object for the Grey Wolf Optimizer Algorithm (GWO). At mi
 (parameter \code{iterations}) and the number of wolves (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_gwo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+
+}
 \references{
 \insertRef{Mirjalili2014}{EmiR}
 }

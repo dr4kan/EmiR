@@ -24,6 +24,10 @@
 #' @param integer if `TRUE` the parameter is constrained to be integer. Default is `FALSE`.
 #' @return `parameter` returns an object of class `Parameter`.
 #' @export
+#'
+#' @examples
+#' p1 <- parameter("x1", 18, 32, integer = TRUE)
+#'
 parameter <- function(name, min_val, max_val, integer = FALSE) {
   new("Parameter", name=name, min_val=min_val, max_val=max_val, integer=integer)
 }

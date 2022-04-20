@@ -23,6 +23,11 @@
 #' @param inequality inequality type. Possible values: `>`, `>=`, `<=`, `<`.
 #' @return `constraint` returns an object of class `Constraint`.
 #' @export
+#'
+#' @examples
+#' g1 <- function(x) 0.0193*x[3] - (x[1]*0.0625)
+#' c1 <- constraint(g1, "<=")
+#'
 constraint <- function(func, inequality) {
   stopifnot(inequality == ">" || inequality == ">=" || inequality == "<=" || inequality == "<")
   new("Constraint", func=func, inequality=inequality)

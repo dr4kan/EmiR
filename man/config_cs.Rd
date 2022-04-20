@@ -39,6 +39,12 @@ Create a configuration object for the Cuckoo Search Algorithm (CS). At minimum t
 (parameter \code{iterations}) and the number of host nests (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_cs(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+discovery_rate = 0.25, step_size = 1.0)
+
+
+}
 \references{
 \insertRef{Yang2009}{EmiR}
 }

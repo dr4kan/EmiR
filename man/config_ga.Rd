@@ -39,6 +39,11 @@ Create a configuration object for the Genetic Algorithm (GA). At minimum the num
 (parameter \code{iterations}) and the number of chromosomes (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_ga(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+keep_fraction = 0.4, mutation_rate = 0.1)
+
+}
 \references{
 \insertRef{holland}{EmiR}
 }

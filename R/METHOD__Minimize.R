@@ -21,6 +21,8 @@
 #'
 #' @return An object of class `data.frame`.
 #' @export
+#'
+
 list_of_algorithms <- function() {
 
   emir_algorithms <- data.frame(rbind(
@@ -103,6 +105,15 @@ list_of_functions <- function() {
 #' @param ... additional options (see \link[EmiR]{MinimizerOpts}).
 #' @return `minimize` returns an object of class `OptimizationResults` (see \link[EmiR]{OptimizationResults}).
 #' @export
+#'
+#'
+#' @examples
+#' \dontrun{
+#'  results <- minimize(algorithm_id = "BAT", obj_func = ob, config = conf, parameters = list(p1,p2, p3, p4), constraints = list(c1,c2,c3),
+#'     save_pop_history = TRUE, constrained_method = "BARRIER", constr_init_pop = TRUE, oob_solutions = "RBC", seed = 1)
+#' }
+#'
+#'
 
 minimize <- function(algorithm_id, obj_func, parameters, config, constraints = NULL, ...) {
 

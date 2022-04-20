@@ -48,6 +48,12 @@ Create a configuration object for the Improved Harmony Search Algorithm (IHS).
 At minimum the number of iterations (parameter \code{iterations}) and the number of
 solutions in the harmony memory (parameter \code{population_size}) have to be provided.
 }
+\examples{
+conf <- config_ihs(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+considering_rate = 0.5, min_adjusting_rate = 0.3, max_adjusting_rate = 0.99,
+min_distance_bandwidth = 0.0001, max_distance_bandwidth = 1)
+
+}
 \references{
 \insertRef{Mahdavi2007}{EmiR}
 }

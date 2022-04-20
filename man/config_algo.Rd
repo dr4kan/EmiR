@@ -39,3 +39,7 @@ Create a configuration object for one of the algorithms available in EmiR. At mi
 algorithm (parameter \code{algorithm_id}), the number of iterations (parameter \code{iterations}) and the
 number of individuals in the population (parameter \code{population_size}) have to be provided.
 }
+\examples{
+conf <- config_algo(algorithm_id = "PS", population_size = 200, iterations = 10000)
+
+}

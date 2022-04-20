@@ -41,6 +41,13 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{yang2010new}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_bat(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' initial_loudness = 1.5, alpha = 0.9, initial_pulse_rate = 0.5, gamma = 0.9,
+#' freq_min = 0., freq_max = 2.)
+#'
+#'
 config_bat <- function(iterations,
                        population_size,
                        iterations_same_cost = NULL,

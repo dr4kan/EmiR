@@ -32,6 +32,10 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Mirjalili2015}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_mfo(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL)
+#'
 config_mfo <- function(iterations,
                        population_size,
                        iterations_same_cost = NULL,

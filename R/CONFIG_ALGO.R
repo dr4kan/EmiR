@@ -35,6 +35,9 @@
 #' @importFrom Rdpack reprompt
 #' @export
 #'
+#' @examples
+#' conf <- config_algo(algorithm_id = "PS", population_size = 200, iterations = 10000)
+#'
 config_algo <- function(algorithm_id,
                         iterations,
                         population_size,

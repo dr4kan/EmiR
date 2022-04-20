@@ -21,3 +21,7 @@ parameter(name, min_val, max_val, integer = FALSE)
 \description{
 Create a parameter the objective function is minimized with respect to.
 }
+\examples{
+p1 <- parameter("x1", 18, 32, integer = TRUE)
+
+}

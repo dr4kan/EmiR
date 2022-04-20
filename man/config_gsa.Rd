@@ -40,6 +40,11 @@ Create a configuration object for the Gravitational Search Algorithm (GSA). At m
 (parameter \code{iterations}) and the number of planets (parameter \code{population_size}) have
 to be provided.
 }
+\examples{
+conf <- config_gsa(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+grav = 1000, grav_evolution = 20.)
+
+}
 \references{
 \insertRef{Rashedi2009}{EmiR}
 }

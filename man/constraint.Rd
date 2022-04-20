@@ -18,3 +18,8 @@ constraint(func, inequality)
 Create a constraint function for constrained optimization. Only inequality constraints are
 supported.
 }
+\examples{
+g1 <- function(x) 0.0193*x[3] - (x[1]*0.0625)
+c1 <- constraint(g1, "<=")
+
+}

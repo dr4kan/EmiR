@@ -38,6 +38,12 @@
 #' @importFrom Rdpack reprompt
 #' @references \insertRef{Mahdavi2007}{EmiR}
 #' @export
+#'
+#' @examples
+#' conf <- config_ihs(iterations = 100, population_size = 50, iterations_same_cost = NULL, absolute_tol = NULL,
+#' considering_rate = 0.5, min_adjusting_rate = 0.3, max_adjusting_rate = 0.99,
+#' min_distance_bandwidth = 0.0001, max_distance_bandwidth = 1)
+#'
 config_ihs <- function(iterations,
                        population_size,
                        iterations_same_cost   = NULL,
