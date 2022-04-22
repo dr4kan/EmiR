@@ -18,6 +18,11 @@ Classical minimization methods, like *gradient descent* or *quasi-Newton techniq
 
 Unlike other available tools, EmiR can be used not only for unconstrained problems, but also for problems subjected to inequality constraints and for integer or mixed-integer problems. 
 
+## How to cite
+If you use EmiR, please cite the following work:
+
+> Pagano, D. and Sostero, L., «EmiR: Evolutionary Minimization for R», SoftwareX 18, 101083 (2022), doi: 10.1016/j.softx.2022.101083.
+
 ## Example of usage
 
 ```
