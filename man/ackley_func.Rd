@@ -20,9 +20,9 @@ Implementation of n-dimensional Ackley function, with \mjeqn{a=20}{a=20},
 \details{
 On an n-dimensional domain it is defined by
 
-\mjdeqn{f(\vec{x}) = -a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a\emph{exp(-b}sqrt(1/n\emph{sum_1^n (x_{i}^2)) -exp(1/n}sum_1^n (\cos(c*x_i)) + a + exp(1),}
+\mjdeqn{f(\vec{x}) = -a\exp\left(-b \sqrt{\frac{1}{n}\sum_{i=1}^n x_{i}^2} \right) -\exp\left(\frac{1}{n}\sum_{i=1}^n \cos(cx_{i}) \right) + a + \exp(1),}{-a*exp(-b*sqrt(1/n*sum_1^n (x_{i}^2)) -exp(1/n*sum_1^n (\cos(c*x_i)) + a + exp(1),}
 and is usually evaluated on
-\mjeqn{x_{i} \in [ -32.768, 32.768 ]}{x_{i} in [-32.768, 32.768]}, for all
+\mjeqn{x_{i} \in \[ -32.768, 32.768 \]}{x_{i} in \[-32.768, 32.768\]}, for all
 \mjeqn{i=1,...,n}{i=1,...,n}. The function has one global minimum at
 \mjeqn{f(\vec{x})=0}{f(x)=0} for \mjeqn{x_{i}=0}{x_i=0} for all \mjeqn{i=1,...,n}{i=1,...,n}.
 }

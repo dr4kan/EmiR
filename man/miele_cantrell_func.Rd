@@ -21,9 +21,9 @@ On an 4-dimensional domain it is defined by
 
 \mjdeqn{f(\vec{x}) = \left(e^{-x_{1}} - x_{2} \right)^4 + 100(x_{2} - x_{3})^6 + \left(\tan(x_{3} - x_{4})\right)^4 + x_{1}^8}{f(x) = (e^{-x_{1}} - x_{2} )^4 + 100(x_{2} - x_{3})^6 + (tan(x_{3} - x_{4}))^4 + x_{1}^8}
 and is usually evaluated on
-\mjeqn{x_{i} \in [ -2, 2 ]}{x_{i} in [ -2, 2 ]}, for all
+\mjeqn{x_{i} \in \[ -2, 2 \]}{x_{i} in \[ -2, 2 \]}, for all
 \mjeqn{i=1,...,4}{i=1,...,4}. The function has one global minimum at
-\mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = [ 0, 1, 1, 1 ]}{x = [ 0, 1, 1, 1 ]}.
+\mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 0, 1, 1, 1 \]}{x = \[ 0, 1, 1, 1 \]}.
 }
 \references{
 \insertRef{cragg1969study}{EmiR}

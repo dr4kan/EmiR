@@ -191,8 +191,6 @@ BEGIN_RCPP
 END_RCPP
 }
 
-RcppExport SEXP run_testthat_tests(SEXP);
-
 static const R_CallMethodDef CallEntries[] = {
     {"_EmiR_cpp_minimize_abc", (DL_FUNC) &_EmiR_cpp_minimize_abc, 5},
     {"_EmiR_cpp_minimize_bat", (DL_FUNC) &_EmiR_cpp_minimize_bat, 5},
@@ -206,7 +204,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_EmiR_cpp_minimize_ps", (DL_FUNC) &_EmiR_cpp_minimize_ps, 5},
     {"_EmiR_cpp_minimize_sa", (DL_FUNC) &_EmiR_cpp_minimize_sa, 5},
     {"_EmiR_cpp_minimize_woa", (DL_FUNC) &_EmiR_cpp_minimize_woa, 5},
-    {"run_testthat_tests", (DL_FUNC) &run_testthat_tests, 1},
     {NULL, NULL, 0}
 };
 

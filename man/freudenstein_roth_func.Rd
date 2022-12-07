@@ -21,9 +21,9 @@ On an 2-dimensional domain it is defined by
 
 \mjdeqn{f(\vec{x}) = (x_{1} - 13 + ((5 - x_{2})x_{2} - 2)x_{2})^2 + (x_{1} - 29 + ((x_{2} + 1)x_{2} - 14)x_{2})^2}{f(x) = (x_{1} - 13 + ((5 - x_{2})x_{2} - 2)x_{2})^2 + (x_{1} - 29 + ((x_{2} + 1)x_{2} - 14)x_{2})^2}
 and is usually evaluated on
-\mjeqn{x_{i} \in [ -10, 10 ]}{x_{i} in [ -10, 10 ]}, for all
+\mjeqn{x_{i} \in \[ -10, 10 \]}{x_{i} in \[ -10, 10 \]}, for all
 \mjeqn{i=1,2}{i=1,2}. The function has one global minimum at
-\mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = [ 5, 4 ]}{x = [ 5, 4 ]}.
+\mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{\vec{x} = \[ 5, 4 \]}{x = \[ 5, 4 \]}.
 }
 \references{
 \insertRef{rao2019engineering}{EmiR}

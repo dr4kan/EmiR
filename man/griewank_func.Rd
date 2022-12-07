@@ -21,7 +21,7 @@ On an n-dimensional domain it is defined by
 
 \mjdeqn{f(\vec{x}) = 1 + \sum_{i=1}^{n} \frac{x_i^{2}}{4000} - \prod_{i=1}^{n}\cos\left(\frac{x_i}{\sqrt{i}}\right),}{f(x) = 1 + \sum_{i=1}^{n} \frac{x_i^{2}}{4000} - \prod_{i=1}^{n}cos(\frac{x_i}{\sqrt{i}}),}
 and is usually evaluated on
-\mjeqn{x_{i} \in [ -600, 600 ]}{x_{i} in [-600, 600]}, for all
+\mjeqn{x_{i} \in \[ -600, 600 \]}{x_{i} in \[-600, 600\]}, for all
 \mjeqn{i=1,...,n}{i=1,...,n}. The function has global minima at
 \mjeqn{f(\vec{x}) = 0}{f(x) = 0} for \mjeqn{x_{i}=0}{x_i = 0} for all \mjeqn{i=1,...,n}{i=1,...,n}.
 }
