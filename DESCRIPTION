@@ -32,4 +32,4 @@ RoxygenNote: 7.2.2
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
 SystemRequirements: C++11
-Suggests: xml2, testthat
+Suggests: xml2
