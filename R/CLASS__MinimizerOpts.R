@@ -59,6 +59,7 @@
 #' @slot initial_population manually specify the position of the initial population. A
 #' \mjeqn{n \times d}{n x d} matrix has to be provided, where \mjeqn{n}{n} is the population size
 #' and \mjeqn{d}{d} is the number of parameters the objective function is minimized with respect to.
+#' @slot generation_function manually specify the function to generate to new solutions.
 #' @name MinimizerOpts
 #' @rdname MinimizerOpts
 setClass (
@@ -76,7 +77,8 @@ setClass (
     constr_init_pop     = "logical",
     oob_solutions       = "character",
     seed                = "numeric",
-    initial_population  = "matrix"
+    initial_population  = "matrix",
+    generation_function = "function"
   ),
 
   # Initializing slots
@@ -91,7 +93,8 @@ setClass (
     constr_init_pop     = TRUE,
     oob_solutions       = "DIS",
     seed                = 0,
-    initial_population  = matrix(, nrow = 0, ncol = 0)
+    initial_population  = matrix(, nrow = 0, ncol = 0),
+    generation_function = as.function(alist(NULL))
   )
 )
 
@@ -110,9 +113,14 @@ setMethod(f = "show",
             cat("      oob_solutions: ", object@oob_solutions, sep = "")
             cat("               seed: ", object@seed, sep = "")
             if (nrow(object@initial_population) > 0) {
-              cat("initial population: manually set")
+              cat(" initial population: manually set")
             } else {
-              cat("initial population: randomly generated")
+              cat(" initial population: randomly generated")
+            }
+            if (object@generation_function != as.function(alist(NULL))) {
+              cat("generation function: manually set")
+            } else {
+              cat("generation function: default")
             }
           }
 )

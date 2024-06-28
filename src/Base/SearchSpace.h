@@ -57,6 +57,9 @@ public:
    /// Access the specified parameter
    Parameter &operator[](std::size_t t) { return m_par[t]; };
 
+   /// Set the generator function
+   void setGeneratorFunction(Function);
+
    /// Return a random number in [0, 1]
    double rand();
 
@@ -68,6 +71,8 @@ private:
    List                   m_constraints;
    std::vector<double>    m_gen_point;
    bool                   m_constr_init_pop;
+   bool                   m_custom_generator_func;
+   Function               m_generator_func;
 };
 
 #endif

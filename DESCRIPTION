@@ -28,7 +28,7 @@ LazyData: true
 Depends: R (>= 3.5.0)
 Imports: Rcpp (>= 1.0.5), methods, Rdpack, tictoc, ggplot2, tibble, tidyr, dplyr, gganimate, mathjaxr, data.table, plot3D, graphics
 LinkingTo: Rcpp, RcppProgress, testthat
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.1
 Roxygen: list(markdown = TRUE)
 RdMacros: Rdpack, mathjaxr
 SystemRequirements: C++11

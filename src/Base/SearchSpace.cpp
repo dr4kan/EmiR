@@ -19,11 +19,11 @@
 #include "SearchSpace.h"
 #include <iostream>
 
-SearchSpace::SearchSpace() : m_par(0), m_constr_init_pop(false) {}
+SearchSpace::SearchSpace() : m_par(0), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func(NULL) {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n), m_constr_init_pop(false) {}
+SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func(NULL) {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -101,6 +101,12 @@ double SearchSpace::getRandom(std::size_t i) {
 
 
 std::vector<double> SearchSpace::getRandom() {
+  if (m_custom_generator_func) {
+    NumericVector v = m_generator_func();
+    m_gen_point = Rcpp::as<std::vector<double> >(v);
+    return m_gen_point;
+  }
+
   for (std::size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
 
   // in case of a constrained optimization, check is
@@ -110,6 +116,13 @@ std::vector<double> SearchSpace::getRandom() {
   }
 
   return m_gen_point;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
+
+void SearchSpace::setGeneratorFunction(Function generator_func) {
+  m_custom_generator_func = true;
+  m_generator_func = generator_func;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
