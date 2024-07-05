@@ -19,11 +19,11 @@
 #include "SearchSpace.h"
 #include <iostream>
 
-SearchSpace::SearchSpace() : m_par(0), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func(NULL) {}
+SearchSpace::SearchSpace() : m_par(0), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func("norm") {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func(NULL) {}
+SearchSpace::SearchSpace(int n) : m_par(n), m_gen_point(n), m_constr_init_pop(false), m_custom_generator_func(false), m_generator_func("norm") {}
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
@@ -123,6 +123,7 @@ std::vector<double> SearchSpace::getRandom() {
 void SearchSpace::setGeneratorFunction(Function generator_func) {
   m_custom_generator_func = true;
   m_generator_func = generator_func;
+  Rcout << generator_func;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 

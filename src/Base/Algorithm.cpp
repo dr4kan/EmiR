@@ -127,6 +127,11 @@ void Algorithm::setCostrInitPop(bool t) {
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
+void Algorithm::setGeneratorFunction(Function t) {
+  m_search_space.setGeneratorFunction(t);
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 
 double Algorithm::rand() {
   return m_search_space.rand();

@@ -26,6 +26,7 @@ c2 <- constraint(g2, "<=")
 p1 <- parameter("x1", 13, 100)
 p2 <- parameter("x2", 0, 100)
 
+
 conf <- config_algo(algorithm_id = "PS", population_size = 200, iterations = 10000)
 results <- minimize(algorithm_id = "PS",
                     obj_func = ob,

@@ -78,7 +78,8 @@ setClass (
     oob_solutions       = "character",
     seed                = "numeric",
     initial_population  = "matrix",
-    generation_function = "function"
+    generation_function = "function",
+    use_generation_func = "logical"
   ),
 
   # Initializing slots
@@ -94,7 +95,8 @@ setClass (
     oob_solutions       = "DIS",
     seed                = 0,
     initial_population  = matrix(, nrow = 0, ncol = 0),
-    generation_function = as.function(alist(NULL))
+    generation_function = as.function(alist(NULL)),
+    use_generation_func = FALSE
   )
 )
 

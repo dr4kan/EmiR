@@ -36,6 +36,8 @@ S4 cpp_minimize_cs(Function obj_function,
   std::string oob_method = opt.slot("oob_solutions");
   auto seed = opt.slot("seed");
   NumericMatrix initial_population = opt.slot("initial_population");
+  Function generation_function = opt.slot("generation_function");
+  bool use_generation_func = opt.slot("use_generation_func");
 
   CS_algorithm cs(obj_function, config);
   cs.setConstraints(constraints);
@@ -52,6 +54,7 @@ S4 cpp_minimize_cs(Function obj_function,
   cs.setSeed(seed);
   cs.setInitialPopulation(initial_population);
   cs.setAlgoName("CS");
+  if (use_generation_func) cs.setGeneratorFunction(generation_function);
   cs.minimize();
   return cs.getResults();
 }

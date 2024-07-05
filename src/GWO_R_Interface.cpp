@@ -36,6 +36,8 @@ S4 cpp_minimize_gwo(Function obj_function,
   std::string oob_method = opt.slot("oob_solutions");
   auto seed = opt.slot("seed");
   NumericMatrix initial_population = opt.slot("initial_population");
+  Function generation_function = opt.slot("generation_function");
+  bool use_generation_func = opt.slot("use_generation_func");
 
   GWO_algorithm gwo(obj_function, config);
   gwo.setConstraints(constraints);
@@ -52,6 +54,7 @@ S4 cpp_minimize_gwo(Function obj_function,
   gwo.setSeed(seed);
   gwo.setInitialPopulation(initial_population);
   gwo.setAlgoName("GWO");
+  if (use_generation_func) gwo.setGeneratorFunction(generation_function);
   gwo.minimize();
   return gwo.getResults();
 }

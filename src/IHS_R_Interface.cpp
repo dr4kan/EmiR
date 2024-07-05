@@ -36,6 +36,8 @@ S4 cpp_minimize_ihs(Function obj_function,
   std::string oob_method = opt.slot("oob_solutions");
   auto seed = opt.slot("seed");
   NumericMatrix initial_population = opt.slot("initial_population");
+  Function generation_function = opt.slot("generation_function");
+  bool use_generation_func = opt.slot("use_generation_func");
 
   IHS_algorithm ihs(obj_function, config);
   ihs.setConstraints(constraints);
@@ -52,6 +54,7 @@ S4 cpp_minimize_ihs(Function obj_function,
   ihs.setSeed(seed);
   ihs.setInitialPopulation(initial_population);
   ihs.setAlgoName("IHS");
+  if (use_generation_func) ihs.setGeneratorFunction(generation_function);
   ihs.minimize();
   return ihs.getResults();
 }

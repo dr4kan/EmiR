@@ -36,6 +36,8 @@ S4 cpp_minimize_gsa(Function obj_function,
   std::string oob_method = opt.slot("oob_solutions");
   auto seed = opt.slot("seed");
   NumericMatrix initial_population = opt.slot("initial_population");
+  Function generation_function = opt.slot("generation_function");
+  bool use_generation_func = opt.slot("use_generation_func");
 
   GSA_algorithm gsa(obj_function, config);
   gsa.setConstraints(constraints);
@@ -52,6 +54,7 @@ S4 cpp_minimize_gsa(Function obj_function,
   gsa.setSeed(seed);
   gsa.setInitialPopulation(initial_population);
   gsa.setAlgoName("GSA");
+  if (use_generation_func) gsa.setGeneratorFunction(generation_function);
   gsa.minimize();
   return gsa.getResults();
 }
