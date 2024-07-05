@@ -13,7 +13,6 @@
 # for more details: <https://www.gnu.org/licenses/>.                          #
 ###############################################################################
 
-
 utils::globalVariables(c("V1", "V2", "V3", "value"))
 
 df_from_func2D <- function(n_points, min_x, max_x, min_y, max_y, func) {
@@ -121,8 +120,7 @@ plot_population <- function(minimizer_result, iteration, n_points = 100) {
       ggplot2::ylab(minimizer_result@parameter_names[2])
     return(p)
 
-  } 
-
+  }
 }
 
 
