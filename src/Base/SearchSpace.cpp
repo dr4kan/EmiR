@@ -123,7 +123,6 @@ std::vector<double> SearchSpace::getRandom() {
 void SearchSpace::setGeneratorFunction(Function generator_func) {
   m_custom_generator_func = true;
   m_generator_func = generator_func;
-  Rcout << generator_func;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
