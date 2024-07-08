@@ -94,7 +94,7 @@ bool SearchSpace::ckeckConstraint() {
 
 
 double SearchSpace::getRandom(std::size_t i) {
-  double value = m_random.rand(m_par[i].getMin(), m_par[i].getMax());;
+  double value = m_random.rand(m_par[i].getMin(), m_par[i].getMax());
   return value;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -104,10 +104,9 @@ std::vector<double> SearchSpace::getRandom() {
   if (m_custom_generator_func) {
     NumericVector v = m_generator_func();
     m_gen_point = Rcpp::as<std::vector<double> >(v);
-    return m_gen_point;
+  } else{
+    for (std::size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
   }
-
-  for (std::size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
 
   // in case of a constrained optimization, check is
   // the solution violates any constraint
