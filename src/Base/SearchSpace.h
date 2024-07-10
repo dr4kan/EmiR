@@ -54,6 +54,9 @@ public:
    /// Return a random point in the search space
    std::vector<double> getRandom();
 
+   /// Return a new point in the search space
+   std::vector<double> getNew(std::vector<double>&);
+
    /// Access the specified parameter
    Parameter &operator[](std::size_t t) { return m_par[t]; };
 

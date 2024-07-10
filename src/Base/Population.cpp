@@ -167,7 +167,7 @@ double Population::evaluateCost(std::vector<double>& v) {
 
     // if violate any of the contraints, regenerate
     if (ckeckViolateConstraints(v)) {
-      v = m_search_space.getRandom();
+      v = m_search_space.getNew(v);
     }
 
     NumericVector tmp_v = m_obj_func(v);

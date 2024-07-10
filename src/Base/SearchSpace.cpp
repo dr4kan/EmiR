@@ -100,20 +100,32 @@ double SearchSpace::getRandom(std::size_t i) {
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 
-std::vector<double> SearchSpace::getRandom() {
+std::vector<double> SearchSpace::getNew(std::vector<double>& x) {
   if (m_custom_generator_func) {
-    NumericVector v = m_generator_func();
+    NumericVector v = m_generator_func(Rcpp::wrap(x));
     m_gen_point = Rcpp::as<std::vector<double> >(v);
-  } else{
-    for (std::size_t i = 0; i < m_gen_point.size(); ++i) m_gen_point[i] = getRandom(i);
+    if (m_constr_init_pop) {
+      if (ckeckConstraint()) {
+        Rcpp::stop("generation_function produced infeasible solution.");
+      }
+    }
+  } else {
+    m_gen_point = getRandom();
   }
+  return m_gen_point;
+}
+//_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
-  // in case of a constrained optimization, check is
-  // the solution violates any constraint
+
+std::vector<double> SearchSpace::getRandom() {
+  for (std::size_t i = 0; i < m_gen_point.size(); ++i) {
+    m_gen_point[i] = getRandom(i);
+  }
   if (m_constr_init_pop) {
-    if (ckeckConstraint()) return getRandom();
+    if (ckeckConstraint()) {
+      return getRandom();
+    }
   }
-
   return m_gen_point;
 }
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
