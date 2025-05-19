@@ -18,7 +18,7 @@ Parmeters are requested to be objects of class \code{Parameter} (see \link[EmiR]
 \item{config}{an object with the configuration parameters of the chosen algorithm. For each
 algorithm there is different function for the tuning of its configuration parameter, as
 reported in the following list:
-\itemize{
+\describe{
 \item{\link[EmiR]{config_abc}}{ -- configuration function for the \emph{Artificial Bee Colony Algorithm}.}
 \item{\link[EmiR]{config_bat}}{ -- configuration function for the \emph{Bat Algorithm}.}
 \item{\link[EmiR]{config_cs} }{ -- configuration function for the \emph{Cuckoo Search Algorithm}.}

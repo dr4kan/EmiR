@@ -65,5 +65,7 @@ If \code{NULL} a random seed at each execution is used. Default is \code{NULL}.}
 \item{\code{initial_population}}{manually specify the position of the initial population. A
 \mjeqn{n \times d}{n x d} matrix has to be provided, where \mjeqn{n}{n} is the population size
 and \mjeqn{d}{d} is the number of parameters the objective function is minimized with respect to.}
+
+\item{\code{generation_function}}{manually specify the function to generate to new solutions.}
 }}
 
