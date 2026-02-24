@@ -3,6 +3,7 @@
 export(ackley_func)
 export(animate_population)
 export(bohachevsky_func)
+export(colville_func)
 export(config_abc)
 export(config_algo)
 export(config_bat)
